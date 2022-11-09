@@ -1,0 +1,53 @@
+---
+project: 'aiml_fw_aimlfw_dep'
+project_creation_date: '2022-08-17'
+project_category: ''
+lifecycle_state: 'Incubation'
+project_lead: &oran_aiml_fw_ptl
+    name: 'Hoejoo Lee'
+    email: 'hoejoo.lee@samsung.com'
+    id: 'cromee'
+    company: 'Samsung Electronics'
+    timezone: 'Asia/Seoul'
+primary_contact: *oran_aiml_fw_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.o-ran-sc.org/projects/AIMLFW'
+    key: 'AIMLFW'
+mailing_list:
+    type: 'groups.io'
+    url: 'https://lists.o-ran-sc.org/g/discuss'
+    tag: '[]'
+realtime_discussion:
+    type: 'irc'
+    server: 'freenode.net'
+    channel: '#o-ran-sc'
+meetings:
+    - type: 'zoom'
+      agenda: ''
+      url: ''
+      server: 'n/a'
+      channel: 'n/a'
+      repeats: 'weekly'
+      time: ''
+repositories:
+    - aiml-fw/aimlfw-dep
+committers:
+    - <<: *oran_aiml_fw_ptl
+    - name: 'Sandeep Jaisawal'
+      email: 's.jaisawal@samsung.com'
+      company: 'Samsung Electronics'
+      id: 's.jaisawal'
+      timezone: 'Asia/Seoul'
+    - name: 'Ganesh Kumar Thangavel'
+      email: 'ganesh.kumar@samsung.com'
+      company: 'Samsung Electronics'
+      id: 'tganesh2k'
+      timezone: 'Asia/Seoul'
+tsc:
+    # yamllint disable rule:line-length
+    approval: 'https://wiki.o-ran-sc.org/pages/viewpage.action?pageId=57377914#id-2022Q3(Jul,Aug,Sep)-20220811'
+    changes:
+        - type: ''
+          name: ''
+          link: ''
