@@ -1,0 +1,61 @@
+# ==================================================================================
+#
+#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#          http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+# ==================================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aiml-dashboard.fullname" . }}
+  namespace: {{ include "common.namespace.platform" . }}
+  labels:
+    {{- include "aiml-dashboard.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "aiml-dashboard.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "aiml-dashboard.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.aimldashboard.image.repository }}:{{ .Values.aimldashboard.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.aimldashboard.image.pullPolicy }}
+          ports:
+            - name: serviceport
+              containerPort: {{ include "common.serviceport.aiml-dashboard.http" .  }}
+              protocol: TCP
+          command: ["/bin/sh", "-c"]
+          args: ["chmod +x npm_run_build.sh ; ./npm_run_build.sh"]
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ include "common.serviceport.aiml-dashboard.http" .  }}
+          envFrom:
+            - configMapRef:
+                name: aiml-dashboard-configmap
