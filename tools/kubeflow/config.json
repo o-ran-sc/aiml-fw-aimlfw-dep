@@ -1,0 +1,22 @@
+{
+  "DBConfig": {
+    "DriverName": "mysql",
+    "DataSourceName": "",
+    "DBName": "mlpipeline",
+    "GroupConcatMaxLen": "4194304"
+  },
+  "ObjectStoreConfig": {
+    "Host": "leofs.kubeflow",
+    "Port": "8080",
+    "AccessKey": "leofs",
+    "SecretAccessKey" : "",
+    "BucketName": "mlpipeline",
+    "PipelinePath": "pipelines"
+  },
+  "ARCHIVE_CONFIG_LOG_FILE_NAME": "main.log",
+  "ARCHIVE_CONFIG_LOG_PATH_PREFIX": "/artifacts",
+  "InitConnectionTimeout": "6m",
+  "DefaultPipelineRunnerServiceAccount": "pipeline-runner",
+  "CacheEnabled": "true",
+  "CRON_SCHEDULE_TIMEZONE": "UTC"
+}
