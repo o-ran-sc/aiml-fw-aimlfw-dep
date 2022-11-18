@@ -21,4 +21,4 @@ kubectl create namespace traininghost
 
 bin/install_rolebindings.sh
 bin/install_databases.sh
-bin/install.sh -f RECIPE_EXAMPLE/example_recipe_oran_g_release.yaml
+bin/install.sh -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml

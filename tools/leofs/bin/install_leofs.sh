@@ -20,11 +20,10 @@ kubectl create namespace kubeflow
 sleep 10
 head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8 | kubectl create secret generic leofs-secret -n kubeflow --from-file=password=/dev/stdin
 
-#TODO: Docker build below to be removed
 docker build -f tools/leofs/Dockerfile.leofs -t leofs .
 
 sudo helm dep up helm/leofs
-helm install leofs helm/leofs -f RECIPE_EXAMPLE/example_recipe_oran_g_release.yaml
+helm install leofs helm/leofs -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
 sleep 10
 NAMESPACE=kubeflow
 COMPONENT=leofs
