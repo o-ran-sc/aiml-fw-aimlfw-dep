@@ -10,6 +10,8 @@ Welcome to O-RAN SC aimlfw-dep Documentation
    :maxdepth: 2
    :caption: Contents:
 
+   overview.rst
+   release-notes.rst
    installation-guide.rst
 
 
