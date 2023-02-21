@@ -67,6 +67,7 @@ aimldashboard:
   host:
     tm_host: "localhost"
     notebook_host: "localhost"
+    debug: false # change to enable the debug mode. 
 
 aimlnotebook:
   image:
