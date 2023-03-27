@@ -31,6 +31,8 @@ sed -e 's/mlpipeline-.*$/mlpipeline-leofs-artifact/g' manifests/kustomize/base/p
 cp /tmp/ml-pipeline-ui-deployment_tmp.yaml manifests/kustomize/base/pipeline/ml-pipeline-ui-deployment.yaml
 cp $previous_dir/$kubeflow_dir/ml-pipeline-apiserver-deployment.yaml manifests/kustomize/base/pipeline/ml-pipeline-apiserver-deployment.yaml
 cp $previous_dir/$kubeflow_dir/config.json backend/src/apiserver/config/config.json
+cp -r $previous_dir/samples/* samples/
+cp $previous_dir/$kubeflow_dir/sample_config.json backend/src/apiserver/config/sample_config.json
 tmpfile=$(mktemp)
 address='backend/src/apiserver/config/config.json'
 leofs_password=$(kubectl get secret leofs-secret -n kubeflow -o jsonpath='{.data.password}' | base64 -d)
