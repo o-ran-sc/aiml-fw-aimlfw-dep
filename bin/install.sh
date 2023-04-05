@@ -76,7 +76,7 @@ COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook"
 
 
 for component in $COMPONENTS; do
-    sudo helm dep up helm/$component
+    helm dep up helm/$component
     echo "Installing $component"
     helm install $component helm/$component -f $OVERRIDEYAML
 done

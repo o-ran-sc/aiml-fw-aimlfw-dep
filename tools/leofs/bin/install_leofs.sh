@@ -22,7 +22,7 @@ head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8 | kubectl create secret generic
 
 docker build -f tools/leofs/Dockerfile.leofs -t leofs .
 
-sudo helm dep up helm/leofs
+helm dep up helm/leofs
 helm install leofs helm/leofs -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
 sleep 10
 NAMESPACE=kubeflow
