@@ -16,14 +16,30 @@
 #
 # ==================================================================================
 
-sudo apt-get install -y apt-transport-https
-sudo apt-get install -y apt-transport-https ca-certificates   curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg   | sudo gpg --dearmor   -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"   | sudo tee /etc/apt/sources.list.d/docker.list
-sudo apt-get update -y
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo mkdir -p /etc/docker
-sudo cat > /tmp/daemon.json <<EOF
+# Checking whether the user is added in the docker group or not.
+if [[ $(groups | grep docker) ]]; then
+    echo "You are already added to the docker group!"
+else
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    echo "Adding you to the docker group re-login is required."
+    echo "Exiting now try to login again."
+    exit
+fi
+
+# Install Docker Engine
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+
+if [ -z $(which docker) ];
+then
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update -y
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo mkdir -p /etc/docker
+    sudo cat > /tmp/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
@@ -34,11 +50,16 @@ sudo cat > /tmp/daemon.json <<EOF
 }
 EOF
 
-sudo cp /tmp/daemon.json /etc/docker/daemon.json
-sudo systemctl restart docker
-sudo systemctl enable docker
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg   https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"   | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    sudo cp /tmp/daemon.json /etc/docker/daemon.json
+    sudo rm /tmp/daemon.json
+    sudo systemctl restart docker
+    sudo systemctl enable docker
+else
+    echo "Found Docker Engine in the system. Skip Docker Engine installation."
+fi
+
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
 sudo apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 kubeadm=1.21.0-00
 sudo apt-mark hold kubelet kubeadm kubectl
@@ -50,4 +71,3 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 curl https://projectcalico.docs.tigera.io/archive/v3.22/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 kubectl taint nodes --all node-role.kubernetes.io/master-
-
