@@ -44,6 +44,16 @@ committers:
       company: 'Samsung Electronics'
       id: 'tganesh2k'
       timezone: 'Asia/Seoul'
+    - name: 'Taewan Kim'
+      email: 't25.kim@samsung.com'
+      company: 'Samsung Electronics'
+      id: 't25kim'
+      timezone: 'Asia/Seoul'
+    - name: 'Minha Lee'
+      email: 'minhac@samsung.com'
+      company: 'Samsung Electronics'
+      id: 'minhalee'
+      timezone: 'Asia/Seoul'
 tsc:
     # yamllint disable rule:line-length
     approval: 'https://wiki.o-ran-sc.org/pages/viewpage.action?pageId=57377914#id-2022Q3(Jul,Aug,Sep)-20220811'
