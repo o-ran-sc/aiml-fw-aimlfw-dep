@@ -35,6 +35,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4350f7f_b2452cb1",
+        "filename": "bin/install_kserve.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000402
+      },
+      "writtenOn": "2023-04-17T12:19:30Z",
+      "side": 1,
+      "message": "Thanks your comment. I fix the indent!",
+      "parentUuid": "0d107d9a_6592a86d",
+      "revId": "1af511a77e431ac6ff66b84cd41485c9ac7f650e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "920c025f_6a26eaa2",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-17T06:57:32Z",
       "side": 1,
       "message": "It would be nice to indent one more space.",
+      "revId": "1af511a77e431ac6ff66b84cd41485c9ac7f650e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccabfe7_83c3ecaa",
+        "filename": "bin/uninstall_kserve.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000402
+      },
+      "writtenOn": "2023-04-17T12:19:30Z",
+      "side": 1,
+      "message": "Thanks your comment. I fix the indent!",
+      "parentUuid": "920c025f_6a26eaa2",
       "revId": "1af511a77e431ac6ff66b84cd41485c9ac7f650e",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
