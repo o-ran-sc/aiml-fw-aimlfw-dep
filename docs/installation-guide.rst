@@ -245,7 +245,18 @@ To install Kserve run the below commands
 
 .. code:: bash
 
-        curl -s "https://raw.githubusercontent.com/kserve/kserve/release-0.7/hack/quick_install.sh" | bash
+        ./bin/install_kserve.sh
+
+
+Uninstall Kserve
+----------------
+
+To uninstall Kserve run the below commands
+
+.. code:: bash
+
+        ./bin/uninstall_kserve.sh
+        
 
 Deploy trained qoe prediction model on Kserve
 ---------------------------------------------
