@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd00935a_8eedd1a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000402
+      },
+      "writtenOn": "2023-04-19T01:55:39Z",
+      "side": 1,
+      "message": "Below is the error log.\n`docs: failed with echo is not allowed, use allowlist_externals to allow it`\n\nAdding `allowlist_externals \u003d echo` at tox.ini like this (https://github.com/o-ran-sc/aiml-fw-aihp-ips-kserve-adapter/blob/47645cb6328485d81932b407e4a418cff25ed250/tox.ini#L28)",
+      "revId": "43f1366246f37907e47536ff51b1242f8819c0ea",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
