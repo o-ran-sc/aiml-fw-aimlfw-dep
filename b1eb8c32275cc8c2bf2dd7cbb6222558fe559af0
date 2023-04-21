@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67bb553b_26aa9649",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-04-21T03:12:09Z",
+      "side": 1,
+      "message": "Please take a look at this change. \nWe can review https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/10950 after this change merged.",
+      "revId": "b1eb8c32275cc8c2bf2dd7cbb6222558fe559af0",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
