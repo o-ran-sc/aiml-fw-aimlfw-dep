@@ -39,6 +39,14 @@ leofs_password=$(kubectl get secret leofs-secret -n kubeflow -o jsonpath='{.data
 sed -e "s/\"SecretAccessKey.*$/\"SecretAccessKey\" : \"$leofs_password\",/g" $address >"$tmpfile" &&
   mv -- "$tmpfile" $address
 
+#Fix for Kubeflow pipeline backend apiserver Dockerfile because stretch version is moved to archive
+sed -i '4i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
+sed -i '5i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
+sed -i '6i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
+sed -i '61i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
+sed -i '62i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
+sed -i '63i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
+
 #build backend apiserver with new config.json
 docker build -f backend/Dockerfile . --tag api_server_local
 kubectl apply -k manifests/kustomize/cluster-scoped-resources/
