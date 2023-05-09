@@ -16,6 +16,40 @@
       "message": "Looks okay",
       "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581b406a_69de5bfc",
+        "filename": "tools/kubeflow/sample_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-09T06:37:34Z",
+      "side": 1,
+      "message": "Is this file path correct? \nI\u0027m wondering that qoe folder in the middle is right since samples/qoe/qoe_pipeline.py is rename to samples/qoe_pipeline_g_release.py.",
+      "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2834f07_73db1692",
+        "filename": "tools/kubeflow/sample_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-09T06:37:34Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ],
   "submitRequirementResults": [
