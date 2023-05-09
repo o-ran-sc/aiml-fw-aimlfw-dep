@@ -1,8 +1,14 @@
 [
     {
-            "name": "qoe_pipeline",
+            "name": "qoe_pipeline_g_release",
             "description":"",
-            "file": "/samples/qoe/qoe_pipeline.py.yaml"
+            "file": "/samples/qoe/qoe_pipeline_g_release.py.yaml"
+    },
+    {
+            "name": "qoe_pipeline_h_release",
+            "description":"",
+            "file": "/samples/qoe/qoe_pipeline_h_release.py.yaml"
     }
+
 ]
 

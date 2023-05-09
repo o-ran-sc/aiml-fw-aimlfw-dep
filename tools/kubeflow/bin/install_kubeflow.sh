@@ -43,6 +43,7 @@ sed -e "s/\"SecretAccessKey.*$/\"SecretAccessKey\" : \"$leofs_password\",/g" $ad
 sed -i '4i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
 sed -i '5i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
 sed -i '6i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
+sed -i '29i RUN python3 -m pip install requests-toolbelt==0.10.1' backend/Dockerfile
 sed -i '61i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
 sed -i '62i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
 sed -i '63i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
