@@ -18,6 +18,23 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14320db8_bfa6d000",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-05-15T15:46:41Z",
+      "side": 1,
+      "message": "it is fixed in a new commit",
+      "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "581b406a_69de5bfc",
@@ -35,6 +52,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a3464bc_8089a0b2",
+        "filename": "tools/kubeflow/sample_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-05-15T15:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "581b406a_69de5bfc",
+      "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2834f07_73db1692",
@@ -48,6 +83,24 @@
       "writtenOn": "2023-05-09T06:37:34Z",
       "side": 1,
       "message": "ditto",
+      "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c319bfc4_7106fdef",
+        "filename": "tools/kubeflow/sample_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-05-15T15:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2834f07_73db1692",
       "revId": "3d0957a80d0e6fe52e5ca203c6facfab6373056e",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
