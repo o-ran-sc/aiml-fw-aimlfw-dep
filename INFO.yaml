@@ -4,9 +4,9 @@ project_creation_date: '2022-08-17'
 project_category: ''
 lifecycle_state: 'Incubation'
 project_lead: &oran_aiml_fw_ptl
-    name: 'Hoejoo Lee'
-    email: 'hoejoo.lee@samsung.com'
-    id: 'cromee'
+    name: 'Joseph Thaliath'
+    email: 'jo.thaliath@samsung.com'
+    id: 'josephthaliath'
     company: 'Samsung Electronics'
     timezone: 'Asia/Seoul'
 primary_contact: *oran_aiml_fw_ptl
@@ -53,6 +53,11 @@ committers:
       email: 'minhac@samsung.com'
       company: 'Samsung Electronics'
       id: 'minhalee'
+      timezone: 'Asia/Seoul'
+    - name: 'Hoejoo Lee'
+      email: 'hoejoo.lee@samsung.com'
+      company: 'Samsung Electronics'
+      id: 'cromee'
       timezone: 'Asia/Seoul'
 tsc:
     # yamllint disable rule:line-length
