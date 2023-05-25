@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d3e4d2_784a0e80",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-25T08:00:04Z",
+      "side": 1,
+      "message": "What about use `pip3 install` only once?",
+      "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "205116ee_cbd5f5d5",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-25T08:00:04Z",
+      "side": 1,
+      "message": "Is `-b g-release` essential? I\u0027m worried about installing only g-release branch code instead of latest code.",
+      "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
