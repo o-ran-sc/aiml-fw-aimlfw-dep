@@ -33,6 +33,7 @@ tools/helm/install_helm.sh
 tools/nfs/install_nfs_subdir_external_provisioner.sh localhost
 
 bin/install_common_templates_to_helm.sh
+bin/build_default_pipeline_image.sh
 tools/leofs/bin/install_leofs.sh
 tools/kubeflow/bin/install_kubeflow.sh
 kubectl create namespace traininghost

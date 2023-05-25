@@ -16,18 +16,16 @@
 #
 # ==================================================================================
 
-FROM python:3.8
-RUN pip3 install protobuf==3.20.1
-RUN pip3 install tensorflow==2.5.0
-RUN pip3 install cassandra-driver==3.25.0
-RUN pip3 install pandas==1.4.4
-RUN pip3 install scikit-learn
-RUN pip3 install boto3
-RUN pip3 install botocore
-RUN pip3 install kubernetes
-ADD SDK /SDK
-WORKDIR /SDK
-RUN pip3 install featurestoresdk_main/.
-RUN pip3 install modelmetricssdk_main/.
+FROM python:3.8-slim
+RUN apt-get update && \
+    apt-get install -y git
+COPY requirements_pipeline.txt .
+RUN pip3 install -r requirements_pipeline.txt
+
+RUN git clone -b g-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/feature-store" /SDK/featurestoresdk_main
+RUN git clone -b g-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/model-storage" /SDK/modelmetricssdk_main
+
+RUN pip3 install /SDK/featurestoresdk_main/.
+RUN pip3 install /SDK/modelmetricssdk_main/.
 RUN mkdir -p /app_run
 WORKDIR /app_run
