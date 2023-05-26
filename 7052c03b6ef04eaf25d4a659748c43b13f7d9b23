@@ -105,6 +105,24 @@
       "parentUuid": "205116ee_cbd5f5d5",
       "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a5e3f5c_e5202fdc",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-26T03:42:23Z",
+      "side": 1,
+      "message": "Thanks for the detail explanation! \nThe first option is good for now. Let\u0027s think about better idea after h-release.",
+      "parentUuid": "d0eb47ed_1a8be139",
+      "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
