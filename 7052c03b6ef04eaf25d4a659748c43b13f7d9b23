@@ -36,6 +36,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27a11c6d_f4b4be18",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-05-26T02:30:27Z",
+      "side": 1,
+      "message": "yes, I will use requirements.txt file",
+      "parentUuid": "02d3e4d2_784a0e80",
+      "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "205116ee_cbd5f5d5",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-05-25T22:58:04Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "205116ee_cbd5f5d5",
+      "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0eb47ed_1a8be139",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-05-26T02:30:27Z",
+      "side": 1,
+      "message": "Yes, since we are releasing h-release branch in coming weeks, so in case anyone takes h release branch and install, it should always install g-release versions of these sdks. After h-release is complete and if there are changes in the sdk then this file needs to be updated. Another approach is to create docker image, tag and store in nexus repository but any change in this repository will unnecessary trigger docker build.",
       "parentUuid": "205116ee_cbd5f5d5",
       "revId": "7052c03b6ef04eaf25d4a659748c43b13f7d9b23",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
