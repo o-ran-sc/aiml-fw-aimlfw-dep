@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a13e85c_89148b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-05-31T14:30:41Z",
+      "side": 1,
+      "message": "Can you add a file, `README.md`, under `demos/hrelease/scripts` folder so that we can know how to test it?",
+      "revId": "78f68365a0d6308040cf47bc1821982fb46e8cae",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
