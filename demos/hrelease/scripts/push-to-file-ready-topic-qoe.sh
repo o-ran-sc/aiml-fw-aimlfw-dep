@@ -25,9 +25,9 @@ START_EPOCH=$3
 END_EPOCH=$4
 
 chmod +x kafka-client-send-file-ready-qoe.sh
-kubectl cp kafka-client-send-file-ready-qoe.sh nonrtric/client:/home/appuser -c client
+kubectl cp kafka-client-send-file-ready-qoe.sh nonrtric/kafka-client:/home/appuser -c kafka-client
 
-kubectl exec client -c client -n nonrtric -- bash -c './kafka-client-send-file-ready-qoe.sh '$NODE_NAME_BASE' '$FILENAME' '$START_EPOCH' '$END_EPOCH' '
+kubectl exec kafka-client -c kafka-client -n nonrtric -- bash -c './kafka-client-send-file-ready-qoe.sh '$NODE_NAME_BASE' '$FILENAME' '$START_EPOCH' '$END_EPOCH' '
 
 echo "done"
 

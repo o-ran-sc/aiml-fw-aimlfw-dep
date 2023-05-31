@@ -24,8 +24,8 @@ if [ $# -lt 3 ]; then
 fi
 
 kubectl patch StatefulSet pm-https-server -n ran -p '{"spec":{"template":{"spec":{"containers":[{"name":"pm-https-server", "env":[{"name":"ALWAYS_RETURN", "value":""}]}]}}}}'
-while [[ $(kubectl get pods pm-https-server-0 -n ran -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for pm-https-server to be up" && sleep 1; done
-kubectl exec -it pm-https-server-0 -n ran -- mkdir -p /files
+kubectl rollout status statefulset/pm-https-server -n ran
+kubectl exec -it pm-https-server-0 -n ran -c pm-https-server -- mkdir -p /files
 sudo apt install -y python3-pip
 pip3 install pandas
 wget https://raw.githubusercontent.com/o-ran-sc/ric-app-qp/g-release/src/cells.csv -O qoedata.csv
