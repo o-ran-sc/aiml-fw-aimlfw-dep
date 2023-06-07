@@ -14,7 +14,7 @@ Installation Guide
 Abstract
 --------
 
-This document describes how to install AIMLFW, it's dependencies and required system resources.
+This document describes how to install AIMLFW, demo scenarios, it's dependencies and required system resources.
 
 
 Version history
@@ -26,7 +26,7 @@ Version history
 | 2022-11-30         | 0.1.0              | 		       | First draft        |
 |                    |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
-|                    |                    |                    |                    |
+| 2023-06-06         | 1.0.0              | Joseph Thaliath    |  H Release         |
 |                    |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
 |                    |                    |                    |                    |
@@ -43,7 +43,7 @@ Introduction
 
 This document describes the supported software and hardware configurations for the reference component as well as providing guidelines on how to install and configure such reference system.
 
-The audience of this document is assumed to have good knowledge in RAN network and Linux system.
+The audience of this document is assumed to have good knowledge in AI/ML tools, Kubernetes and Linux system.
 
 
 Hardware Requirements
@@ -52,10 +52,12 @@ Hardware Requirements
 
 Below are the minimum requirements for installing the AIMLFW
 
-#. OS: Ubuntu 18.04 server
+#. OS: Ubuntu 22.04 server
 #. 8 cpu cores
 #. 16 GB RAM
 #. 60 GB harddisk
+
+..  _reference1:
 
 Software Installation and Deployment
 ------------------------------------
@@ -114,6 +116,8 @@ Software Uninstallation
         bin/uninstall_traininghost.sh
 
 .. _install-influx-db-as-datalake:
+
+..  _reference2:
 
 Install Influx DB as datalake
 -----------------------------
@@ -301,6 +305,7 @@ Check running state of pod using below command
 
         kubectl get pods -n kserve-test
 
+..  _reference4:
 
 Test predictions using model deployed on Kserve
 -----------------------------------------------
@@ -350,3 +355,185 @@ Use command below to trigger predictions
 .. code:: bash
 
         source predict.sh
+
+..  _reference3:
+
+Prepare Non-RT RIC DME as data source for AIMLFW
+------------------------------------------------
+
+Bring up the RANPM setup by following the steps mentioned in the file install/README.md present in the repository `RANPM repository <https://gerrit.o-ran-sc.org/r/admin/repos/nonrtric/plt/ranpm>`__
+
+Once all the pods are in running state, follow the below steps to prepare ranpm setup for AIMLFW qoe usecase data access
+
+The scripts files are present in the folder demos/hrelease/scripts of repository `AIMLFW repository <https://gerrit.o-ran-sc.org/r/admin/repos/aiml-fw/aimlfw-dep>`__
+
+Note: The following steps need to be performed in the VM where the ranpm setup is installed.
+
+.. code:: bash
+
+        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
+        cd aimlfw-dep/demos/hrelease/scripts
+        ./get_access_tokens.sh
+
+Update the RECIPE file (:file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml`) of AIMLFW installation with Influx DB details of RANPM setup. The token is displayed when the script :file:`./get_access_tokens.sh` is executed.
+Example of updating the RECIPE file is shown below
+
+.. code:: bash
+
+        datalake:
+          influxdb:
+            host: <IP of RANPM setup>
+            port: 31812
+            orgname: est
+            bucket: pm-bucket
+            token:  <Token shown when ./get_access_tokens.sh is executed>
+
+Execute the below script
+
+.. code:: bash
+
+        ./prepare_env_aimlfw_access.sh
+
+Add feature group from AIMLFW dashboard, example on how to create a feature group is shown in this demo video: `Feature group creation demo <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_final_lowres.mp4?api=v2>`__
+
+Execute below script to push qoe data into ranpm setup
+
+.. code:: bash
+
+        ./push_qoe_data.sh  <source name mentioned when creating feature group> <Number of rows> <Cell Identity>
+
+Example for executing above script
+
+.. code:: bash
+        
+        ./push_qoe_data.sh  gnb300505 30 c4/B2
+
+Steps to check if data is upload correctly
+
+
+.. code:: bash
+
+        kubectl exec -it influxdb2-0 -n nonrtric -- bash
+        influx query 'from(bucket: "pm-bucket") |> range(start: -1000000000000000000d)' |grep pdcpBytesDl
+
+Steps to clear the data in InfluxDB
+
+.. code:: bash
+
+        kubectl exec -it influxdb2-0 -n nonrtric -- bash
+        influx delete --bucket pm-bucket --start 1801-01-27T05:00:22.305309038Z   --stop 2023-11-14T00:00:00Z
+
+
+Training job creation with DME as data source
+---------------------------------------------
+
+#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
+#. RANPM setup should be installed and configured as per steps mentioned in section :ref:`Prepare Non-RT RIC DME as data source for AIMLFW <reference3>`
+#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_training_final_lowres.mp4?api=v2>`__ 
+#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation 
+
++--------------------+--------------------------------------------------------------+
+| **Parameter**      | **Value**                                                    |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Training Job Name  | qoetest                                                      |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Training Function  | qoe_pipeline_h_release                                       |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Experiment Name    | Default                                                      |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Datalake Source    | Influx DB                                                    |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| _measurement       | ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| bucket             | pm-bucket                                                    |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Feature Name       | \*                                                           |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Feature Filter     |                                                              |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Hyper Parameters   | epochs:1                                                     |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+| Description        | test                                                         |
+|                    |                                                              |
+|                    |                                                              |
++--------------------+--------------------------------------------------------------+
+
+
+Training job creation with standalone Influx DB as data source
+--------------------------------------------------------------
+
+#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
+#. Standalone Influx DB should be setup and configured as mentioned in section :ref:`Install Influx DB as datalake <reference2>`
+#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_training_final_lowres.mp4?api=v2>`__
+#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation 
+
++--------------------+-------------------------+
+| **Parameter**      | **Value**               |
+|                    |                         |
++--------------------+-------------------------+
+| Training Job Name  | qoetest                 |
+|                    |                         |
++--------------------+-------------------------+
+| Training Function  | qoe_pipeline_g_release  |
+|                    |                         |
++--------------------+-------------------------+
+| Experiment Name    | Default                 |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Datalake Source    | Influx DB               |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| _measurement       | liveCell                |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| bucket             | UEData                  |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Feature Name       | \*                      |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Feature Filter     |                         |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Hyper Parameters   | epochs:1                |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Description        | test                    |
+|                    |                         |
+|                    |                         |
++--------------------+-------------------------+
+
+
+
+
+
+
+

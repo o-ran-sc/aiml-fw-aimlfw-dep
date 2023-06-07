@@ -23,12 +23,15 @@ Version history
 | 2022-12-08         | 1.0.0              | Joseph Thaliath    | G release          |
 |                    |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
+| 2023-06-07         | 2.0.0              | Joseph Thaliath    | H release          |
+|                    |                    |                    |                    |
++--------------------+--------------------+--------------------+--------------------+
 
 
 Summary
 -------
 
-The G release of AIMLFW provides required installation scripts for deployment of G release version of AIMLFW
+The H release of AIMLFW provides required installation scripts for deployment of H release version of AIMLFW
 
 
 Release Data
@@ -41,10 +44,10 @@ Release Data
 | **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                   |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
-| **Release designation**              | G release                            |
+| **Release designation**              | H release                            |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
-| **Release date**                     | 2022-12-15                           |
+| **Release date**                     | 2023-06-07                           |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
 | **Purpose of the delivery**          | AIMLFW Installation and Deployment   |
