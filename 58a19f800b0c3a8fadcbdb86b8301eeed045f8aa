@@ -18,6 +18,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f585e887_115e595c",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-06-08T05:31:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d486cd4f_184da4e8",
+      "revId": "58a19f800b0c3a8fadcbdb86b8301eeed045f8aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8274f4c_fa40f850",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-08T01:59:53Z",
       "side": 1,
       "message": "Please add only one blank between in and AI/ML.",
+      "revId": "58a19f800b0c3a8fadcbdb86b8301eeed045f8aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a04a75dc_e1d0f9db",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-06-08T05:31:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8274f4c_fa40f850",
       "revId": "58a19f800b0c3a8fadcbdb86b8301eeed045f8aa",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
