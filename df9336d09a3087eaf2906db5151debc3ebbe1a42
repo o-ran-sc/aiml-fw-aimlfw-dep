@@ -16,6 +16,24 @@
       "message": "It seems that `f-release` is too old. Isn\u0027t it possible to use `g-release` at least?",
       "revId": "df9336d09a3087eaf2906db5151debc3ebbe1a42",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13e0a7a_dd68da0b",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-06-14T08:05:48Z",
+      "side": 1,
+      "message": "The file \"cell.json.gz\" is available is in this branch only",
+      "parentUuid": "e90fbafc_65f55f70",
+      "revId": "df9336d09a3087eaf2906db5151debc3ebbe1a42",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
