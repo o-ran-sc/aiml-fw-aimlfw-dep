@@ -7,7 +7,7 @@
 Release-Notes
 -------------
 
-This document provides the release notes for the G release of AIMLFW Installation and Deployment
+This document provides the release notes for the H release of AIMLFW Installation and Deployment
 
 .. contents::
    :depth: 3
@@ -23,7 +23,7 @@ Version history
 | 2022-12-08         | 1.0.0              | Joseph Thaliath    | G release          |
 |                    |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
-| 2023-06-07         | 2.0.0              | Joseph Thaliath    | H release          |
+| 2023-06-07         | 1.1.0              | Joseph Thaliath    | H release          |
 |                    |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
 
@@ -47,7 +47,7 @@ Release Data
 | **Release designation**              | H release                            |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
-| **Release date**                     | 2023-06-07                           |
+| **Release date**                     | 2023-06-29                           |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
 | **Purpose of the delivery**          | AIMLFW Installation and Deployment   |

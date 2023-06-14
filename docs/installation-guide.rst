@@ -161,7 +161,7 @@ Use the :file:`insert.py` in ``ric-app/qp repository`` to upload the qoe data in
 
 .. code:: bash
 
-        git clone https://gerrit.o-ran-sc.org/r/ric-app/qp
+        git clone -b f-release https://gerrit.o-ran-sc.org/r/ric-app/qp
         cd qp/qp
 
 Update :file:`insert.py` file with the following content:
@@ -262,6 +262,8 @@ To uninstall Kserve run the below commands
         ./bin/uninstall_kserve.sh
         
 
+..  _reference4:
+
 Deploy trained qoe prediction model on Kserve
 ---------------------------------------------
 
@@ -305,7 +307,6 @@ Check running state of pod using below command
 
         kubectl get pods -n kserve-test
 
-..  _reference4:
 
 Test predictions using model deployed on Kserve
 -----------------------------------------------
@@ -429,7 +430,7 @@ Training job creation with DME as data source
 
 #. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
 #. RANPM setup should be installed and configured as per steps mentioned in section :ref:`Prepare Non-RT RIC DME as data source for AIMLFW <reference3>`
-#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_training_final_lowres.mp4?api=v2>`__ 
+#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/81297504/h_release_training_source_dme.mp4?api=v2>`__ 
 #. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
 
 NOTE: Below are some example values to be used for the QoE usecase training job creation 
@@ -483,7 +484,7 @@ Training job creation with standalone Influx DB as data source
 
 #. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
 #. Standalone Influx DB should be setup and configured as mentioned in section :ref:`Install Influx DB as datalake <reference2>`
-#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_training_final_lowres.mp4?api=v2>`__
+#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/81297504/h_release_training_source_influxdb.mp4?api=v2>`__
 #. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
 
 NOTE: Below are some example values to be used for the QoE usecase training job creation 
