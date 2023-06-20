@@ -4,17 +4,18 @@
 .. Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
 
 
+=============
 Release-Notes
--------------
+=============
 
-This document provides the release notes for the H release of AIMLFW Installation and Deployment
+This document provides the release notes for the release of AIMLFW Installation and Deployment
 
 .. contents::
    :depth: 3
    :local:
 
 Version history
----------------
+===============
 
 +--------------------+--------------------+--------------------+--------------------+
 | **Date**           | **Ver.**           | **Author**         | **Comment**        |
@@ -29,13 +30,38 @@ Version history
 
 
 Summary
--------
+=======
 
 The H release of AIMLFW provides required installation scripts for deployment of H release version of AIMLFW
 
 
 Release Data
-------------
+============
+
+H Release
+---------
+
+
++--------------------------------------+-------------------------------------------+
+| **Project**                          | AIMLFW Installation and Deployment        |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                        |
+|                                      | /95c8a98ab9f3074bd2916aebd1653b243615ef7e |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release designation**              | H release                                 |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release date**                     | 2023-06-29                                |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Purpose of the delivery**          | AIMLFW Installation and Deployment        |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+
+G Release
+---------
 
 +--------------------------------------+--------------------------------------+
 | **Project**                          | AIMLFW Installation and Deployment   |
@@ -44,10 +70,10 @@ Release Data
 | **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                   |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
-| **Release designation**              | H release                            |
+| **Release designation**              | G release                            |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
-| **Release date**                     | 2023-06-29                           |
+| **Release date**                     | 2022-12-15                           |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
 | **Purpose of the delivery**          | AIMLFW Installation and Deployment   |
