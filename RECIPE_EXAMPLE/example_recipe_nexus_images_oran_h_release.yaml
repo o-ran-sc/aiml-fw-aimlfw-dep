@@ -27,7 +27,7 @@ tm:
     repository: nexus3.o-ran-sc.org:10002/o-ran-sc/aiml-fw-awmf-tm-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.1.1"
+    tag: "1.1.3"
 
 leofs:
   image:
@@ -63,7 +63,7 @@ aimldashboard:
     repository: nexus3.o-ran-sc.org:10002/o-ran-sc/portal-aiml-dashboard-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.1.1"
+    tag: "1.1.2"
   host:
     tm_host: "localhost"
     notebook_host: "localhost"
@@ -74,4 +74,4 @@ aimlnotebook:
     repository: nexus3.o-ran-sc.org:10002/o-ran-sc/portal-aiml-notebook-docker 
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.1.1"
+    tag: "1.1.2"
