@@ -29,4 +29,3 @@ NAMESPACE=kubeflow
 COMPONENT=leofs
 POD_NAME=$(kubectl get pod -l app.kubernetes.io/name=$COMPONENT -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}")
 while [[ $(kubectl get pods $POD_NAME -n kubeflow -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for leofs pod" && sleep 1; done
-kubectl exec -it $POD_NAME -n kubeflow -- bash -c "source /root/deb/leofs_start.sh"
