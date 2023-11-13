@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26d6737_51097708",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-13T02:42:45Z",
+      "side": 1,
+      "message": "Please keep the mode of script files at 755. \n```\nbin/install_traininghost.sh: line 37: tools/leofs/bin/install_leofs.sh: Permission denied\n```",
+      "revId": "94440e387a475818ff0983fea855aed68fe2b419",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
