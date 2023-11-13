@@ -1,0 +1,8 @@
+Verified+1: Taewan Kim <t25.kim@samsung.com>
+Verified+1: ORAN Required GHA <releng+oran.required.gha@linuxfoundation.org>
+Code-Review+2: Taewan Kim <t25.kim@samsung.com>
+Submitted-by: Joseph Thaliath <jo.thaliath@samsung.com>
+Submitted-at: Mon, 13 Nov 2023 06:21:51 +0000
+Reviewed-on: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/12036
+Project: aiml-fw/aimlfw-dep
+Branch: refs/heads/master
