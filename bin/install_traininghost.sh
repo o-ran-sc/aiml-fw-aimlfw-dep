@@ -37,6 +37,7 @@ bin/build_default_pipeline_image.sh
 tools/leofs/bin/install_leofs.sh
 tools/kubeflow/bin/install_kubeflow.sh
 kubectl create namespace traininghost
+kubectl create namespace ricips
 
 bin/install_rolebindings.sh
 bin/install_databases.sh

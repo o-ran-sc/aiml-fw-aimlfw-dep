@@ -71,9 +71,7 @@ if [ -z "$HAS_COMMON_PACKAGE" ];then
     exit 1
 fi
 
-COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook"
-
-
+COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook kserve-adapter"
 
 for component in $COMPONENTS; do
     helm dep up helm/$component
