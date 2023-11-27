@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ad14f8_b60a9ace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-27T06:31:49Z",
+      "side": 1,
+      "message": "Some comments, let me know your thoughts",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e287804_ddafa6aa",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_h_release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-27T06:31:49Z",
+      "side": 1,
+      "message": "We can create a new file for I release",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6af993_4e61baff",
+        "filename": "bin/install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-27T06:31:49Z",
+      "side": 1,
+      "message": "We need to seperate the training host installation from the inference installation. We need to combine both kserve and kserve adapter installation as one installation like install_kserve_inference.sh",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b742b6f1_c3b94149",
+        "filename": "bin/install_traininghost.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-27T06:31:49Z",
+      "side": 1,
+      "message": "We need to seperate the training host installation from the inference installation. We need to combine both kserve and kserve adapter installation as one installation like install_kserve_inference.sh",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
