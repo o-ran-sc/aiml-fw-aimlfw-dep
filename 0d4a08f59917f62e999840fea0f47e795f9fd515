@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2afad03_4e8261bc",
+        "filename": "bin/install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-28T23:02:59Z",
+      "side": 1,
+      "message": "That makes sense. I\u0027ll update the patchset with your comment.\nIs it okay if `install_kserve_inference.sh` includes creating namespace and executing install_kserve.sh file?\n\nI wonder if we need to change the names of two files with each other.\ninstall.sh is for installing everything.\ninstall_traininghost.sh is for traininghost installation like install_kserve_inference.sh.",
+      "parentUuid": "37848a0b_137bfcaa",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b742b6f1_c3b94149",
         "filename": "bin/install_traininghost.sh",
         "patchSetId": 1
