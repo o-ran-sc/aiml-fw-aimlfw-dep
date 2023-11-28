@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2023 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
 #   limitations under the License.
 #
 # ==================================================================================
-docker rmi tm
-docker rmi data-extraction
-docker rmi kfadapter
-docker rmi aiml-dashboard
-docker rmi aiml-notebook
-docker rmi kserve-adapter:1.0.0
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kserve-adapter-configmap
+  namespace: {{ include "common.namespace.kserve" . }}
+data:
+  # Configuration values can be set as key-value properties
+  RIC_DMS_IP: "{{ .Values.kserveadapter.ric_dms.ip }}"
+  RIC_DMS_PORT: "{{ .Values.kserveadapter.ric_dms.port }}"
