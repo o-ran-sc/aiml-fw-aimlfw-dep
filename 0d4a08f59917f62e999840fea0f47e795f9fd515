@@ -18,6 +18,23 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e22d034_b085766c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-28T02:25:52Z",
+      "side": 1,
+      "message": "Thanks for your kind comments. Please see my replies.",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e287804_ddafa6aa",
@@ -54,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8af4f04_deb54ba1",
+        "filename": "bin/install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-28T02:25:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure if your idea is good in terms of convenience.\nCurrently, `bin/install.sh` seems to be the common file for helm packages.\nIf we make the `install_kserve_inference.sh` file, we may rename the `bin/install.sh` file to the helm packages for traininghost, such as `bin/install_helm_traininghost.sh`. \nAfter we make `bin/install.sh` to execute `bin/install_helm_kserve_inference.sh` and `bin/install_helm_traininghost.sh`.\nWe also need to manage both `traininghost` and `kserver_inference` yaml recipe files.",
+      "parentUuid": "2a6af993_4e61baff",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b742b6f1_c3b94149",
         "filename": "bin/install_traininghost.sh",
         "patchSetId": 1
@@ -65,6 +100,24 @@
       "writtenOn": "2023-11-27T06:31:49Z",
       "side": 1,
       "message": "We need to seperate the training host installation from the inference installation. We need to combine both kserve and kserve adapter installation as one installation like install_kserve_inference.sh",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0afce3a_78889fb4",
+        "filename": "bin/install_traininghost.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-28T02:25:52Z",
+      "side": 1,
+      "message": "It makes sense.",
+      "parentUuid": "b742b6f1_c3b94149",
       "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
