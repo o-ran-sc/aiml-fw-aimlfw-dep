@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2023 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,17 +15,20 @@
 #   limitations under the License.
 #
 # ==================================================================================
-bin/uninstall.sh
-bin/uninstall_databases.sh
-helm repo remove local
-sudo helm plugin uninstall servecm
-
-
-tools/kubeflow/bin/uninstall_kubeflow.sh
-tools/leofs/bin/uninstall_leofs.sh
-bin/uninstall_kserve_inference.sh
-bin/uninstall_rolebindings.sh
-kubectl delete namespace traininghost
-
-tools/nfs/delete_nfs_subdir_external_provisioner.sh
-tools/kubernetes/uninstall_k8s.sh
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "kserve-adapter.fullname" . }}
+  namespace: {{ include "common.namespace.kserve" . }}
+  labels:
+    {{- include "kserve-adapter.labels" . | nindent 4 }}
+spec:
+  type: NodePort
+  ports:
+    - port: {{ include "common.serviceport.kserve-adapter.http" .  }}
+      targetPort: {{ include "common.serviceport.kserve-adapter.targetport" .  }}
+      nodePort: {{ include "common.serviceport.kserve-adapter.external" .  }}
+      protocol: TCP
+      name: serviceport
+  selector:
+    {{- include "kserve-adapter.selectorLabels" . | nindent 4 }}

@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2023 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,17 +15,6 @@
 #   limitations under the License.
 #
 # ==================================================================================
-bin/uninstall.sh
-bin/uninstall_databases.sh
-helm repo remove local
-sudo helm plugin uninstall servecm
 
-
-tools/kubeflow/bin/uninstall_kubeflow.sh
-tools/leofs/bin/uninstall_leofs.sh
-bin/uninstall_kserve_inference.sh
-bin/uninstall_rolebindings.sh
-kubectl delete namespace traininghost
-
-tools/nfs/delete_nfs_subdir_external_provisioner.sh
-tools/kubernetes/uninstall_k8s.sh
+bin/uninstall_kserve.sh
+kubectl delete namespace ricips
