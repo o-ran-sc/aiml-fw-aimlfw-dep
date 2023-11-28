@@ -18,3 +18,4 @@
 
 {{- define "common.namespace.platform" -}}traininghost{{- end -}}
 {{- define "common.namespace.kubeflow" -}}kubeflow{{- end -}}
+{{- define "common.namespace.kserve" -}}ricips{{- end -}}

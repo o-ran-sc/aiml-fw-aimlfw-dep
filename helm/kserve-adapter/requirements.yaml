@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2023 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 #   limitations under the License.
 #
 # ==================================================================================
-docker rmi tm
-docker rmi data-extraction
-docker rmi kfadapter
-docker rmi aiml-dashboard
-docker rmi aiml-notebook
-docker rmi kserve-adapter:1.0.0
+dependencies:
+  - name: aimlfw-common
+    version: 1.0.0
+    repository: "@local"

@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2023 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 #   limitations under the License.
 #
 # ==================================================================================
-
 #!/bin/bash
 
 IS_HELM3=$(helm version --short|grep -e "^v3")
@@ -44,7 +43,7 @@ if [ -z "$OVERRIDEYAML" ];then
     echo "****************************************************************************************************************"
     echo "                                                     ERROR                                                      "
     echo "****************************************************************************************************************"
-    echo "AIMLFW deployment without deployment recipe is currently disabled. Please specify an recipe with the -f option."
+    echo "Kserve deployment without deployment recipe is currently disabled. Please specify an recipe with the -f option."
     echo "****************************************************************************************************************"
     exit 1
 fi
@@ -54,27 +53,28 @@ then
     echo "****************************************************************************************************************"
     echo "                                                     ERROR                                                      "
     echo "****************************************************************************************************************"
-    echo "AIMLFW deployment expects helm 3 installed"
+    echo "Kserve deployment expects helm 3 installed"
     echo "****************************************************************************************************************"
     exit 1
 else
     HAS_COMMON_PACKAGE=$(helm search repo local/aimlfw-common | grep aimlfw-common)
 fi
 
-
 if [ -z "$HAS_COMMON_PACKAGE" ];then
-    echo "****************************************************************************************************************"
-    echo "                                                     ERROR                                                      "
-    echo "****************************************************************************************************************"
-    echo "Can't locate the aimlfw-common helm package in the local repo. Please make sure that it is properly installed."
-    echo "****************************************************************************************************************"
-    exit 1
+    bin/install_common_templates_to_helm.sh
+    if [ -z $(helm search repo local/aimlfw-common | grep aimlfw-common) ];then
+        echo "****************************************************************************************************************"
+        echo "                                                     ERROR                                                      "
+        echo "****************************************************************************************************************"
+        echo "Can't locate the aimlfw-common helm package in the local repo. Please make sure that it is properly installed."
+        echo "****************************************************************************************************************"
+        exit 1
+    fi
 fi
 
-COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook"
+kubectl create namespace ricips
+bin/install_kserve.sh
 
-for component in $COMPONENTS; do
-    helm dep up helm/$component
-    echo "Installing $component"
-    helm install $component helm/$component -f $OVERRIDEYAML
-done
+helm dep up helm/kserve-adapter
+echo "Installing kserve-adapter"
+helm install kserve-adapter helm/kserve-adapter -f $OVERRIDEYAML
