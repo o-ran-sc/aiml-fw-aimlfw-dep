@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37848a0b_137bfcaa",
+        "filename": "bin/install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-28T13:59:50Z",
+      "side": 1,
+      "message": "The reason is we might want to install inference only (e.g. Near-RT RIC) and install training host in SMO. We can look at this approach:\n1) keep this install.sh only for training host.\n2) since for inference we need to install only one component using helm, we can add the helm install kserve-adapter in install_kserve_inference.sh\n\nLet me know your opinion",
+      "parentUuid": "d8af4f04_deb54ba1",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b742b6f1_c3b94149",
         "filename": "bin/install_traininghost.sh",
         "patchSetId": 1
