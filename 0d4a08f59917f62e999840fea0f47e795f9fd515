@@ -52,6 +52,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39c2569_05d5760c",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_h_release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-29T15:35:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e287804_ddafa6aa",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a6af993_4e61baff",
@@ -123,6 +141,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "479fae73_a44b1f99",
+        "filename": "bin/install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-29T15:35:34Z",
+      "side": 1,
+      "message": "I think the changes looks fine for now",
+      "parentUuid": "e2afad03_4e8261bc",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b742b6f1_c3b94149",
@@ -154,6 +190,24 @@
       "side": 1,
       "message": "It makes sense.",
       "parentUuid": "b742b6f1_c3b94149",
+      "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e48d637_64c0e0c4",
+        "filename": "bin/install_traininghost.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-11-29T15:35:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0afce3a_78889fb4",
       "revId": "0d4a08f59917f62e999840fea0f47e795f9fd515",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
