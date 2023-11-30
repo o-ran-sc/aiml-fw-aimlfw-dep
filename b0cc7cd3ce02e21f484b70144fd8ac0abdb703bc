@@ -16,6 +16,24 @@
       "message": "Should we install the common package using bin/install_common_templates_to_helm.sh if its not installed?",
       "revId": "b0cc7cd3ce02e21f484b70144fd8ac0abdb703bc",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee669622_b97f5cdc",
+        "filename": "bin/install_kserve_inference.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-11-30T00:09:58Z",
+      "side": 1,
+      "message": "It has been updated to exit it if the common package cannot be installed with `bin/install_common_templates_to_helm.sh`.",
+      "parentUuid": "89e61456_34c74262",
+      "revId": "b0cc7cd3ce02e21f484b70144fd8ac0abdb703bc",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
