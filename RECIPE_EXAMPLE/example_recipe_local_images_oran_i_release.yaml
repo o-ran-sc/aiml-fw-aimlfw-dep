@@ -49,7 +49,7 @@ datalake:
     port: <Fill port of datalake>
     orgname: <Fill org name configured in datalake>
     bucket: <Fill bucket info of data in datalake>
-    token:  <Fill token info to access data>
+    token: <Fill token info to access data>
 
 kfadapter:
   image:
@@ -67,7 +67,7 @@ aimldashboard:
   host:
     tm_host: "localhost"
     notebook_host: "localhost"
-    debug: "\"false\""
+    debug: '"false"'
 
 aimlnotebook:
   image:
@@ -85,3 +85,10 @@ kserveadapter:
   ric_dms:
     ip: <Fill IP of ric dms>
     port: 8000
+
+modelmgmtservice:
+  image:
+    repository: modelmgmtservice
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0.0"
