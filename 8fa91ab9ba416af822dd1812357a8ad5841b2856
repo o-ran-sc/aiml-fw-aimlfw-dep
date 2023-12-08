@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24f897d9_f3c3583a",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_i_release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-12-08T09:27:30Z",
+      "side": 1,
+      "message": "Generally, we are putting configurable variables which we want user to change during the default installation process. Since MMES_URL is considered to be fixed always during the default installation process, we have not added here.",
+      "parentUuid": "8b5973d0_4536e4a9",
+      "revId": "8fa91ab9ba416af822dd1812357a8ad5841b2856",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5455f82c_09cc03f0",
         "filename": "helm/modelmgmtservice/templates/configmap.yaml",
         "patchSetId": 1
