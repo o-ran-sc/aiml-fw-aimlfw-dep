@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f8d9fb_f24456e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-12-08T09:24:20Z",
+      "side": 1,
+      "message": "Can you answer my questions?",
+      "revId": "8fa91ab9ba416af822dd1812357a8ad5841b2856",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5973d0_4536e4a9",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_i_release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-12-08T09:24:20Z",
+      "side": 1,
+      "message": "Don\u0027t we need to put configuration values, such as `MMES_URL`, here?",
+      "revId": "8fa91ab9ba416af822dd1812357a8ad5841b2856",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5455f82c_09cc03f0",
+        "filename": "helm/modelmgmtservice/templates/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-12-08T09:24:20Z",
+      "side": 1,
+      "message": "It seems like postfix.",
+      "revId": "8fa91ab9ba416af822dd1812357a8ad5841b2856",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "717c30e7_c34acce1",
+        "filename": "helm/modelmgmtservice/templates/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-12-08T09:24:20Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8fa91ab9ba416af822dd1812357a8ad5841b2856",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
