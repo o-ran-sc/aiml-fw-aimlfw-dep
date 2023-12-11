@@ -33,6 +33,24 @@
       "message": "I think you need to add the code for building the modelmgmtservice image to the `bin/docker_image_build_local.sh`file.\n\nMy last question is, where will you put the code that executes the helm command, such as `helm dep up` and `helm install`?",
       "revId": "fdb7efc0a8b05f517356d2f92b2dee6306a3f0fb",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54d6638_7d7f522c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001940
+      },
+      "writtenOn": "2023-12-11T05:58:49Z",
+      "side": 1,
+      "message": "Hello Mr. Taewan,\nI am having some git related issue in modifying script files from my Windows machine, it does unwanted changed to .sh file, so all script related changed will be done by my colleague from Linux machine in subsequent commit.",
+      "parentUuid": "7636f622_a858c2cd",
+      "revId": "fdb7efc0a8b05f517356d2f92b2dee6306a3f0fb",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
