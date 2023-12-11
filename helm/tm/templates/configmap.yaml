@@ -28,8 +28,11 @@ data:
   DATA_EXTRACTION_API_PORT: "{{ include "common.serviceport.data-extraction.http" .  }}"
   TRAINING_MANAGER_PORT: "{{ include "common.serviceport.tm.http" .  }}"
   TRAINING_MANAGER_IP: {{ .Values.traininghost.ip_address }}
+  MODEL_MANAGEMENT_SERVICE_IP: "{{ include "common.servicehost.modelmgmtservice.http" . }}"
+  MODEL_MANAGEMENT_SERVICE_PORT: "{{ include "common.serviceport.modelmgmtservice.external" . }}"
   PS_USER: postgres
   PS_IP: tm-db-postgresql.traininghost
   PS_PORT: "5432"
   PYTHONUNBUFFERED: "0"
   ACCESS_CONTROL_ALLOW_ORIGIN: "http://localhost:32005"
+  PIPELINE: {{.Values.tm.pipelines | toJson | quote }}
