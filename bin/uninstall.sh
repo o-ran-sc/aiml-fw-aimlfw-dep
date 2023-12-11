@@ -16,7 +16,7 @@
 #
 # ==================================================================================
 
-COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook"
+COMPONENTS="tm data-extraction kfadapter aiml-dashboard aiml-notebook modelmgmtservice"
 
 for component in $COMPONENTS; do
     echo "Uninstalling $component"

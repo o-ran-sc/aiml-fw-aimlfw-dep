@@ -21,3 +21,4 @@ docker rmi kfadapter
 docker rmi aiml-dashboard
 docker rmi aiml-notebook
 docker rmi kserve-adapter:1.0.0
+docker rmi modelmgmtservice:1.0.0 
