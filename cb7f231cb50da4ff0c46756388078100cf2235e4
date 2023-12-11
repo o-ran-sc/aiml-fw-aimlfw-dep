@@ -16,6 +16,24 @@
       "message": "It\u0027s necessary to get rid of the personal ID.",
       "revId": "cb7f231cb50da4ff0c46756388078100cf2235e4",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4506a4c0_a60c77ff",
+        "filename": "bin/docker_image_build_local.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001949
+      },
+      "writtenOn": "2023-12-11T07:25:43Z",
+      "side": 1,
+      "message": "Yes. thanks for the catch. I have updated it",
+      "parentUuid": "79ac8a20_29700fe8",
+      "revId": "cb7f231cb50da4ff0c46756388078100cf2235e4",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
