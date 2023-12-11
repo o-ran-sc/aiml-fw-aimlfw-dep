@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79ac8a20_29700fe8",
+        "filename": "bin/docker_image_build_local.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-12-11T07:22:01Z",
+      "side": 1,
+      "message": "It\u0027s necessary to get rid of the personal ID.",
+      "revId": "cb7f231cb50da4ff0c46756388078100cf2235e4",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
