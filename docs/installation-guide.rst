@@ -26,10 +26,13 @@ Version history
 | 2022-11-30         | 0.1.0              | 		       | First draft           |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
-| 2023-06-06         | 1.0.0              | Joseph Thaliath    |  H Release            |
+| 2023-06-06         | 1.0.0              | Joseph Thaliath    | H Release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
 | 2023-08-10         | 1.0.1              | Joseph Thaliath    | H Maintenance release |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
+| 2023-12-14         | 1.1.0              | Joseph Thaliath    | I release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
 
@@ -52,8 +55,8 @@ Hardware Requirements
 Below are the minimum requirements for installing the AIMLFW
 
 #. OS: Ubuntu 22.04 server
-#. 8 cpu cores
-#. 16 GB RAM
+#. 16 cpu cores
+#. 32 GB RAM
 #. 60 GB harddisk
 
 ..  _reference1:
@@ -91,21 +94,14 @@ Check the AIMLFW dashboard by using the following url
 
         http://localhost:32005/
 
-In case Influx DB datalake not available, it can be installed using the steps mentioned in section :ref:`install-influx-db-as-datalake`. Once installed the access details of the datalake can be updated in :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml`. Once updated, follow the below steps for reinstall of some components:
+In case of any change required in the RECIPE_EXAMPLE/example_recipe_latest_stable.yaml file after installation, 
+the following steps can be followed to reinstall with new changes.
 
 .. code:: bash
 
         bin/uninstall.sh
         bin/install.sh -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
 
-Following are the steps to build sample training pipeline image for QoE prediction example.
-This step is required before triggering training for the QoE prediction example.
-
-.. code:: bash
-
-        cd /tmp/
-        git clone "https://gerrit.o-ran-sc.org/r/portal/aiml-dashboard"
-        docker build -f aiml-dashboard/kf-pipelines/Dockerfile.pipeline -t traininghost/pipelineimage:latest aiml-dashboard/kf-pipelines/.
 
 Software Uninstallation
 -----------------------
@@ -118,8 +114,11 @@ Software Uninstallation
 
 ..  _reference2:
 
-Install Influx DB as datalake
------------------------------
+
+Install Influx DB as datalake (Optional)
+----------------------------------------
+
+Standalone Influx DB installation can be used if DME is not used as a data source.
 
 .. code:: bash
 
@@ -241,8 +240,338 @@ To check inserted data in Influx DB , execute below command inside the Influx DB
         influx query  'from(bucket: "UEData") |> range(start: -1000d)' -o primary -t <token>
 
 
-Install Kserve for deploying models
------------------------------------
+
+..  _reference3:
+
+Prepare Non-RT RIC DME as data source for AIMLFW (optional)
+-----------------------------------------------------------
+
+Bring up the RANPM setup by following the steps mentioned in the file install/README.md present in the repository `RANPM repository <https://gerrit.o-ran-sc.org/r/admin/repos/nonrtric/plt/ranpm>`__
+
+Once all the pods are in running state, follow the below steps to prepare ranpm setup for AIMLFW qoe usecase data access
+
+The scripts files are present in the folder demos/hrelease/scripts of repository `AIMLFW repository <https://gerrit.o-ran-sc.org/r/admin/repos/aiml-fw/aimlfw-dep>`__
+
+Note: The following steps need to be performed in the VM where the ranpm setup is installed.
+
+.. code:: bash
+
+        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
+        cd aimlfw-dep/demos/hrelease/scripts
+        ./get_access_tokens.sh
+
+Output of ./get_access_tokens.sh can be used during feature group creation step.
+
+
+Execute the below script
+
+.. code:: bash
+
+        ./prepare_env_aimlfw_access.sh
+
+Add feature group from AIMLFW dashboard, example on how to create a feature group is shown in this demo video: `Feature group creation demo <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_final_lowres.mp4?api=v2>`__
+
+Execute below script to push qoe data into ranpm setup
+
+.. code:: bash
+
+        ./push_qoe_data.sh  <source name mentioned when creating feature group> <Number of rows> <Cell Identity>
+
+Example for executing above script
+
+.. code:: bash
+        
+        ./push_qoe_data.sh  gnb300505 30 c4/B2
+
+Steps to check if data is upload correctly
+
+
+.. code:: bash
+
+        kubectl exec -it influxdb2-0 -n nonrtric -- bash
+        influx query 'from(bucket: "pm-logg-bucket") |> range(start: -1000000000000000000d)' |grep pdcpBytesDl
+
+Steps to clear the data in InfluxDB
+
+.. code:: bash
+
+        kubectl exec -it influxdb2-0 -n nonrtric -- bash
+        influx delete --bucket pm-logg-bucket --start 1801-01-27T05:00:22.305309038Z   --stop 2023-11-14T00:00:00Z
+
+        
+Feature group creation
+----------------------
+
+From AIMLFW dashboard create feature group (Training Jobs-> Create Feature Group )
+
+NOTE: Below are some example values to be used for the DME based feature group creation for qoe usecase
+
++--------------------+-------------------------------------------------------------------+
+| **Parameter**      | **Value**                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Feature Group Name | featuregroup1                                                     |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Features           | pdcpBytesDl,pdcpBytesUl                                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Host               | <IP of VM where DME is installed>                                 |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Port               | 31812                                                             |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Db Org             | est                                                               |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Bucket Name        | pm-logg-bucket                                                    |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| DB Token           | <token obtained using get_access_tokens.sh during DME setup>      |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| DME flag           | enable it                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Source Name        | <any source name. but same needs to be given when running         |
+|                    |  push_qoe_data.sh>                                                |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Measured Obj Class | NRCellDU                                                          |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Dme port           | 31823                                                             |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+
+
+NOTE: Below are some example values to be used for the standalone influx DB creation for qoe usecase
+
++--------------------+-------------------------------------------------------------------+
+| **Parameter**      | **Value**                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Feature Group Name | featuregroup1                                                     |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Features           | pdcpBytesDl,pdcpBytesUl                                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Host               | <IP of VM where Influx DB is installed>                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Port               | <port of Influx DB>                                               |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Db Org             | primary                                                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Bucket Name        | UEData                                                            |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| DB Token           | <token obtained during INflux DB installation>                    |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+
+Register Model (optional)
+-------------------------
+
+Register the model using the below steps if using Model management service for training.
+
+.. code:: bash
+
+        curl --location 'http://<VM IP where AIMLFW is installed>:32006/registerModel' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                 "model-name":"qoe1",
+                 "rapp-id": "rapp_1",
+                 "meta-info" : 
+                 {
+                     "accuracy":"90",
+                     "model-type":"timeseries",
+                     "feature-list":["pdcpBytesDl","pdcpBytesUl"]
+                 }
+              }'
+
+Training job creation with DME as data source
+---------------------------------------------
+
+#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
+#. RANPM setup should be installed and configured as per steps mentioned in section :ref:`Prepare Non-RT RIC DME as data source for AIMLFW <reference3>`
+#. To create training job, follow the steps in the demo videos stored here: `Training Job creation <https://wiki.o-ran-sc.org/display/AIMLFEW/Files+for+I+release>`__ 
+#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>` or 
+   :ref:`Steps to deploy model using Kserve adapter <reference6>`
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used.
+
++--------------------+-------------------------------------------------------------------+
+| **Parameter**      | **Value**                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Training Job Name  | qoetest                                                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Model Management   |  disable                                                          |
+| Service            |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Training Function  | qoe_pipeline_h_release                                            |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| FeatureGroup Name  | featuregroup1                                                     |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Datalake Source    | Influx DB                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| bucket             | pm-logg-bucket                                                    |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Feature Filter     |                                                                   |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Hyper Parameters   | epochs:1                                                          |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Description        | test                                                              |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is used.
+
++--------------------+-------------------------------------------------------------------+
+| **Parameter**      | **Value**                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Training Job Name  | qoetest                                                           |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Model Management   |  enable                                                           |
+| Service            |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Model name         | qoe1                                                              |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| FeatureGroup Name  | featuregroup1                                                     |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Datalake Source    | Influx DB                                                         |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| bucket             | pm-logg-bucket                                                    |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Feature Filter     |                                                                   |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Hyper Parameters   | epochs:1                                                          |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| Description        | test                                                              |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+
+
+Training job creation with standalone Influx DB as data source
+--------------------------------------------------------------
+
+#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
+#. Standalone Influx DB should be setup and configured as mentioned in section :ref:`Install Influx DB as datalake <reference2>`
+#. To create training job, follow the steps in the demo videos stored here: `Training Job creation <https://wiki.o-ran-sc.org/display/AIMLFEW/Files+for+I+release>`__ 
+#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>` or 
+   :ref:`Steps to deploy model using Kserve adapter <reference6>`
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used
+
++--------------------+-------------------------+
+| **Parameter**      | **Value**               |
+|                    |                         |
++--------------------+-------------------------+
+| Training Job Name  | qoetest                 |
+|                    |                         |
++--------------------+-------------------------+
+| Model Management   | disable                 |
+| Service            |                         |
++--------------------+-------------------------+
+| Training Function  | qoe_pipeline_g_release  |
+|                    |                         |
++--------------------+-------------------------+
+| FeatureGroup Name  | featuregroup1           |
+|                    |                         |
++--------------------+-------------------------+
+| Datalake Source    | Influx DB               |
+|                    |                         |
++--------------------+-------------------------+
+| _measurement       | liveCell                |
+|                    |                         |
++--------------------+-------------------------+
+| bucket             | UEData                  |
+|                    |                         |
++--------------------+-------------------------+
+| Feature Filter     |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Hyper Parameters   | epochs:1                |
+|                    |                         |
++--------------------+-------------------------+
+| Description        | test                    |
+|                    |                         |
++--------------------+-------------------------+
+
+NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is used
+
++--------------------+-------------------------+
+| **Parameter**      | **Value**               |
+|                    |                         |
++--------------------+-------------------------+
+| Training Job Name  | qoetest                 |
+|                    |                         |
++--------------------+-------------------------+
+| Model Management   | enable                  |
+| Service            |                         |
++--------------------+-------------------------+
+| Model Name         | qoe_pipeline_g_release  |
+|                    |                         |
++--------------------+-------------------------+
+| Datalake Source    | Influx DB               |
+|                    |                         |
++--------------------+-------------------------+
+| _measurement       | liveCell                |
+|                    |                         |
++--------------------+-------------------------+
+| bucket             | UEData                  |
+|                    |                         |
++--------------------+-------------------------+
+| Feature Filter     |                         |
+|                    |                         |
++--------------------+-------------------------+
+| Hyper Parameters   | epochs:1                |
+|                    |                         |
++--------------------+-------------------------+
+| Description        | test                    |
+|                    |                         |
++--------------------+-------------------------+
+
+..  _reference5:
+
+Obtain Model URL for deploying trained models
+---------------------------------------------
+
+URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
+In case of using AIMLFW Model management service, URL for downloading and deploying model using Model Management Service will be the following:
+
+.. code:: bash
+
+        http://<VM IP where AIMLFW is deployed>:32006/downloadModel/<model name>/model.zip
+
+Install only Kserve for deploying models
+----------------------------------------
 
 To install Kserve run the below commands
 
@@ -251,8 +580,8 @@ To install Kserve run the below commands
         ./bin/install_kserve.sh
 
 
-Uninstall Kserve
-----------------
+Uninstall only Kserve
+---------------------
 
 To uninstall Kserve run the below commands
 
@@ -260,6 +589,7 @@ To uninstall Kserve run the below commands
 
         ./bin/uninstall_kserve.sh
         
+
 
 ..  _reference4:
 
@@ -295,6 +625,7 @@ Create :file:`qoe.yaml` file with below contents
 
 
 To deploy model update the Model URL in the :file:`qoe.yaml` file and execute below command to deploy model
+Refer :ref:`Obtain Model URL for deploying trained models <reference5>`
 
 .. code:: bash
 
@@ -356,184 +687,99 @@ Use command below to trigger predictions
 
         source predict.sh
 
-..  _reference3:
 
-Prepare Non-RT RIC DME as data source for AIMLFW
-------------------------------------------------
+Install both Kserve and Kserve adapter for deploying models
+-----------------------------------------------------------
 
-Bring up the RANPM setup by following the steps mentioned in the file install/README.md present in the repository `RANPM repository <https://gerrit.o-ran-sc.org/r/admin/repos/nonrtric/plt/ranpm>`__
-
-Once all the pods are in running state, follow the below steps to prepare ranpm setup for AIMLFW qoe usecase data access
-
-The scripts files are present in the folder demos/hrelease/scripts of repository `AIMLFW repository <https://gerrit.o-ran-sc.org/r/admin/repos/aiml-fw/aimlfw-dep>`__
-
-Note: The following steps need to be performed in the VM where the ranpm setup is installed.
+To install Kserve run the below commands
 
 .. code:: bash
 
-        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
-        cd aimlfw-dep/demos/hrelease/scripts
-        ./get_access_tokens.sh
+        ./bin/install_kserve_inference.sh
 
-Update the RECIPE file (:file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml`) of AIMLFW installation with Influx DB details of RANPM setup. The token is displayed when the script :file:`./get_access_tokens.sh` is executed.
-Example of updating the RECIPE file is shown below
 
-.. code:: bash
+Uninstall both Kserve and Kserve adapter for deploying models
+-------------------------------------------------------------
 
-        datalake:
-          influxdb:
-            host: <IP of RANPM setup>
-            port: 31812
-            orgname: est
-            bucket: pm-logg-bucket
-            token:  <Token shown when ./get_access_tokens.sh is executed>
-
-Execute the below script
+To uninstall Kserve run the below commands
 
 .. code:: bash
 
-        ./prepare_env_aimlfw_access.sh
-
-Add feature group from AIMLFW dashboard, example on how to create a feature group is shown in this demo video: `Feature group creation demo <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_final_lowres.mp4?api=v2>`__
-
-Execute below script to push qoe data into ranpm setup
-
-.. code:: bash
-
-        ./push_qoe_data.sh  <source name mentioned when creating feature group> <Number of rows> <Cell Identity>
-
-Example for executing above script
-
-.. code:: bash
-        
-        ./push_qoe_data.sh  gnb300505 30 c4/B2
-
-Steps to check if data is upload correctly
-
-
-.. code:: bash
-
-        kubectl exec -it influxdb2-0 -n nonrtric -- bash
-        influx query 'from(bucket: "pm-logg-bucket") |> range(start: -1000000000000000000d)' |grep pdcpBytesDl
-
-Steps to clear the data in InfluxDB
-
-.. code:: bash
-
-        kubectl exec -it influxdb2-0 -n nonrtric -- bash
-        influx delete --bucket pm-logg-bucket --start 1801-01-27T05:00:22.305309038Z   --stop 2023-11-14T00:00:00Z
-
-
-Training job creation with DME as data source
----------------------------------------------
-
-#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
-#. RANPM setup should be installed and configured as per steps mentioned in section :ref:`Prepare Non-RT RIC DME as data source for AIMLFW <reference3>`
-#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/81297504/h_release_training_source_dme.mp4?api=v2>`__ 
-#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
-
-NOTE: Below are some example values to be used for the QoE usecase training job creation 
-
-+--------------------+-------------------------------------------------------------------+
-| **Parameter**      | **Value**                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Training Job Name  | qoetest                                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Training Function  | qoe_pipeline_h_release                                            |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Experiment Name    | Default                                                           |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Datalake Source    | Influx DB                                                         |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| bucket             | pm-logg-bucket                                                    |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Name       | \*                                                                |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Filter     |                                                                   |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Hyper Parameters   | epochs:1                                                          |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Description        | test                                                              |
-|                    |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-
-
-Training job creation with standalone Influx DB as data source
---------------------------------------------------------------
-
-#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
-#. Standalone Influx DB should be setup and configured as mentioned in section :ref:`Install Influx DB as datalake <reference2>`
-#. To create training job, follow the steps in the demo video: `Training Job creation <https://wiki.o-ran-sc.org/download/attachments/81297504/h_release_training_source_influxdb.mp4?api=v2>`__
-#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>`. Model URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
-
-NOTE: Below are some example values to be used for the QoE usecase training job creation 
-
-+--------------------+-------------------------+
-| **Parameter**      | **Value**               |
-|                    |                         |
-+--------------------+-------------------------+
-| Training Job Name  | qoetest                 |
-|                    |                         |
-+--------------------+-------------------------+
-| Training Function  | qoe_pipeline_g_release  |
-|                    |                         |
-+--------------------+-------------------------+
-| Experiment Name    | Default                 |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Datalake Source    | Influx DB               |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| _measurement       | liveCell                |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| bucket             | UEData                  |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Feature Name       | \*                      |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Feature Filter     |                         |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Hyper Parameters   | epochs:1                |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Description        | test                    |
-|                    |                         |
-|                    |                         |
-+--------------------+-------------------------+
+        ./bin/uninstall_kserve_inference.sh
 
 
 
+..  _reference6:
+
+Steps to deploy model using Kserve adapter
+------------------------------------------
+
+Prerequisites
+
+#. Install chart museum
+#. Build ricdms binary
 
 
+#. Run ric dms
 
+   .. code:: bash
+
+        export RIC_DMS_CONFIG_FILE=$(pwd)/config/config-test.yaml
+        ./ricdms
+
+
+#. Create sample_config.json
+
+   Create sample_config.json file with the following contents
+
+   .. code:: bash
+
+        {
+          "xapp_name": "sample-xapp",
+          "xapp_type": "inferenceservice",
+          "version": "2.2.0",
+          "sa_name": "default",
+          "inferenceservice": {
+              "engine": "tensorflow",
+              "storage_uri": "<Model URL>",
+              "runtime_version": "2.5.1",
+              "api_version": "serving.kubeflow.org/v1beta1",
+              "min_replicas": 1,
+              "max_replicas": 1
+          }
+        }
+
+       Refer :ref:`Obtain Model URL for deploying trained models <reference5>`
+
+#. Copy sample_config.json
+  
+   Update the below command with kserve adapter pod name 
+
+   .. code:: bash
+
+      kubectl cp sample_config.json ricips/<kserve adapter pod name>:pkg/helm/data/sample_config.json
+
+#. Generating and upload helm package
+
+   .. code:: bash
+
+        curl --request POST --url 'http://127.0.0.1:31000/v1/ips/preparation?configfile=pkg/helm/data/sample_config.json&schemafile=pkg/helm/data/sample_schema.json'
+
+#. Check uploaded charts
+
+   .. code:: bash
+
+        curl http://127.0.0.1:8080/api/charts
+
+#. Deploying the model
+
+   .. code:: bash
+
+        curl --request POST --url 'http://127.0.0.1:31000/v1/ips?name=inference-service&version=1.0.0'
+
+#. Check deployed Inference service
+
+   .. code:: bash
+
+        kubectl get InferenceService -n ricips
 

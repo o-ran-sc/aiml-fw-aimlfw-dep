@@ -86,3 +86,10 @@ kserveadapter:
   ric_dms:
     ip: <Fill IP of ric dms>
     port: 8000
+
+modelmgmtservice:
+  image:
+    repository: nexus3.o-ran-sc.org:10002/o-ran-sc/aiml-fw-awmf-modelmgmtservice-docker
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0.0"
