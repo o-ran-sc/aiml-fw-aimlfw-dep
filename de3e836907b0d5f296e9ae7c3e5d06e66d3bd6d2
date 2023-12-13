@@ -1,0 +1,8 @@
+Code-Review+2: SANDEEP KUMAR JAISAWAL <s.jaisawal@samsung.com>
+Verified+1: ORAN Required GHA <releng+oran.required.gha@linuxfoundation.org>
+Verified+1: ORAN Jobbuilder <releng+oran-jobbuilder@linuxfoundation.org>
+Submitted-by: Joseph Thaliath <jo.thaliath@samsung.com>
+Submitted-at: Wed, 13 Dec 2023 17:04:42 +0000
+Reviewed-on: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/12278
+Project: aiml-fw/aimlfw-dep
+Branch: refs/heads/master
