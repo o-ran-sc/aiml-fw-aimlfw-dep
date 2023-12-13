@@ -30,16 +30,44 @@ Version history
 | 2023-08-10         | 1.1.1              | Joseph Thaliath    | H Maintenance release |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
+| 2023-12-14         | 1.2.0              | Joseph Thaliath    | I release             |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
 
 
 Summary
 =======
 
-The H release of AIMLFW provides required installation scripts for deployment of H release version of AIMLFW
+The I release of AIMLFW provides required installation scripts for deployment of I release version of AIMLFW
 
 
 Release Data
 ============
+
+I Release
+---------
+
+
++--------------------------------------+-------------------------------------------+
+| **Project**                          | AIMLFW Installation and Deployment        |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                        |
+|                                      | /f4da22cf4b292fc740b182f62b8bca9f0a808059 |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release designation**              | I release                                 |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release date**                     | 2023-12-29                                |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Purpose of the delivery**          | AIMLFW Installation and Deployment        |
+|                                      | New componentes added                     |
+|                                      | Model management service                  |
+|                                      | Kserve adapter                            |
++--------------------------------------+-------------------------------------------+
+
 
 H Maintenance Release
 ---------------------
