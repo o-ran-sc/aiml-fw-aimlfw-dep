@@ -16,6 +16,41 @@
       "message": "Thank you very much for your interest in aimlfw!\nAccording to the purpose of this changeset, it would be great to exclude DS_store and INFO.yml files from the list.",
       "revId": "c5c60df741ab1f33a7220b9885517ae78fe12deb",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c017a3d_19971a8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002377
+      },
+      "writtenOn": "2024-06-25T02:01:21Z",
+      "side": 1,
+      "message": "I have removed all other items except for install_k8s.sh from the review and restored them.\n\nThank you for your warm encouragement :)",
+      "revId": "c5c60df741ab1f33a7220b9885517ae78fe12deb",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c65622_546d3696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002377
+      },
+      "writtenOn": "2024-06-25T02:01:21Z",
+      "side": 1,
+      "message": "I have removed all other items except for install_k8s.sh from the review and restored them.\n\nThank you for your warm encouragement :)",
+      "parentUuid": "7a732bff_7a9e57ac",
+      "revId": "c5c60df741ab1f33a7220b9885517ae78fe12deb",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
