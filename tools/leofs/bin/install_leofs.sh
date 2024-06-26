@@ -20,8 +20,13 @@ kubectl create namespace kubeflow
 sleep 10
 head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8 | kubectl create secret generic leofs-secret -n kubeflow --from-file=password=/dev/stdin
 
-docker build -f tools/leofs/Dockerfile.leofs -t leofs .
-
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile.leofs \
+    --local dockerfile=tools/leofs \
+    --local context=. \
+    --output type=oci,name=leofs | sudo nerdctl load --namespace k8s.io
+    
 helm dep up helm/leofs
 helm install leofs helm/leofs -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
 sleep 10
