@@ -84,3 +84,18 @@ wget -q "https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERS
 sudo tar Cxzvvf /usr/bin /tmp/nerdctl.tar.gz
 
 echo "Installation completed for nerdctl!"
+
+# install buildkit
+BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
+
+archType="amd64"
+if test "$(uname -m)" = "aarch64"
+then
+            archType="arm64"
+fi
+echo "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz"
+wget -q "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz" -O /tmp/buildkit.tar.gz
+tar Cxzvvf /tmp /tmp/buildkit.tar.gz
+sudo mv /tmp/bin/buildctl /usr/bin/
+
+echo "Installation completed for buildkit!"
