@@ -19,41 +19,42 @@
 kubectl create namespace kubeflow
 sleep 10
 
-previous_dir=$PWD
 kubeflow_dir=tools/kubeflow
-cd /tmp
-wget https://github.com/kubeflow/pipelines/archive/refs/tags/1.4.0.tar.gz
-tar -xvzf 1.4.0.tar.gz
-cd pipelines-1.4.0
-cp $previous_dir/$kubeflow_dir/kustomization.yaml manifests/kustomize/env/platform-agnostic/kustomization.yaml
-cp $previous_dir/$kubeflow_dir/workflow-controller-configmap.yaml manifests/kustomize/base/argo/workflow-controller-configmap.yaml
-sed -e 's/mlpipeline-.*$/mlpipeline-leofs-artifact/g' manifests/kustomize/base/pipeline/ml-pipeline-ui-deployment.yaml > /tmp/ml-pipeline-ui-deployment_tmp.yaml
-cp /tmp/ml-pipeline-ui-deployment_tmp.yaml manifests/kustomize/base/pipeline/ml-pipeline-ui-deployment.yaml
-cp $previous_dir/$kubeflow_dir/ml-pipeline-apiserver-deployment.yaml manifests/kustomize/base/pipeline/ml-pipeline-apiserver-deployment.yaml
-cp $previous_dir/$kubeflow_dir/config.json backend/src/apiserver/config/config.json
-cp -r $previous_dir/samples/* samples/
-cp $previous_dir/$kubeflow_dir/sample_config.json backend/src/apiserver/config/sample_config.json
-tmpfile=$(mktemp)
-address='backend/src/apiserver/config/config.json'
-leofs_password=$(kubectl get secret leofs-secret -n kubeflow -o jsonpath='{.data.password}' | base64 -d)
-sed -e "s/\"SecretAccessKey.*$/\"SecretAccessKey\" : \"$leofs_password\",/g" $address >"$tmpfile" &&
-  mv -- "$tmpfile" $address
-
-#Fix for Kubeflow pipeline backend apiserver Dockerfile because stretch version is moved to archive
-sed -i '4i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
-sed -i '5i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
-sed -i '6i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
-sed -i '29i RUN python3 -m pip install requests-toolbelt==0.10.1' backend/Dockerfile
-sed -i '61i RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
-sed -i '62i RUN sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list' backend/Dockerfile
-sed -i '63i RUN sed  -i '/stretch-updates/d' /etc/apt/sources.list' backend/Dockerfile
-
-#build backend apiserver with new config.json
-docker build -f backend/Dockerfile . --tag api_server_local
-kubectl apply -k manifests/kustomize/cluster-scoped-resources/
+previous_dir=$PWD
 source $previous_dir/$kubeflow_dir/leofs_env.sh
-envsubst < $previous_dir/$kubeflow_dir/mlpipeline-leofs-artifact-secret.yaml | kubectl apply -n kubeflow -f -
-kubectl apply -k  manifests/kustomize/env/platform-agnostic-pns/
-sleep 60
-kubectl set image deployment/ml-pipeline -n kubeflow ml-pipeline-api-server=api_server_local:latest
+
+KFP_VERSION="2.2.0"
+REPO_URL="https://github.com/kubeflow/pipelines/archive/refs/tags/$KFP_VERSION.tar.gz"
+WORK_DIR="/tmp/kubeflow_pipelines"
+CUSTOM_ENV_DIR="$previous_dir/$kubeflow_dir/aimlfw-kustomize"  # Update this path to your actual custom kustomize directory
+
+# Create a working directory in /tmp
+mkdir -p $WORK_DIR
+cd $WORK_DIR
+
+# Download the specific version of Kubeflow Pipelines
+curl -L $REPO_URL -o kubeflow_pipelines.tar.gz
+
+# Extract the downloaded tarball
+tar -xvzf kubeflow_pipelines.tar.gz
+
+# Navigate to the extracted directory
+cd pipelines-$KFP_VERSION
+
+# Copy the custom kustomize overlay to the appropriate location
+cp -r $CUSTOM_ENV_DIR manifests/kustomize/env/
+
+# Replace placeholders in the specific kustomize file using environment variables
+KUSTOMIZE_FILE="manifests/kustomize/env/$(basename $CUSTOM_ENV_DIR)/minio-artifact-secret-patch.env"
+# Replace values in the kustomize file
+sed -i "s/PLACEHOLDER_LEOFS_KEY/$LEOFS_KEY/g" $KUSTOMIZE_FILE
+
+cd manifests/kustomize/env/$(basename $CUSTOM_ENV_DIR)
+
+# deploy all the artifacts
+kustomize build ../../cluster-scoped-resources | kubectl apply -f -
+kubectl wait crd/applications.app.k8s.io --for condition=established --timeout=60s
+kustomize build ./ | kubectl apply -f -
+kubectl wait applications/pipeline -n kubeflow --for condition=Ready --timeout=1800s
+
 cd $previous_dir
