@@ -99,3 +99,9 @@ tar Cxzvvf /tmp /tmp/buildkit.tar.gz
 sudo mv /tmp/bin/buildctl /usr/bin/
 
 echo "Installation completed for buildkit!"
+<<<<<<< HEAD
+=======
+
+# run buildkit instance
+sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
+>>>>>>> 66349a9 (Steps for buildkit instance)
