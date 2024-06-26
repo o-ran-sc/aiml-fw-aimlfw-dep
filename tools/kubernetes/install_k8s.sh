@@ -69,4 +69,18 @@ sudo sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
 echo "Applying modified Calico configuration..."
 kubectl apply -f calico.yaml
 
-echo "Installation complete!"
+echo "Installation completed for kubernetes!"
+
+# install nerdctl
+NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
+
+archType="amd64"
+if test "$(uname -m)" = "aarch64"
+then
+            archType="arm64"
+fi
+
+wget -q "https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${archType}.tar.gz" -O /tmp/nerdctl.tar.gz
+sudo tar Cxzvvf /usr/bin /tmp/nerdctl.tar.gz
+
+echo "Installation completed for nerdctl!"
