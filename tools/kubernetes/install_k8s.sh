@@ -97,3 +97,5 @@ echo "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/bu
 wget -q "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz" -O /tmp/buildkit.tar.gz
 tar Cxzvvf /tmp /tmp/buildkit.tar.gz
 sudo mv /tmp/bin/buildctl /usr/bin/
+
+echo "Installation completed for buildkit!"
