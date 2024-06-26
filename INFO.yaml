@@ -59,6 +59,11 @@ committers:
       company: 'Samsung Electronics'
       id: 'cromee'
       timezone: 'Asia/Seoul'
+    - name: 'Rajdeep Singh'
+      email: 'rajdeep.sin@samsung.com'
+      company: 'Samsung Electronics'
+      id: 'rajdeep11'
+      timezone: 'Asia/Seoul'
 tsc:
     # yamllint disable rule:line-length
     approval: 'https://wiki.o-ran-sc.org/pages/viewpage.action?pageId=57377914#id-2022Q3(Jul,Aug,Sep)-20220811'
