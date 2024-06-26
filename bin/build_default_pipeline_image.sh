@@ -16,4 +16,9 @@
 #
 # ==================================================================================
 
-docker build -f tools/kubeflow/Dockerfile.pipeline -t traininghost/pipelineimage:latest tools/kubeflow/.
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile.pipeline \
+    --local dockerfile=tools/kubeflow \
+    --local context=tools/kubeflow \
+    --output type=oci,name=traininghost/pipelineimage:latest | sudo nerdctl load --namespace k8s.io
