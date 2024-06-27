@@ -20,6 +20,6 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install tm-db bitnami/postgresql --namespace traininghost
 while [[ $(kubectl get pods tm-db-postgresql-0 -n traininghost -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for training manager db pod" && sleep 1; done
 echo "Installed tm-db"
-helm install cassandra --set dbUser.user="cassandra" --namespace="traininghost"  bitnami/cassandra
+helm install cassandra --set dbUser.user="cassandra" --namespace="traininghost"  bitnami/cassandra --version 10.0.0
 while [[ $(kubectl get pods cassandra-0 -n traininghost -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for cassandra manager db pod" && sleep 1; done
 echo "Installed cassandra-db"
