@@ -100,3 +100,11 @@ sudo mv /tmp/bin/buildctl /usr/bin/
 
 # run buildkit instance
 sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
+
+# install kustomize
+KUSTOMIZE_VERSION=5.4.2
+curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
+tar -xvzf "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
+sudo mv kustomize /usr/local/bin/ 
+rm "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+echo "Kustomize installed successfully." 
