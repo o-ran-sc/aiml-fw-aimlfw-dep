@@ -123,7 +123,7 @@ Standalone Influx DB installation can be used if DME is not used as a data sourc
 .. code:: bash
 
         helm repo add bitnami https://charts.bitnami.com/bitnami
-        helm install my-release bitnami/influxdb
+        helm install my-release bitnami/influxdb --version 5.13.5
         kubectl exec -it <pod name> bash
 
 From below command  we can get username, org name, org id and access token
