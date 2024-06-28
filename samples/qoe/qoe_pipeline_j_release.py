@@ -2,6 +2,7 @@ import kfp
 import kfp.dsl as dsl
 from kfp.dsl import InputPath, OutputPath
 from kfp.dsl import component as component
+from kfp import kubernetes
 
 
 @component(base_image="traininghost/pipelineimage:latest")
