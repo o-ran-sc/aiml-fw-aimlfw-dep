@@ -404,6 +404,7 @@ Training job creation with DME as data source
    :ref:`Steps to deploy model using Kserve adapter <reference6>`
 
 NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used.
+**Note** : The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
 
 +--------------------+-------------------------------------------------------------------+
 | **Parameter**      | **Value**                                                         |
