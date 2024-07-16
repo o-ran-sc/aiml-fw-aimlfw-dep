@@ -34,5 +34,5 @@ data:
   PS_IP: tm-db-postgresql.traininghost
   PS_PORT: "5432"
   PYTHONUNBUFFERED: "0"
-  ACCESS_CONTROL_ALLOW_ORIGIN: "http://localhost:32005"
+  ACCESS_CONTROL_ALLOW_ORIGIN: "*"
   PIPELINE: {{.Values.tm.pipelines | toJson | quote }}
