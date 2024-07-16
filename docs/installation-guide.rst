@@ -331,6 +331,9 @@ NOTE: Below are some example values to be used for the DME based feature group c
 | DB Token           | <token obtained using get_access_tokens.sh during DME setup>      |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
+| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
 | DME flag           | enable it                                                         |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
@@ -371,6 +374,9 @@ NOTE: Below are some example values to be used for the standalone influx DB crea
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
 | DB Token           | <token obtained during INflux DB installation>                    |
+|                    |                                                                   |
++--------------------+-------------------------------------------------------------------+
+| _measurement       | liveCell                                                          |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
 
@@ -425,12 +431,6 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 | Datalake Source    | Influx DB                                                         |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
-| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| bucket             | pm-logg-bucket                                                    |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
 | Feature Filter     |                                                                   |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
@@ -460,12 +460,6 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
 | Datalake Source    | Influx DB                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| bucket             | pm-logg-bucket                                                    |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
 | Feature Filter     |                                                                   |
@@ -509,12 +503,6 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 | Datalake Source    | Influx DB               |
 |                    |                         |
 +--------------------+-------------------------+
-| _measurement       | liveCell                |
-|                    |                         |
-+--------------------+-------------------------+
-| bucket             | UEData                  |
-|                    |                         |
-+--------------------+-------------------------+
 | Feature Filter     |                         |
 |                    |                         |
 +--------------------+-------------------------+
@@ -541,12 +529,6 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 |                    |                         |
 +--------------------+-------------------------+
 | Datalake Source    | Influx DB               |
-|                    |                         |
-+--------------------+-------------------------+
-| _measurement       | liveCell                |
-|                    |                         |
-+--------------------+-------------------------+
-| bucket             | UEData                  |
 |                    |                         |
 +--------------------+-------------------------+
 | Feature Filter     |                         |
