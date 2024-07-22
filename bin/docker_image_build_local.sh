@@ -25,13 +25,18 @@ git clone "https://gerrit.o-ran-sc.org/r/portal/aiml-dashboard"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aihp/ips/kserve-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/modelmgmtservice"
 
-docker build -f tm/Dockerfile -t tm tm/.
-docker build -f data-extraction/Dockerfile -t data-extraction data-extraction/.
-docker build -f kubeflow-adapter/Dockerfile -t kfadapter kubeflow-adapter/.
-docker build -f aiml-dashboard/Dockerfile -t aiml-dashboard aiml-dashboard/.
-docker build -f aiml-dashboard/kf-pipelines/Dockerfile -t aiml-notebook aiml-dashboard/kf-pipelines/.
-docker build -f kserve-adapter/Dockerfile -t kserve-adapter:1.0.0 kserve-adapter/.
-docker build -f modelmgmtservice/Dockerfile -t modelmgmtservice:1.0.0 modelmgmtservice/.
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+	--frontend dockerfile.v0 \
+	--opt filename=Dockerfile \
+	--local dockerfile=tm \
+	--local context=tm \
+	--output type=oci,name=tm:latest | sudo nerdctl load --namespace k8s.io
+#docker build -f data-extraction/Dockerfile -t data-extraction data-extraction/.
+#docker build -f kubeflow-adapter/Dockerfile -t kfadapter kubeflow-adapter/.
+#docker build -f aiml-dashboard/Dockerfile -t aiml-dashboard aiml-dashboard/.
+#docker build -f aiml-dashboard/kf-pipelines/Dockerfile -t aiml-notebook aiml-dashboard/kf-pipelines/.
+#docker build -f kserve-adapter/Dockerfile -t kserve-adapter:1.0.0 kserve-adapter/.
+#docker build -f modelmgmtservice/Dockerfile -t modelmgmtservice:1.0.0 modelmgmtservice/.
 
 cd -
 rm -Rf /tmp/gerrit_code
