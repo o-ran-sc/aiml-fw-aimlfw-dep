@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebe796b_84ce0e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-07-22T08:28:42Z",
+      "side": 1,
+      "message": "Thank you for your contribution! Please take a look at my comments.",
+      "revId": "cea9bf344a4d5dc4f198af8212341c73097b1ec7",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ad3afd_e7ca81bf",
+        "filename": "bin/docker_image_build_local.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-07-22T08:28:42Z",
+      "side": 1,
+      "message": "Please remove commented lines.",
+      "revId": "cea9bf344a4d5dc4f198af8212341c73097b1ec7",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "918aaff2_152a14d5",
@@ -20,6 +54,23 @@
         "endLine": 39,
         "endChar": 89
       },
+      "revId": "cea9bf344a4d5dc4f198af8212341c73097b1ec7",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5a7440_d9c7b2e5",
+        "filename": "bin/docker_images_delete_local.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-07-22T08:28:42Z",
+      "side": 1,
+      "message": "Please delete the commented rows.",
       "revId": "cea9bf344a4d5dc4f198af8212341c73097b1ec7",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }

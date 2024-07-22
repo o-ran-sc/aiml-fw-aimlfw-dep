@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198d8f5a_4047cd32",
+        "filename": "helm/tm/templates/configmap.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-07-22T08:28:42Z",
+      "side": 0,
+      "message": "I don\u0027t think this file should be deleted. Can you cancel this deletion?",
+      "revId": "3495d44b80da6bdff712c249deb885c9b3e13ce9",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
