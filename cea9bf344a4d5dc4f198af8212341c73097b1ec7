@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "918aaff2_152a14d5",
+        "filename": "bin/docker_image_build_local.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2024-07-22T08:21:00Z",
+      "side": 1,
+      "message": "Please build the image for others also.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 89
+      },
+      "revId": "cea9bf344a4d5dc4f198af8212341c73097b1ec7",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
