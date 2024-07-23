@@ -16,7 +16,7 @@
 #
 # ==================================================================================
 sudo nerdctl --namespace k8s.io rmi tm:latest
-#docker rmi data-extraction
+sudo nerdctl --namespace k8s.io rmi data-extraction:latest
 #docker rmi kfadapter
 #docker rmi aiml-dashboard
 #docker rmi aiml-notebook

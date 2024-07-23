@@ -31,7 +31,15 @@ sudo buildctl --addr=nerdctl-container://buildkitd build \
 	--local dockerfile=tm \
 	--local context=tm \
 	--output type=oci,name=tm:latest | sudo nerdctl load --namespace k8s.io
-#docker build -f data-extraction/Dockerfile -t data-extraction data-extraction/.
+
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile \
+    --local dockerfile=data-extraction \
+    --local context=data-extraction \
+    --output type=oci,name=data-extraction:latest | sudo nerdctl load --namespace k8s.io
+
+
 #docker build -f kubeflow-adapter/Dockerfile -t kfadapter kubeflow-adapter/.
 #docker build -f aiml-dashboard/Dockerfile -t aiml-dashboard aiml-dashboard/.
 #docker build -f aiml-dashboard/kf-pipelines/Dockerfile -t aiml-notebook aiml-dashboard/kf-pipelines/.
