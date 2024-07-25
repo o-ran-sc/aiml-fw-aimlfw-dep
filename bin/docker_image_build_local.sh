@@ -40,7 +40,13 @@ sudo buildctl --addr=nerdctl-container://buildkitd build \
     --output type=oci,name=data-extraction:latest | sudo nerdctl load --namespace k8s.io
 
 
-#docker build -f kubeflow-adapter/Dockerfile -t kfadapter kubeflow-adapter/.
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile \
+    --local dockerfile=kubeflow-adapter \
+    --local context=kubeflow-adapter \
+    --output type=oci,name=kfadapter:latest | sudo nerdctl load --namespace k8s.io
+
 #docker build -f aiml-dashboard/Dockerfile -t aiml-dashboard aiml-dashboard/.
 #docker build -f aiml-dashboard/kf-pipelines/Dockerfile -t aiml-notebook aiml-dashboard/kf-pipelines/.
 #docker build -f kserve-adapter/Dockerfile -t kserve-adapter:1.0.0 kserve-adapter/.
