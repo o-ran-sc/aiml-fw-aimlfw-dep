@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98aec7de_334f64c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-07-25T03:42:50Z",
+      "side": 1,
+      "message": "Thank you for your contribution. \nThere is no explanation for the change in the commit message.\nCan you write a commit message about what the change is?\nIt would be great if you could modify the container image deletion code. \nPlease refer to the link, https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/13209/1/bin/docker_images_delete_local.sh.",
+      "revId": "94f2232b76950d40b6920923ae70963dfe251a75",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
