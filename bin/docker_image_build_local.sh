@@ -54,7 +54,13 @@ sudo buildctl --addr=nerdctl-container://buildkitd build \
     --local context=aiml-dashboard \
     --output type=oci,name=aiml-dashboard:latest | sudo nerdctl load --namespace k8s.io
 
-#docker build -f aiml-dashboard/kf-pipelines/Dockerfile -t aiml-notebook aiml-dashboard/kf-pipelines/.
+sudo buildctl --addr=nerdctl-container://buildkitd build \
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile \
+    --local dockerfile=aiml-dashboard/kf-pipelines \
+    --local context=aiml-dashboard/kf-pipelines \
+    --output type=oci,name=aiml-notebook:latest | sudo nerdctl load --namespace k8s.io
+
 #docker build -f kserve-adapter/Dockerfile -t kserve-adapter:1.0.0 kserve-adapter/.
 #docker build -f modelmgmtservice/Dockerfile -t modelmgmtservice:1.0.0 modelmgmtservice/.
 
