@@ -162,13 +162,26 @@ function rpt() {
 rpt
 kubectl delete -f "${DIR}/../tools/kserve/cert-manager-test.yaml"
 
-IS_KSERVE_INSTALLED=$(kubectl get crd inferenceservices.serving.kserve.io 2>&1 | grep "Error from server (NotFound)" | wc -l)
-if [ "$IS_KSERVE_INSTALLED" -eq 1 ]; then
+########## Install Kserve & Kserve Runtimes ##########
+IS_KSERVE_INSTALLED=$(kubectl get crd inferenceservices.serving.kserve.io --ignore-not-found)
+if [ -z "$IS_KSERVE_INSTALLED" ]; then
     kubectl apply -f https://raw.githubusercontent.com/kserve/kserve/master/install/${KSERVE_VERSION}/kserve.yaml
-    KSERVE_STATEFULSETS="kserve-controller-manager"
-    for KSERVE_STATEFULSET in $KSERVE_STATEFULSETS; do
-        wait_for_statefulset $KSERVE_STATEFULSET "kserve-system"
+    KSERVE_DEPLOYMENTS="kserve-controller-manager"
+    for KSERVE_DEPLOYMENT in $KSERVE_DEPLOYMENTS; do
+        wait_for_deployment $KSERVE_DEPLOYMENT "kserve"
     done
+
+    # Wait for KServe Webhook to be ready by checking kserve-controller-manager logs
+    echo "Waiting for KServe Webhook to be ready..."
+    kubectl wait --for=condition=available --timeout=120s deployment/kserve-controller-manager -n kserve
 else
-    echo "skip kserve install"
+    echo "KServe already exist, skipping installation"
+fi
+
+RUNTIMES_INSTALLED=$(kubectl get clusterservingruntimes.serving.kserve.io --ignore-not-found)
+if [ -z "$RUNTIMES_INSTALLED" ]; then
+    echo "Installing KServe runtimes"
+    kubectl apply -f https://raw.githubusercontent.com/kserve/kserve/master/install/${KSERVE_VERSION}/kserve-runtimes.yaml
+else
+    echo "KServe runtimes already exist, skipping installation"
 fi
