@@ -41,11 +41,12 @@ function wait_for_pods_terminate() {
     echo
 }
 
-########## Uninstall Kserve ##########
+########## Uninstall Kserve & Kserve Runtimes ##########
+kubectl delete --timeout=10s -f https://raw.githubusercontent.com/kserve/kserve/master/install/${KSERVE_VERSION}/kserve-runtimes.yaml
 kubectl delete --timeout=10s -f https://raw.githubusercontent.com/kserve/kserve/master/install/${KSERVE_VERSION}/kserve.yaml
-KSERVE_STATEFULSETS="kserve-controller-manager"
-for KSERVE_STATEFULSET in $KSERVE_STATEFULSETS; do
-    wait_for_pods_terminate $KSERVE_STATEFULSET "kserve-system"
+KSERVE_DEPLOYMENTS="kserve-controller-manager"
+for KSERVE_DEPLOYMENT in $KSERVE_DEPLOYMENTS; do
+    wait_for_pods_terminate $KSERVE_DEPLOYMENT "kserve"
 done
 
 ########## Uninstall Cert Manager ##########
@@ -63,6 +64,8 @@ for KNATIVE_DEPLOYMENT in $KNATIVE_DEPLOYMENTS; do
 done
 
 set +e
+# TODO: Review and resolve errors from deleting overlapping resources in serving-crds.yaml and serving-core.yaml
+# These errors occur due to overlapping resource definitions but are not expected to affect the installation or functionality
 kubectl delete -f https://github.com/knative/serving/releases/download/${KNATIVE_VERSION}/serving-core.yaml       
 kubectl delete -f https://github.com/knative/serving/releases/download/${KNATIVE_VERSION}/serving-crds.yaml       
 set -e
