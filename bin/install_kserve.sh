@@ -18,15 +18,26 @@
 
 set -eu
 
+# Function to dynamically generate log messages
+# This function allows logging with a consistent format, supporting different levels like INFO, ERROR, and WARN
+log_message() {
+    local log_level=$1
+    local component=$2
+    local message=$3
+    echo "[$log_level] $component: $message"
+}
+
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "$DIR" || exit
 
-# import configs
+# Import KServe configs
+log_message "INFO" "KServe" "Importing configurations"
 source ${DIR}/../tools/kserve/config.sh
 
-function wait_for_deployment() {
-    echo -n "waiting for all pods running underneath of $1 deployment"
-
+# Function to wait for Kubernetes deployments
+wait_for_deployment() {
+    log_message "INFO" "Kubernetes" "Waiting for all pods under deployment $1 in namespace $2"
     STILL_WAITING=true
     while $STILL_WAITING; do
         STILL_WAITING=false
@@ -38,12 +49,11 @@ function wait_for_deployment() {
             if [ $DESIRED_STATE -ne $CURRENT_STATE ]; then
                 STILL_WAITING=true
                 sleep 1
-                echo -n "."
+                log_message "INFO" "Kubernetes" "Pod $POD is not ready. Retrying..."
             fi
         done
     done
-
-    echo
+    log_message "INFO" "Kubernetes" "All pods for deployment $1 are now running"
 }
 
 function wait_for_statefulset() {
