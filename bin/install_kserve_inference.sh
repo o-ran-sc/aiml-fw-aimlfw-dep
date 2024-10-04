@@ -17,21 +17,33 @@
 # ==================================================================================
 #!/bin/bash
 
+# Function to dynamically generate log messages
+log_message() {
+    local log_level=$1
+    local component=$2
+    local message=$3
+    echo "[$log_level] $component: $message"
+}
+
 IS_HELM3=$(helm version --short|grep -e "^v3")
 
 while [ -n "$1" ]; do # while loop starts
 
     case "$1" in
 
-    -f) OVERRIDEYAML=$2
-        shift
-        ;;
-    -c) LIST_OF_COMPONENTS=$2
-        shift
-        ;;
-    -o) KERNEL_OPTIMIZATION=true
-        ;;
-    *) echo "Option $1 not recognized" ;; # In case you typed a different option other than a,b,c
+        -f) OVERRIDEYAML=$2
+            log_message "INFO" "Argument Parsing" "Using override YAML file: $OVERRIDEYAML"
+            shift
+            ;;
+        -c) LIST_OF_COMPONENTS=$2
+            log_message "INFO" "Argument Parsing" "List of components specified: $LIST_OF_COMPONENTS"
+            shift
+            ;;
+        -o) KERNEL_OPTIMIZATION=true
+            log_message "INFO" "Argument Parsing" "Kernel optimization enabled"
+            ;;
+        *) log_message "ERROR" "Argument Parsing" "Unrecognized option: $1"; exit 1 ;;
+
 
     esac
 
@@ -40,41 +52,43 @@ while [ -n "$1" ]; do # while loop starts
 done
 
 if [ -z "$OVERRIDEYAML" ];then
-    echo "****************************************************************************************************************"
-    echo "                                                     ERROR                                                      "
-    echo "****************************************************************************************************************"
-    echo "Kserve deployment without deployment recipe is currently disabled. Please specify an recipe with the -f option."
-    echo "****************************************************************************************************************"
+    log_message "ERROR" "Validation" "Kserve deployment requires a deployment recipe. Please specify a recipe with the -f option."
     exit 1
 fi
 
 if [ -z $IS_HELM3 ]
 then
-    echo "****************************************************************************************************************"
-    echo "                                                     ERROR                                                      "
-    echo "****************************************************************************************************************"
-    echo "Kserve deployment expects helm 3 installed"
-    echo "****************************************************************************************************************"
+    log_message "ERROR" "Validation" "Helm 3 is required for Kserve deployment. Please install Helm 3."
     exit 1
 else
     HAS_COMMON_PACKAGE=$(helm search repo local/aimlfw-common | grep aimlfw-common)
 fi
 
-if [ -z "$HAS_COMMON_PACKAGE" ];then
+if [ -z "$HAS_COMMON_PACKAGE" ]; then
+    log_message "INFO" "Helm" "Installing common Helm templates..."
     bin/install_common_templates_to_helm.sh
-    if [ -z $(helm search repo local/aimlfw-common | grep aimlfw-common) ];then
-        echo "****************************************************************************************************************"
-        echo "                                                     ERROR                                                      "
-        echo "****************************************************************************************************************"
-        echo "Can't locate the aimlfw-common helm package in the local repo. Please make sure that it is properly installed."
-        echo "****************************************************************************************************************"
+    if [ -z $(helm search repo local/aimlfw-common | grep aimlfw-common) ]; then
+        log_message "ERROR" "Helm" "Could not locate the aimlfw-common Helm package in the local repo. Please ensure it is installed."
         exit 1
+    else
+        log_message "INFO" "Helm" "Successfully installed the aimlfw-common Helm package."
     fi
+else
+    log_message "INFO" "Helm" "aimlfw-common Helm package found."
 fi
 
+# Create the necessary namespace
+log_message "INFO" "Kubernetes" "Creating namespace 'ricips'..."
 kubectl create namespace ricips
+
+# Install Kserve
+log_message "INFO" "Kserve Installation" "Installing Kserve..."
 bin/install_kserve.sh
 
+# Update and install the Kserve adapter
+log_message "INFO" "Kserve Adapter" "Updating dependencies for kserve-adapter..."
 helm dep up helm/kserve-adapter
-echo "Installing kserve-adapter"
+log_message "INFO" "Kserve Adapter" "Installing kserve-adapter..."
 helm install kserve-adapter helm/kserve-adapter -f $OVERRIDEYAML
+log_message "INFO" "Kserve Adapter" "Kserve-adapter installed successfully."
+
