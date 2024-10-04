@@ -17,7 +17,23 @@
 # ==================================================================================
 
 #Uninstall databases
+
+# Function to log messages with different levels: INFO, WARN, ERROR
+log_message() {
+    local log_level=$1
+    local component=$2
+    local message=$3
+    echo "[$log_level] $component: $message"
+}
+
+log_message "INFO" "Helm" "Uninstalling PostgreSQL (tm-db) from 'traininghost' namespace..."
 helm delete tm-db -n traininghost
+if [ $? -eq 0 ]; then
+    log_message "INFO" "Helm" "Successfully uninstalled tm-db"
+else
+    log_message "ERROR" "Helm" "Failed to uninstall tm-db"
+    exit 1
+fi
 kubectl delete pvc data-tm-db-postgresql-0 -n traininghost
 helm delete cassandra -n traininghost
 sleep 10
