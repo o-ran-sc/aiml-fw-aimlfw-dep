@@ -269,7 +269,7 @@ Execute the below script
 
         ./prepare_env_aimlfw_access.sh
 
-Add feature group from AIMLFW dashboard, example on how to create a feature group is shown in this demo video: `Feature group creation demo <https://wiki.o-ran-sc.org/download/attachments/71762231/feature_group_create_final_lowres.mp4?api=v2>`__
+Add feature group from AIMLFW dashboard, example on how to create a feature group is shown in this demo video: `Feature group creation demo <https://lf-o-ran-sc.atlassian.net/wiki/download/attachments/13697168/feature_group_create_final_lowres.mp4?api=v2>`__
 
 Execute below script to push qoe data into ranpm setup
 
@@ -349,7 +349,7 @@ NOTE: Below are some example values to be used for the DME based feature group c
 +--------------------+-------------------------------------------------------------------+
 
 
-NOTE: Below are some example values to be used for the standalone influx DB creation for qoe usecase
+NOTE: Below are some example values to be used for the standalone influx DB creation for qoe usecase. Dme is not used in this example. 
 
 +--------------------+-------------------------------------------------------------------+
 | **Parameter**      | **Value**                                                         |
@@ -410,7 +410,7 @@ Training job creation with DME as data source
    :ref:`Steps to deploy model using Kserve adapter <reference6>`
 
 NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used.
-**Note** : The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
+NOTE: The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
 
 +--------------------+-------------------------------------------------------------------+
 | **Parameter**      | **Value**                                                         |
@@ -456,9 +456,6 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 | Model name         | qoe1                                                              |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
-| FeatureGroup Name  | featuregroup1                                                     |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
 | Datalake Source    | Influx DB                                                         |
 |                    |                                                                   |
 +--------------------+-------------------------------------------------------------------+
@@ -483,6 +480,7 @@ Training job creation with standalone Influx DB as data source
    :ref:`Steps to deploy model using Kserve adapter <reference6>`
 
 NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used
+NOTE: The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
 
 +--------------------+-------------------------+
 | **Parameter**      | **Value**               |
@@ -525,7 +523,7 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 | Model Management   | enable                  |
 | Service            |                         |
 +--------------------+-------------------------+
-| Model Name         | qoe_pipeline_g_release  |
+| Model Name         | qoe1                    |
 |                    |                         |
 +--------------------+-------------------------+
 | Datalake Source    | Influx DB               |
