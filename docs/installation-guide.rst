@@ -190,7 +190,7 @@ Update :file:`insert.py` file with the following content:
 
         def jsonToTable(df):
              df.index = range(len(df))
-             cols = [col for col in df.columns if isinstance(df.iloc[0][col], dict) or isinstance(df.iloc[0][col], list)]
+             cols = [col for col in df.columns if isinstance(df.iloc[0][col], (dict, list))]
              if len(cols) == 0:
                      return df
              for col in cols:
@@ -203,7 +203,7 @@ Update :file:`insert.py` file with the following content:
 
         def time(df):
              df.index = pd.date_range(start=datetime.datetime.now(), freq='10ms', periods=len(df))
-             df['measTimeStampRf'] = df['measTimeStampRf'].apply(lambda x: str(x))
+             df['measTimeStampRf'] = df['measTimeStampRf'].astype(str)
              return df
 
 
