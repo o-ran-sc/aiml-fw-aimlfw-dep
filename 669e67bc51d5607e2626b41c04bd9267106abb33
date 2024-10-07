@@ -1,0 +1,9 @@
+Verified+1: ORAN Required GHA <releng+oran.required.gha@linuxfoundation.org>
+Verified+1: subhash kumar singh <subh.singh@samsung.com>
+Code-Review+1: Taewan Kim <t25.kim@samsung.com>
+Code-Review+2: subhash kumar singh <subh.singh@samsung.com>
+Submitted-by: subhash kumar singh <subh.singh@samsung.com>
+Submitted-at: Mon, 07 Oct 2024 05:11:30 +0000
+Reviewed-on: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/13510
+Project: aiml-fw/aimlfw-dep
+Branch: refs/heads/master
