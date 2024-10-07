@@ -56,9 +56,9 @@ wait_for_deployment() {
     log_message "INFO" "Kubernetes" "All pods for deployment $1 are now running"
 }
 
-function wait_for_statefulset() {
-    echo -n "waiting for $1 statefulset to run"
-
+# Function to wait for Kubernetes StatefulSets
+wait_for_statefulset() {
+    log_message "INFO" "Kubernetes" "Waiting for statefulset $1 in namespace $2"
     STILL_WAITING=true
     while $STILL_WAITING; do
         STILL_WAITING=false
@@ -69,24 +69,26 @@ function wait_for_statefulset() {
             if [ $DESIRED_STATE -ne $CURRENT_STATE ]; then
                 STILL_WAITING=true
                 sleep 1
-                echo -n "."
+                log_message "INFO" "Kubernetes" "Statefulset $1 not fully ready. Retrying..."
             fi
         done
     done
-
-    echo
+    log_message "INFO" "Kubernetes" "Statefulset $1 is now running"
 }
 
 ########## Install Cert Manager ##########
+log_message "INFO" "Cert-Manager" "Checking Cert Manager installation..."
 IS_CERT_INSTALLED=$(kubectl get crd certificaterequests.cert-manager.io 2>&1 | grep "Error from server (NotFound)" | wc -l)
 if [ "$IS_CERT_INSTALLED" -eq 1 ]; then
+    log_message "INFO" "Cert-Manager" "Installing Cert Manager"
     kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/${CERT_MANAGER_VERSION}/cert-manager.yaml
     CERT_MANAGER_DEPLOYMENTS="cert-manager-cainjector cert-manager-webhook cert-manager"
     for CERT_MANAGER_DEPLOYMENT in $CERT_MANAGER_DEPLOYMENTS; do
         wait_for_deployment $CERT_MANAGER_DEPLOYMENT "cert-manager"
     done
+    log_message "INFO" "Cert-Manager" "Cert Manager installation completed"
 else
-    echo "skip cert-manager install"
+    log_message "INFO" "Cert-Manager" "Cert Manager already installed, skipping installation"
 fi
 
 # temp dir
