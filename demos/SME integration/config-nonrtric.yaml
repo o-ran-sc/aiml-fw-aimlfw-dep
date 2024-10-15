@@ -1,0 +1,18 @@
+AIMLTrainingservice:
+  AefProfiles:
+  - interfaceDescriptions:
+    - ipv4Addr: 192.168.181.254
+      port: 32002
+      securityMethods:
+      - PSK
+    Versions:
+      - ApiVersion: ""
+        Resources:
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - GET
+          ResourceName: "getPipeline"
+          Uri: "/pipelines"
+  ApiName: AIMLT-http10
+
+
