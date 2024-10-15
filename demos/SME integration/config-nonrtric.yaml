@@ -31,6 +31,8 @@ AIMLTrainingservice:
         - CommType: REQUEST_RESPONSE
           Operations:
           - GET
+          ResourceName: "GetTrainingJob"
+          Uri: "/trainingjobs/{training_job_id}/{version}"
 
   ApiName: AIMLT-http10
 
