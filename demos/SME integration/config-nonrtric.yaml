@@ -38,6 +38,11 @@ AIMLTrainingservice:
           - DELETE
           ResourceName: "DeleteTrainingJob"
           Uri: "/trainingjobs"
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - GET
+          ResourceName: "RetrainingJob"
+          Uri: "/trainingjobs/retraining"
   ApiName: AIMLT-http10
 
 
