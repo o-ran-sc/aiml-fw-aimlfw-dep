@@ -13,6 +13,11 @@ AIMLTrainingservice:
           - GET
           ResourceName: "getPipeline"
           Uri: "/pipelines"
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - POST
+          ResourceName: "CreateFeatureGroup"
+          Uri: "/featureGroup"
   ApiName: AIMLT-http10
 
 
