@@ -1,0 +1,18 @@
+AIMLTrainingservice:
+  AefProfiles:
+  - interfaceDescriptions:
+    - ipv4Addr: <IP ADDRESS FOR Training Manager>
+      port: 32002
+      securityMethods:
+      - PSK
+    Versions:
+      - ApiVersion: ""
+        Resources:
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - GET
+          ResourceName: "getPipeline"
+          Uri: "/pipelines"
+  ApiName: AIMLT-http10
+
+
