@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e62afc89_e05bab26",
+        "filename": "demos/SME integration/config-nonrtric.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-10-16T22:59:15Z",
+      "side": 1,
+      "message": "Doesn\u0027t it need the `training_job_id`?",
+      "revId": "884e5994b62ae50a36cd52de538503e42f14407e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
