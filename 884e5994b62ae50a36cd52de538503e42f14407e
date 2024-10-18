@@ -52,6 +52,24 @@
       "parentUuid": "fb5b53ec_a9da96b0",
       "revId": "884e5994b62ae50a36cd52de538503e42f14407e",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e738cb58_de572ece",
+        "filename": "demos/SME integration/config-nonrtric.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2024-10-18T09:54:15Z",
+      "side": 1,
+      "message": "Make sense. Thank you for your kind answer!",
+      "parentUuid": "153878cc_53587914",
+      "revId": "884e5994b62ae50a36cd52de538503e42f14407e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
