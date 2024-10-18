@@ -34,6 +34,24 @@
       "parentUuid": "e62afc89_e05bab26",
       "revId": "884e5994b62ae50a36cd52de538503e42f14407e",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153878cc_53587914",
+        "filename": "demos/SME integration/config-nonrtric.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002600
+      },
+      "writtenOn": "2024-10-18T09:44:53Z",
+      "side": 1,
+      "message": "training_job_id  is provided in the body as follows:\n--data \u0027{\"list\":[{\"trainingjob_name\":\"testing_influxdb_102\",\"version\":1}]}\u0027",
+      "parentUuid": "fb5b53ec_a9da96b0",
+      "revId": "884e5994b62ae50a36cd52de538503e42f14407e",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
