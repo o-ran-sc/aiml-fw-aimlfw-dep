@@ -58,3 +58,8 @@ spec:
                 secretKeyRef:
                   name: leofs-secret
                   key: password
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgres-password
+                  name: tm-db-postgresql

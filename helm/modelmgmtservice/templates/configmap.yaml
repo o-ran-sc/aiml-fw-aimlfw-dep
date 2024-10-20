@@ -30,3 +30,7 @@ data:
   MODEL_FILE_POSTFIX: _model.zip
   INFO_FILE_POSTFIX: _info.json
   LOG_FILE_NAME: mmes.log
+  PG_USER: postgres
+  PG_HOST: tm-db-postgresql
+  PG_PORT: "5432"
+  PG_DBNAME: training_manager_database
