@@ -33,6 +33,16 @@ AIMLTrainingservice:
           - GET
           ResourceName: "GetTrainingJob"
           Uri: "/trainingjobs/{training_job_id}/{version}"
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - DELETE
+          ResourceName: "DeleteTrainingJob"
+          Uri: "/trainingjobs"
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - GET
+          ResourceName: "RetrainingJob"
+          Uri: "/trainingjobs/retraining"
   ApiName: AIMLT-http10
 
 
