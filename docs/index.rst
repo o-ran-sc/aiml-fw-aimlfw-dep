@@ -13,6 +13,7 @@ Welcome to O-RAN SC aimlfw-dep Documentation
    overview.rst
    release-notes.rst
    installation-guide.rst
+   ranpm-installation.rst
 
 
 * :ref:`genindex`
