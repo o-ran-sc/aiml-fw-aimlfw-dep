@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f1af30c_9f2ac2db",
+        "filename": "docs/ranpm-installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002075
+      },
+      "writtenOn": "2024-11-08T13:01:04Z",
+      "side": 1,
+      "message": "is it meant to be 2022?",
+      "revId": "9f7c11e1e84d3eb654f9ab9a6e155e7635d9acc3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c090b25_bcf10cbe",
+        "filename": "docs/ranpm-installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002075
+      },
+      "writtenOn": "2024-11-08T13:01:04Z",
+      "side": 1,
+      "message": "just a suggestion to add commands to install these to make it faster for the person to install it.",
+      "revId": "9f7c11e1e84d3eb654f9ab9a6e155e7635d9acc3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
