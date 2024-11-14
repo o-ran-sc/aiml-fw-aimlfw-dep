@@ -18,6 +18,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7837c5fb_69fbb900",
+        "filename": "docs/ranpm-installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002075
+      },
+      "writtenOn": "2024-11-14T12:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f1af30c_9f2ac2db",
+      "revId": "9f7c11e1e84d3eb654f9ab9a6e155e7635d9acc3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c090b25_bcf10cbe",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-11-08T13:01:04Z",
       "side": 1,
       "message": "just a suggestion to add commands to install these to make it faster for the person to install it.",
+      "revId": "9f7c11e1e84d3eb654f9ab9a6e155e7635d9acc3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dafaf86_038a5b2a",
+        "filename": "docs/ranpm-installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002075
+      },
+      "writtenOn": "2024-11-14T12:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c090b25_bcf10cbe",
       "revId": "9f7c11e1e84d3eb654f9ab9a6e155e7635d9acc3",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
