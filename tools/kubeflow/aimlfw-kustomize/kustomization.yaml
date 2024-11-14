@@ -15,10 +15,6 @@ configMapGenerator:
     behavior: replace
     files:
       - viewer-pod-template.json
-secretGenerator:
-  - name: mlpipeline-minio-artifact
-    env: minio-artifact-secret-patch.env
-    behavior: merge
 generatorOptions:
   disableNameSuffixHash: true
 patches:
