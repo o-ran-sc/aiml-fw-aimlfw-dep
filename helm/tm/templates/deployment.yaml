@@ -56,9 +56,6 @@ spec:
             - name: serviceport
               containerPort: {{ include "common.serviceport.tm.http" .  }}
               protocol: TCP
-          workingDir: /home/app/trainingmgr/
-          command: ["python3"]
-          args: [trainingmgr_main.py]
           envFrom:
             - configMapRef:
                 name: tm-configmap
