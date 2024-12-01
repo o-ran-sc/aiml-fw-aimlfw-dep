@@ -15,15 +15,12 @@ configMapGenerator:
     behavior: replace
     files:
       - viewer-pod-template.json
-secretGenerator:
-  - name: mlpipeline-minio-artifact
-    env: minio-artifact-secret-patch.env
-    behavior: merge
 generatorOptions:
   disableNameSuffixHash: true
 patches:
   - path: aimlfw-configuration-pipeline-patch.yaml
   - path: aimlfw-configuration-pipeline-ui-patch.yaml
+  - path: aimlfw-configuration-remove-minio-patch.yaml
 # Identifier for application manager to apply ownerReference.
 # The ownerReference ensures the resources get garbage collected
 # when application is deleted.

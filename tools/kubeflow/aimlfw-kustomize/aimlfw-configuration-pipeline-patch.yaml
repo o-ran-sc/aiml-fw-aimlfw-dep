@@ -18,10 +18,7 @@ spec:
                   name: pipeline-install-config
                   key: bucketName
             - name: OBJECTSTORECONFIG_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: pipeline-install-config
-                  key: minioServiceHost
+              value: ""
             - name: OBJECTSTORECONFIG_REGION
               value: ""
             - name: OBJECTSTORECONFIG_PORT
