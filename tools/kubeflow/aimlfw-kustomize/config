@@ -5,15 +5,7 @@ artifactRepository:
         bucket: $(kfp-artifact-bucket-name),
         keyPrefix: artifacts,
         endpoint: leofs.kubeflow:8080,
-        insecure: true,
-        accessKeySecret: {
-            name: mlpipeline-minio-artifact,
-            key: accesskey
-        },
-        secretKeySecret: {
-            name: mlpipeline-minio-artifact,
-            key: secretkey
-        }
+        insecure: true
     },
     archiveLogs: true
 }

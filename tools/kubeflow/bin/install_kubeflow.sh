@@ -45,7 +45,7 @@ cd pipelines-$KFP_VERSION
 cp -r $CUSTOM_ENV_DIR manifests/kustomize/env/
 
 # Replace placeholders in the specific kustomize file using environment variables
-KUSTOMIZE_FILE="manifests/kustomize/env/$(basename $CUSTOM_ENV_DIR)/minio-artifact-secret-patch.env"
+#KUSTOMIZE_FILE="manifests/kustomize/env/$(basename $CUSTOM_ENV_DIR)/minio-artifact-secret-patch.env"
 # Replace values in the kustomize file
 sed -i "s/PLACEHOLDER_LEOFS_KEY/$LEOFS_KEY/g" $KUSTOMIZE_FILE
 

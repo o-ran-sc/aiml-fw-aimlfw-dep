@@ -21,7 +21,6 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: pipeline-install-config
-                  key: minioServiceHost
             - name: OBJECTSTORECONFIG_REGION
               value: ""
             - name: OBJECTSTORECONFIG_PORT
