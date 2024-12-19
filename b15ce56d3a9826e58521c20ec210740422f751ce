@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8c5775_ae568eeb",
+        "filename": "tools/kubeflow/Dockerfile.pipeline",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2024-12-19T13:49:10Z",
+      "side": 1,
+      "message": "JFI, when we do the branch cut it should be revised to H release.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 102
+      },
+      "revId": "b15ce56d3a9826e58521c20ec210740422f751ce",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
