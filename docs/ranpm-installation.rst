@@ -194,41 +194,49 @@ Pushing PM Reports
 ------------------
 .. <DESCRIBE THE SCRIPT TO PUSH PM REPORTS TO RANPM>
 
-1. Configure JobDefination of influxlogger
-
-Configure the default filter in jobDefinition.json as
-
-.. code-block:: diff
-
-        --- a/install/helm/nrt-pm-log/config/jobDefinition.json
-        +++ b/install/helm/nrt-pm-log/config/jobDefinition.json
-        @@ -9,7 +9,15 @@
-                {
-                        "measuredObjClass": "NRCellDU",
-                        "measTypes": [
-        -                  "pmCounterNumber101"
-        +                  "throughput",
-        +                  "x",
-        +                  "y",
-        +                  "availPrbDl",
-        +                  "availPrbUl",
-        +                  "measPeriodPrb",
-        +                  "pdcpBytesUl",
-        +                  "pdcpBytesDl",
-        +                  "measPeriodPdcpBytes"
-                        ]
-                }
-                ],
-
-Reinstall pm-log
+1. Create ICS job
 
 .. code-block:: bash
 
-        cd ./ranpm/install
-        # Re-install PM-Log
-        sudo bash ./uninstall-pm-log.sh
-        sudo bash ./install-pm-log.sh
+        curl --location --request PUT 'http://localhost:31823/data-consumer/v1/info-jobs/job1' \
+        --header 'Content-Type: application/json' \
+        --data '{
+                "info_type_id": "PmData",
+                "job_owner": "console",
+                "job_definition": {
+                "filter": {
+                        "sourceNames": [],
+                        "measObjInstIds": [],
+                        "measTypeSpecs": [
+                        {
+                        "measuredObjClass": "NRCellDU",
+                        "measTypes": [
+                                "throughput",
+                                "x",
+                                "y",
+                                "availPrbDl",
+                                "availPrbUl",
+                                "measPeriodPrb",
+                                "pdcpBytesUl",
+                                "pdcpBytesDl",
+                                "measPeriodPdcpBytes"
+                                ]
+                        }
+                        ],
+                        "measuredEntityDns": []
+                },
+                "deliveryInfo": {
+                        "topic": "pmreports",
+                        "bootStrapServers": "kafka-1-kafka-bootstrap.nonrtric:9097"
+                        }
+                }
+        }'
 
+Confirm ICS Job-creation
+
+.. code-block:: bash
+
+        curl --location 'http://localhost:31823/data-consumer/v1/info-jobs/job1' | jq .
 
 2. Clone and run script to Push data
 
@@ -269,6 +277,11 @@ Example for executing above script
 
         kubectl exec -it influxdb2-0 -n nonrtric -- influx delete --bucket pm-logg-bucket --start 1801-01-27T05:00:22.305309038Z   --stop 2023-11-14T00:00:00Z
 
+5. Delete ICS job
+
+.. code:: bash
+
+        curl --location --request DELETE 'http://localhost:31823/data-consumer/v1/info-jobs/job1'
 
 Uninstalling RANPM
 ------------------
@@ -277,3 +290,88 @@ Uninstalling RANPM
 
         cd ./ranpm/install
         sudo bash ./uninstall-ranpm.sh
+
+Using Non-RT RIC DME as data source for AIMLFW
+----------------------------------------------
+
+1. Deploy AIMLFW
+        Please refer `here <https://docs.o-ran-sc.org/projects/o-ran-sc-aiml-fw-aimlfw-dep/en/latest/installation-guide.html#software-installation-and-deployment>`__ for AIMLFW Installation
+
+2. Create FeatureGroup
+
+        i) Get RANPM InfluxDb Token
+
+        .. code-block:: bash
+
+                git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
+                cd aimlfw-dep/demos/hrelease/scripts
+                # The following script will give the inflxu-Token for RANPM
+                ./get_access_tokens.sh
+
+        ii) Prepare RANPM for AIMLFW ascess
+
+        .. code-block:: bash
+
+                ./prepare_env_aimlfw_access.sh
+                # Make influxDb accessible by port-fowarding (Keep it running)
+                kubectl port-forward svc/influxdb2 -n nonrtric 8086:8086 --address 0.0.0.0 
+        
+        iii) Create FeatureGroup at AIMLFW
+
+        .. code-block:: bash
+
+                curl --location '<AIMLFW-Ip>:32002/featureGroup' \
+                --header 'Content-Type: application/json' \
+                --data '{
+                        "featuregroup_name": "<FEATURE_GROUP_NAME>",
+                        "feature_list": "x,y,pdcpBytesDl,pdcpBytesUl",
+                        "datalake_source": "InfluxSource",
+                        "enable_dme": true,
+                        "host": "<RANPM-IP>",
+                        "port": "8086",
+                        "dme_port": "31823",
+                        "bucket": "pm-logg-bucket",
+                        "token": "<INFLUX_DB_TOKEN>",
+                        "source_name": "",
+                        "measured_obj_class": "NRCellDU",
+                        "measurement": "test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B13",
+                        "db_org": "est"
+                } '
+        
+        | Note: 
+        | a. AIMLFW-Ip: Refers to the VM-Ip where AIMLFW is installed
+        | b. RANPM-ip: Refers to the VM-ip where RANPM is installed 
+        | c. port: Refers to influxDB port which we have exposed in Step-2 i.e. 8086
+        | d. dme_port: Refers to the Nodeport of InformationService (in RANPM) generally, 31823
+        | e. INFLUX_DB_TOKEN: Refers to the token recieved from Step-1
+
+
+        .. code-block:: bash
+                
+                # Confirm ICS job creation
+                curl --location 'http://localhost:31823/data-consumer/v1/info-jobs/<FEATURE_GROUP_NAME>' | jq .
+
+
+3. Simulate RAN-Traffic to RANPM by Pushing PM-reports
+
+        .. code-block:: bash
+
+                cd aimlfw-dep/demos/hrelease/scripts
+                ./push_qoe_data.sh  gnb300505 30 c4/B13
+
+        Confirm the data in influxDb
+
+        .. code-block:: bash
+
+                kubectl exec -it influxdb2-0 -n nonrtric -- bash
+                influx v1 shell
+                use "pm-logg-bucket"
+                SELECT * from "test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B13"
+
+
+        The Measurement MUST contain 4 columns as per x,y,pdcpBytesDl,pdcpBytesUl.
+
+4. Create TrainingJob
+
+        Please refer `here <https://docs.o-ran-sc.org/projects/o-ran-sc-aiml-fw-aimlfw-dep/en/latest/installation-guide.html#training-job-creation-with-dme-as-data-source>`__ and use the featureGroup created in Step 2. 
+ 
