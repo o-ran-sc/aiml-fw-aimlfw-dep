@@ -544,44 +544,38 @@ NOTE: Below are some example values to be used for the QoE usecase training job 
 Obtain Model URL for deploying trained models
 ---------------------------------------------
 
-URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
-In case of using AIMLFW Model management service, URL for downloading and deploying model using Model Management Service will be the following:
-
 .. code:: bash
 
-        http://<VM IP where AIMLFW is deployed>:32006/downloadModel/<model name>/model.zip
+        http://<VM IP where AIMLFW is deployed>:32002/model/<MODEL_NAME>/<MODEL_VERSION>/<MODEL_ARTIFACT_VERSION>/Model.zip
 
-Install only Kserve for deploying models
+
+..  _reference4:
+
+Model-Deployment
 ----------------------------------------
 
-To install Kserve run the below commands
+1. Installing Kserve
 
 .. code:: bash
 
         ./bin/install_kserve.sh
 
-
-Uninstall only Kserve
----------------------
-
-To uninstall Kserve run the below commands
+2. Verify Installation
 
 .. code:: bash
 
-        ./bin/uninstall_kserve.sh
+        ~$ kubectl get pods -n kserve
         
+        NAME                                        READY   STATUS    RESTARTS   AGE
+        kserve-controller-manager-5d995bd58-9pf6x   2/2     Running   0          6d18h
 
-
-..  _reference4:
-
-Deploy trained qoe prediction model on Kserve
----------------------------------------------
-
-Create namespace using command below
+3. Deploy trained qoe prediction model on Kserve
 
 .. code:: bash
 
+        # Create namespace
         kubectl create namespace kserve-test
+
 
 Create :file:`qoe.yaml` file with below contents
 
@@ -590,19 +584,14 @@ Create :file:`qoe.yaml` file with below contents
         apiVersion: "serving.kserve.io/v1beta1"
         kind: "InferenceService"
         metadata:
-          name: qoe-model
+          name: "qoe-model"
+          namespace: kserve-test
         spec:
           predictor:
-            tensorflow:
-              storageUri: "<update Model URL here>"
-              runtimeVersion: "2.5.1"
-              resources:
-                requests:
-                  cpu: 0.1
-                  memory: 0.5Gi
-                limits:
-                  cpu: 0.1
-                  memory: 0.5Gi
+            model:
+              modelFormat:
+                name: tensorflow
+              storageUri: "<MODEL_URL>"
 
 
 To deploy model update the Model URL in the :file:`qoe.yaml` file and execute below command to deploy model
@@ -610,63 +599,70 @@ Refer :ref:`Obtain Model URL for deploying trained models <reference5>`
 
 .. code:: bash
 
-        kubectl apply -f qoe.yaml -n kserve-test
+        kubectl apply -f qoe.yaml
 
-Check running state of pod using below command
+        
+Verify Model-Deployment
+
 
 .. code:: bash
 
-        kubectl get pods -n kserve-test
+        ~$ kubectl get InferenceService -n kserve-test
+
+        NAME        URL                                              READY   PREV   LATEST   PREVROLLEDOUTREVISION   LATESTREADYREVISION         AGE
+        qoe-model   http://qoe-model.kserve-test.svc.cluster.local   True           100                              qoe-model-predictor-00001   42s
 
 
-Test predictions using model deployed on Kserve
------------------------------------------------
+        ~$ kubectl get pods -n kserve-test
 
-Use below command to obtain Ingress port for Kserve. 
-
-.. code:: bash
-
-        kubectl get svc istio-ingressgateway -n istio-system
-
-Obtain nodeport corresponding to port 80.
-In the below example, the port is 31206.
-
-.. code::
-
-        NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                      AGE
-        istio-ingressgateway   LoadBalancer   10.105.222.242   <pending>     15021:31423/TCP,80:31206/TCP,443:32145/TCP,31400:32338/TCP,15443:31846/TCP   4h15m
+        NAME                                                   READY   STATUS    RESTARTS   AGE
+        qoe-model-predictor-00001-deployment-86d9db6cb-5r8st   2/2     Running   0          93s         
 
 
-Create predict.sh file with following contents
+4. Test predictions using model deployed on Kserve
+
+In order to test our deployed-model, we will query the InferenceService from a curl-pod.
 
 .. code:: bash
 
-        model_name=qoe-model
-        curl -v -H "Host: $model_name.kserve-test.example.com" http://<IP of where Kserve is deployed>:<ingress port for Kserve>/v1/models/$model_name:predict -d @./input_qoe.json
+        # Deploy a curl-pod
+        kubectl run curl-pod --image=curlimages/curl:latest --command sleep 3600
+        # Query Inference-Service
+        kubectl exec -it curl-pod -- \
+                curl   \
+                --location http://qoe-model.kserve-test.svc.cluster.local/v1/models/qoe-model:predict \
+                --header "Content-Type: application/json" \
+                --data '{
+                        "signature_name": "serving_default",
+                        "instances": [[
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56],
+                                [2.56, 2.56]]
+                                ]
+                        }'
 
-Update the ``IP`` of host where Kserve is deployed and ingress port of Kserve obtained using above method.
+| Note: We can change which deployed-model to query by changing the location as:
+| location = <KSERVE_HOST>/v1/models/<MODEL_NAME>:predict, where
+| a. MODEL_NAME: Refers to the Name of Inference-Service
+| b. KSERVE_HOST: Refers to the URL of Inference-Service
 
-Create sample data for predictions in file :file:`input_qoe.json`. Add the following content in :file:`input_qoe.json` file.
+
+
+5. Uninstall Kserve
 
 .. code:: bash
 
-        {"signature_name": "serving_default", "instances": [[[2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56],
-               [2.56, 2.56]]]}
+        ./bin/uninstall_kserve.sh 
 
 
-Use command below to trigger predictions
-
-.. code:: bash
-
-        source predict.sh
+For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/website/0.8/get_started/first_isvc/#1-create-a-namespace>`__ 
 
 
 Install both Kserve and Kserve adapter for deploying models
