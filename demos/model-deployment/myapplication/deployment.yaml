@@ -1,0 +1,49 @@
+# ==================================================================================
+#
+#       Copyright (c) 2025 Samsung Electronics Co., Ltd. All Rights Reserved.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#          http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+# ==================================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapplication
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapplication
+  template:
+    metadata:
+      labels:
+        app: myapplication
+    spec:
+      containers:
+      - name: myapplication-container
+        image: myapplication:dev
+        imagePullPolicy: IfNotPresent
+        command: ["python3", "-u","main.py"]
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        env:
+        - name: KSERVE_HOST
+          value: "http://qoe-model.kserve-test.svc.cluster.local"
+        - name: MODEL_NAME
+          value: "qoe-model"
