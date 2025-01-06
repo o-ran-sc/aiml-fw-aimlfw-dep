@@ -1,0 +1,23 @@
+AIMLTrainingservice:
+  AefProfiles:
+  - interfaceDescriptions:
+    - ipv4Addr: <IP ADDRESS FOR Training Manager>
+      port: 32006
+      securityMethods:
+      - PSK
+    Versions:
+      - ApiVersion: ""
+        Resources:
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - POST
+          ResourceName: "RegisterModel"
+          Uri: "ai-ml-model-registration/v1/model-registrations/"
+        - CommType: REQUEST_RESPONSE
+          Operations:
+          - DELETE
+          ResourceName: "DeleteModel"
+          Uri: "ai-ml-model-registration/v1/model-registrations/{model_id}"    
+  ApiName: AIMLT-MME-requests
+
+
