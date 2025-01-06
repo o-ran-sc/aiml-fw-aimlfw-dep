@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f5172c_d8cffa4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002600
+      },
+      "writtenOn": "2025-01-06T12:40:45Z",
+      "side": 1,
+      "message": "SME intergation config for MME",
+      "revId": "59ce44c1b364c101c03a1b42da964cfaa7ede993",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
