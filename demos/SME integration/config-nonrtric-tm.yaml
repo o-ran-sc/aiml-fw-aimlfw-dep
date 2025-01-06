@@ -11,38 +11,35 @@ AIMLTrainingservice:
         - CommType: REQUEST_RESPONSE
           Operations:
           - GET
-          ResourceName: "getPipeline"
-          Uri: "/pipelines"
+          - POST
+          ResourceName: "FeatureGroup"
+          Uri: "ai-ml-model-training/v1/featureGroup"
         - CommType: REQUEST_RESPONSE
           Operations:
           - POST
-          ResourceName: "CreateFeatureGroup"
-          Uri: "/featureGroup"
-        - CommType: REQUEST_RESPONSE
-          Operations:
-          - POST
+          - GET
           ResourceName: "CreateTrainingJob"
-          Uri: "/trainingjobs/{training_job_id}"
+          Uri: "ai-ml-model-training/v1/training-jobs"
         - CommType: REQUEST_RESPONSE
           Operations:
           - POST
           ResourceName: "StartTraining"
-          Uri: "/trainingjobs/{training_job_id}/training"
+          Uri: "ai-ml-model-training/v1/training-jobs/{training_job_id}/training"
         - CommType: REQUEST_RESPONSE
           Operations:
           - GET
           ResourceName: "GetTrainingJob"
-          Uri: "/trainingjobs/{training_job_id}/{version}"
+          Uri: "ai-ml-model-training/v1/training-jobs/{training_job_id}"
         - CommType: REQUEST_RESPONSE
           Operations:
           - DELETE
           ResourceName: "DeleteTrainingJob"
-          Uri: "/trainingjobs"
+          Uri: "ai-ml-model-training/v1/training-jobs/{training_job_id}"
         - CommType: REQUEST_RESPONSE
           Operations:
           - GET
-          ResourceName: "RetrainingJob"
-          Uri: "/trainingjobs/retraining"
-  ApiName: AIMLT-http10
+          ResourceName: "GetTrainingJobStatus"
+          Uri: "ai-ml-model-training/v1/training-jobs/{training_job_id}/status"      
+  ApiName: AIMLT-TM-requests
 
 
