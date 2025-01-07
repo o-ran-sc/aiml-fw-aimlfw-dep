@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0823d3aa_90b89184",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-01-07T11:55:22Z",
+      "side": 1,
+      "message": "please update this url with ..../{model_name}/{model_version}/{artifact_Ver}/Model.zip",
+      "range": {
+        "startLine": 468,
+        "startChar": 11,
+        "endLine": 468,
+        "endChar": 93
+      },
+      "revId": "20ab55fa68b316b57601112ad29c55060a0825dd",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
