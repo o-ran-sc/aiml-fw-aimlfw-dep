@@ -320,7 +320,7 @@ Using Non-RT RIC DME as data source for AIMLFW
 
         .. code-block:: bash
 
-                curl --location '<AIMLFW-Ip>:32002/featureGroup' \
+                curl --location '<AIMLFW-Ip>:32002/ai-ml-model-training/v1/featureGroup' \
                 --header 'Content-Type: application/json' \
                 --data '{
                         "featuregroup_name": "<FEATURE_GROUP_NAME>",
