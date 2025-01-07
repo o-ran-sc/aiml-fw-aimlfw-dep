@@ -548,6 +548,51 @@ Obtain Model URL for deploying trained models
 
         http://<VM IP where AIMLFW is deployed>:32002/model/<MODEL_NAME>/<MODEL_VERSION>/<MODEL_ARTIFACT_VERSION>/Model.zip
 
+Model-Retraining
+----------------------------------------
+A previously trained model can be retrained with different configurations/data as follows:
+
+.. code:: bash
+
+        curl --location 'localhost:32002/ai-ml-model-training/v1/training-jobs' \
+        --header 'Content-Type: application/json' \
+        --data '{
+                "modelId": {
+                "modelname":"<MODEL_TO_RETRAIN>",
+                "modelversion":"<MODEL_VERSION_TO_RETRAIN>"
+        },
+        "training_config": {
+                "description": "Retraining-Example",
+                "dataPipeline": {
+                "feature_group_name": "<FEATUREGROUP_NAME>",
+                "query_filter": "",
+                "arguments": {"epochs": 20}
+                },
+                "trainingPipeline": {
+                        "training_pipeline_name": "qoe_Pipeline",
+                        "training_pipeline_version": "qoe_Pipeline",
+                        "retraining_pipeline_name": "qoe_Pipeline_retrain",
+                        "retraining_pipeline_version": "qoe_Pipeline_retrain"
+                }
+        },
+        "model_location": ""
+        }'
+
+| The user can specify different configurations as well as retraining-pipeline by modifying the training-config.
+| The default `qoe_Pipeline_retrain` pipeline fetches and loads the existing model, retrains it with new arguments or data, and updates the artifact version from 1.0.0 to 1.1.0.
+
+Verify Updated Artifact-Version after retraining from MME
+
+.. code:: bash
+
+        curl --location 'localhost:32006/ai-ml-model-discovery/v1/models/?model-name=<MODEL_NAME>&model-version=<MODEL_VERSION>'
+
+
+| Note: 
+| a. The QoE retraining function does not come pre uploaded, we need to go to training function, create training function and run the `qoe-pipeline-retrain-2` notebook.
+| b. Subsequent retrainings will update the artifact version as follows: 
+|               From 1.x.0 to 1.(x + 1).0
+
 
 ..  _reference4:
 
