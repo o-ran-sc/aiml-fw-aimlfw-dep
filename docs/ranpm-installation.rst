@@ -320,7 +320,7 @@ Using Non-RT RIC DME as data source for AIMLFW
 
         .. code-block:: bash
 
-                curl --location '<AIMLFW-Ip>:32002/featureGroup' \
+                curl --location '<AIMLFW-Ip>:32002/ai-ml-model-training/v1/featureGroup' \
                 --header 'Content-Type: application/json' \
                 --data '{
                         "featuregroup_name": "<FEATURE_GROUP_NAME>",
@@ -373,5 +373,5 @@ Using Non-RT RIC DME as data source for AIMLFW
 
 4. Create TrainingJob
 
-        Please refer `here <https://docs.o-ran-sc.org/projects/o-ran-sc-aiml-fw-aimlfw-dep/en/latest/installation-guide.html#training-job-creation-with-dme-as-data-source>`__ and use the featureGroup created in Step 2. 
+        Please refer `here <https://docs.o-ran-sc.org/projects/o-ran-sc-aiml-fw-aimlfw-dep/en/latest/installation-guide.html#training-job-creation-with-dme-or-standalone-influxdb-as-data-source>`__ and use the featureGroup created in Step 2. 
  
