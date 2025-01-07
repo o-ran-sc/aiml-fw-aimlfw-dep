@@ -35,6 +35,9 @@ Version history
 | 2023-12-14         | 1.1.0              | Joseph Thaliath    | I release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
+| 2023-12-14         | 2.0.0              | Rajdeep Singh      | K release             |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
 
 
 Introduction
@@ -302,252 +305,192 @@ Steps to clear the data in InfluxDB
 Feature group creation
 ----------------------
 
-From AIMLFW dashboard create feature group (Training Jobs-> Create Feature Group )
+From AIMLFW dashboard create feature group (Training Jobs-> Create Feature Group ) Or curl 
+
+NOTE: Here is a curl request to create feature group using curl
+
+.. code:: bash
+
+        curl --location 'http://<VM IP where AIMLFW is installed>:32002/ai-ml-model-training/v1/featureGroup' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                        "featuregroup_name": "<Name of the feature group>",
+                        "feature_list": "<Features in a comma separated format>",
+                        "datalake_source": "InfluxSource",
+                        "enable_dme": <True for DME use, False for Standalone Influx DB>,
+                        "host": "<IP of VM where Influx DB is installed>",
+                        "port": "<Port of Influx DB>",",
+                        "dme_port": "",
+                        "bucket": "<Bucket Name>",
+                        "token": "<INFLUX_DB_TOKEN>",
+                        "source_name": "<any source name. but same needs to be given when running push_qoe_data.sh>",
+                        "measured_obj_class": "",
+                        "measurement": "<Measurement of the db>",
+                        "db_org": "<Org of the db>"
+                    }'
 
 NOTE: Below are some example values to be used for the DME based feature group creation for qoe usecase
 
-+--------------------+-------------------------------------------------------------------+
-| **Parameter**      | **Value**                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Group Name | featuregroup1                                                     |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Features           | pdcpBytesDl,pdcpBytesUl                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Host               | <IP of VM where DME is installed>                                 |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Port               | 31812                                                             |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Db Org             | est                                                               |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Bucket Name        | pm-logg-bucket                                                    |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| DB Token           | <token obtained using get_access_tokens.sh during DME setup>      |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| _measurement       | test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B2  |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| DME flag           | enable it                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Source Name        | <any source name. but same needs to be given when running         |
-|                    |  push_qoe_data.sh>                                                |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Measured Obj Class | NRCellDU                                                          |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Dme port           | 31823                                                             |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
+.. code:: bash
 
+            curl --location '<AIMLFW-Ip>:32002/ai-ml-model-training/v1/featureGroup' \
+            --header 'Content-Type: application/json' \
+            --data '{
+                    "featuregroup_name": "<FEATURE_GROUP_NAME>",
+                    "feature_list": "x,y,pdcpBytesDl,pdcpBytesUl",
+                    "datalake_source": "InfluxSource",
+                    "enable_dme": true,
+                    "host": "<RANPM-IP>",
+                    "port": "8086",
+                    "dme_port": "31823",
+                    "bucket": "pm-logg-bucket",
+                    "token": "<INFLUX_DB_TOKEN>",
+                    "source_name": "",
+                    "measured_obj_class": "NRCellDU",
+                    "measurement": "test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=c4_B13",
+                    "db_org": "est"
+            } '
 
 NOTE: Below are some example values to be used for the standalone influx DB creation for qoe usecase. Dme is not used in this example. 
 
-+--------------------+-------------------------------------------------------------------+
-| **Parameter**      | **Value**                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Group Name | featuregroup1                                                     |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Features           | pdcpBytesDl,pdcpBytesUl                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Host               | <IP of VM where Influx DB is installed>                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Port               | <port of Influx DB>                                               |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Db Org             | primary                                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Bucket Name        | UEData                                                            |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| DB Token           | <token obtained during INflux DB installation>                    |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| _measurement       | liveCell                                                          |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
+.. code:: bash
 
-Register Model (optional)
--------------------------
+        curl --location 'http://<VM IP where AIMLFW is installed>:32002/ai-ml-model-training/v1/featureGroup' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                        "featuregroup_name": "<Feature Group name>",
+                        "feature_list": "pdcpBytesDl,pdcpBytesUl",
+                        "datalake_source": "InfluxSource",
+                        "enable_dme": false,
+                        "host": "my-release-influxdb.default",
+                        "port": "8086",
+                        "dme_port": "",
+                        "bucket": "UEData",
+                        "token": "<INFLUX_DB_TOKEN>",
+                        "source_name": "",
+                        "measured_obj_class": "",
+                        "measurement": "liveCell",
+                        "db_org": "primary"
+                    }'
+
+Register Model (compulsory)
+---------------------------
 
 Register the model using the below steps if using Model management service for training.
 
 .. code:: bash
 
-        curl --location 'http://<VM IP where AIMLFW is installed>:32006/registerModel' \
+        curl --location 'http://<VM IP where AIMLFW is installed>:32006/ai-ml-model-registration/v1/registerModel' \
               --header 'Content-Type: application/json' \
               --data '{
-                 "model-name":"qoe1",
-                 "rapp-id": "rapp_1",
-                 "meta-info" : 
-                 {
-                     "accuracy":"90",
-                     "model-type":"timeseries",
-                     "feature-list":["pdcpBytesDl","pdcpBytesUl"]
-                 }
-              }'
+                    "modelId": {
+                        "modelName": "modeltest1",
+                        "modelVersion": "1"
+                    },
+                    "description": "This is a test model.",
+                    "modelInformation": {
+                        "metadata": {
+                            "author": "John Doe"
+                        },
+                        "inputDataType": "pdcpBytesDl,pdcpBytesUl",
+                        "outputDataType": "pdcpBytesDl,pdcpBytesUl"
+                    }
+                }'
 
-Training job creation with DME as data source
----------------------------------------------
+Model Discovery
+---------------
+
+Model discovery can be done using the following API endpoint:
+
+
+To fetch all registered models, use the following API endpoint:
+.. code:: bash
+
+    curl --location 'http://<AIMLFW-Ip>:32006/ai-ml-model-discovery/v1/models'
+
+To fetch models with model name , use the following API endpoint:
+
+.. code:: bash
+
+    curl --location 'http://<AIMLFW-Ip>:32006/ai-ml-model-discovery/v1/models/?model-name=<model_name>'
+
+To fetch specific model, use the following API endpoint:
+
+.. code:: bash
+
+    curl --location 'http://<AIMLFW-Ip>:32006/ai-ml-model-discovery/v1/models/?model-name=<model_name>&model-version=<model_version>'
+
+
+Training job creation with DME or Standalone InfluxDB as data source
+--------------------------------------------------------------------
 
 #. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
 #. RANPM setup should be installed and configured as per steps mentioned in section :ref:`Prepare Non-RT RIC DME as data source for AIMLFW <reference3>`
-#. To create training job, follow the steps in the demo videos stored here: `Training Job creation <https://wiki.o-ran-sc.org/display/AIMLFEW/Files+for+I+release>`__ 
 #. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>` or 
    :ref:`Steps to deploy model using Kserve adapter <reference6>`
 
-NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used.
 NOTE: The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
 
-+--------------------+-------------------------------------------------------------------+
-| **Parameter**      | **Value**                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Training Job Name  | qoetest                                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Model Management   |  disable                                                          |
-| Service            |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Training Function  | qoe_pipeline_h_release                                            |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| FeatureGroup Name  | featuregroup1                                                     |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Datalake Source    | Influx DB                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Filter     |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Hyper Parameters   | epochs:1                                                          |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Description        | test                                                              |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
+.. code:: bash
 
-NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is used.
+        curl --location 'http://<VM IP where AIMLFW is installed>:32002/ai-ml-model-training/v1/training-jobs' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                        "modelId":{
+                            "modelname": "modeltest15",
+                            "modelversion": "1"
+                        },
+                        "model_location": "",
+                        "training_config": {
+                            "description": "trainingjob for testing",
+                            "dataPipeline": {
+                                "feature_group_name": "testing_influxdb_01",
+                                "query_filter": "",
+                                "arguments": "{'epochs': 1}"
+                            },
+                            "trainingPipeline": {
+                                    "training_pipeline_name": "qoe_Pipeline_testing_1", 
+                                    "training_pipeline_version": "qoe_Pipeline_testing_1", 
+                                    "retraining_pipeline_name":"qoe_Pipeline_retrain",
+                                    "retraining_pipeline_version":"2"
+                            }
+                        },
+                        "training_dataset": "",
+                        "validation_dataset": "",
+                        "notification_url": "",
+                        "consumer_rapp_id": "",
+                        "producer_rapp_id": ""
+                    }'
 
-+--------------------+-------------------------------------------------------------------+
-| **Parameter**      | **Value**                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Training Job Name  | qoetest                                                           |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Model Management   |  enable                                                           |
-| Service            |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Model name         | qoe1                                                              |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Datalake Source    | Influx DB                                                         |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Feature Filter     |                                                                   |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Hyper Parameters   | epochs:1                                                          |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
-| Description        | test                                                              |
-|                    |                                                                   |
-+--------------------+-------------------------------------------------------------------+
+..  _reference7:
 
+Obtain the Status of Training Job
+---------------------------------
 
-Training job creation with standalone Influx DB as data source
---------------------------------------------------------------
+The Status of Trainingjob can be featched using the following API endpoint. Replace <TrainingjobId> with the ID of the training job.
 
-#. AIMLFW should be installed by following steps in section :ref:`Software Installation and Deployment <reference1>`
-#. Standalone Influx DB should be setup and configured as mentioned in section :ref:`Install Influx DB as datalake <reference2>`
-#. To create training job, follow the steps in the demo videos stored here: `Training Job creation <https://wiki.o-ran-sc.org/display/AIMLFEW/Files+for+I+release>`__ 
-#. After training job is created and executed successfully, model can be deployed using steps mentioned in section :ref:`Deploy trained qoe prediction model on Kserve <reference4>` or 
-   :ref:`Steps to deploy model using Kserve adapter <reference6>`
+.. code:: bash
 
-NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is not used
-NOTE: The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
+    curl --location 'http://<AIMLFW-Ip>:32002/ai-ml-model-training/v1/training-jobs/<TrainingjobId>/status'
 
-+--------------------+-------------------------+
-| **Parameter**      | **Value**               |
-|                    |                         |
-+--------------------+-------------------------+
-| Training Job Name  | qoetest                 |
-|                    |                         |
-+--------------------+-------------------------+
-| Model Management   | disable                 |
-| Service            |                         |
-+--------------------+-------------------------+
-| Training Function  | qoe_pipeline_g_release  |
-|                    |                         |
-+--------------------+-------------------------+
-| FeatureGroup Name  | featuregroup1           |
-|                    |                         |
-+--------------------+-------------------------+
-| Datalake Source    | Influx DB               |
-|                    |                         |
-+--------------------+-------------------------+
-| Feature Filter     |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Hyper Parameters   | epochs:1                |
-|                    |                         |
-+--------------------+-------------------------+
-| Description        | test                    |
-|                    |                         |
-+--------------------+-------------------------+
-
-NOTE: Below are some example values to be used for the QoE usecase training job creation when model management service is used
-
-+--------------------+-------------------------+
-| **Parameter**      | **Value**               |
-|                    |                         |
-+--------------------+-------------------------+
-| Training Job Name  | qoetest                 |
-|                    |                         |
-+--------------------+-------------------------+
-| Model Management   | enable                  |
-| Service            |                         |
-+--------------------+-------------------------+
-| Model Name         | qoe1                    |
-|                    |                         |
-+--------------------+-------------------------+
-| Datalake Source    | Influx DB               |
-|                    |                         |
-+--------------------+-------------------------+
-| Feature Filter     |                         |
-|                    |                         |
-+--------------------+-------------------------+
-| Hyper Parameters   | epochs:1                |
-|                    |                         |
-+--------------------+-------------------------+
-| Description        | test                    |
-|                    |                         |
-+--------------------+-------------------------+
 
 ..  _reference5:
 
 Obtain Model URL for deploying trained models
 ---------------------------------------------
 
+URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
+Or You can curl the following API endpoint to obtain Trainingjob Info and fetch model_url for deployment after training is complete. Replace <TrainingjobId> with the ID of the training job.
+
 .. code:: bash
 
-        http://<VM IP where AIMLFW is deployed>:32002/model/<MODEL_NAME>/<MODEL_VERSION>/<MODEL_ARTIFACT_VERSION>/Model.zip
+    curl --location 'http://<AIMLFW-Ip>:32002/ai-ml-model-training/v1/training-jobs/<TrainingjobId>'
 
+Or you can directly download the model once the training is complete using the following API endpoint:
+
+.. code:: bash
+
+    curl --location 'http://<AIMLFW-Ip>:32002/model/<modelname>/<modelversion>/<artifactversion>/Model.zip'
 
 ..  _reference4:
 
