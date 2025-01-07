@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a2eb85_9ad515b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002075
+      },
+      "writtenOn": "2025-01-07T10:04:53Z",
+      "side": 1,
+      "message": "I have raised the similar commit with all the recipe files.",
+      "revId": "b10211130cb6d631e28e9f39e72842cda6485f75",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
