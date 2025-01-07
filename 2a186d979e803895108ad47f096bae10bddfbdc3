@@ -22,6 +22,30 @@
       },
       "revId": "2a186d979e803895108ad47f096bae10bddfbdc3",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb711c9_3a39637f",
+        "filename": "demos/model-deployment/myapplication/app/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-01-07T07:13:48Z",
+      "side": 1,
+      "message": "Changed to 2025",
+      "parentUuid": "4796e39d_ed52f36b",
+      "range": {
+        "startLine": 3,
+        "startChar": 8,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "2a186d979e803895108ad47f096bae10bddfbdc3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
