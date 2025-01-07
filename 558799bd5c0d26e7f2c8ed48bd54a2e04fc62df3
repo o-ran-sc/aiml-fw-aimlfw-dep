@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2991c637_9c850be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-01-07T19:05:49Z",
+      "side": 1,
+      "message": "Ashish, could you once rebase the code resolving conflict.",
+      "revId": "558799bd5c0d26e7f2c8ed48bd54a2e04fc62df3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
