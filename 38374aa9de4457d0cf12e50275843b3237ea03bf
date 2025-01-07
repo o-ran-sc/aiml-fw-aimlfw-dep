@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "586edc20_a1b85b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002600
+      },
+      "writtenOn": "2025-01-07T10:20:01Z",
+      "side": 1,
+      "message": "Added model discovery and othe MME apis accrding to the R1AP v6.0",
+      "revId": "38374aa9de4457d0cf12e50275843b3237ea03bf",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
