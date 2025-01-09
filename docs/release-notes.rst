@@ -33,6 +33,9 @@ Version history
 | 2023-12-14         | 1.2.0              | Joseph Thaliath    | I release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
+| 2025-01-09         | 1.3.0              | Subhash Kumar Singh| K release             |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
 
 
 Summary
@@ -43,6 +46,31 @@ The I release of AIMLFW provides required installation scripts for deployment of
 
 Release Data
 ============
+
+K Release
+---------
+
+
++--------------------------------------+-------------------------------------------+
+| **Project**                          | AIMLFW Installation and Deployment        |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                        |
+|                                      | /b97cada6af92c13688228668a37cccb207bf378d |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release designation**              | K release                                 |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Release date**                     | 2025-01-09                                |
+|                                      |                                           |
++--------------------------------------+-------------------------------------------+
+| **Purpose of the delivery**          | Align with Specification as per R1AP v6.0 |
+|                                      | Exposure of AIMLFW over R1 interface      |
+|                                      | Code refactoring                          |
+|                                      | Model training and retraining             |
++--------------------------------------+-------------------------------------------+
+
 
 I Release
 ---------
