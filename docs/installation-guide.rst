@@ -480,12 +480,18 @@ The Status of Trainingjob can be featched using the following API endpoint. Repl
 Obtain Model URL for deploying trained models
 ---------------------------------------------
 
-URL for deployment can be obainted from AIMFW dashboard (Training Jobs-> Training Job status -> Select Info for a training job -> Model URL)
-Or You can curl the following API endpoint to obtain Trainingjob Info and fetch model_url for deployment after training is complete. Replace <TrainingjobId> with the ID of the training job.
+You can curl the following API endpoint to obtain Trainingjob Info and fetch model_url for deployment after training is complete. Replace <TrainingjobId> with the ID of the training job.
 
 .. code:: bash
 
     curl --location 'http://<AIMLFW-Ip>:32002/ai-ml-model-training/v1/training-jobs/<TrainingjobId>'
+
+OR you can download the model using Model_name, Model_version, Model_artifact_version as follows:
+
+.. code:: bash
+
+    wget http://<AIMLFW-Ip>:32002/model/<MODEL_NAME>/<MODEL_VERSION>/<MODEL_ARTIFACT_VERSION>/Model.zip
+
 
 Model-Retraining
 ----------------------------------------
