@@ -376,11 +376,11 @@ NOTE: Below are some example values to be used for the standalone influx DB crea
 Register Model (compulsory)
 ---------------------------
 
-Register the model using the below steps if using Model management service for training.
+Register the model using the below steps using Model management service for training.
 
 .. code:: bash
 
-        curl --location 'http://<VM IP where AIMLFW is installed>:32006/ai-ml-model-registration/v1/registerModel' \
+        curl --location 'http://<VM IP where AIMLFW is installed>:32006/ai-ml-model-registration/v1/model-registrations' \
               --header 'Content-Type: application/json' \
               --data '{
                     "modelId": {
