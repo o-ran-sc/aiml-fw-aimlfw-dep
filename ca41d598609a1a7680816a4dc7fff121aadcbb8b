@@ -1,0 +1,11 @@
+Verified+1: ORAN Jobbuilder <releng+oran-jobbuilder@linuxfoundation.org>
+Code-Review+1: Swaraj Kumar <swaraj.kumar@samsung.com>
+Code-Review+2: Rajdeep Singh <rajdeep.sin@samsung.com>
+Verified+1: ORAN Required GHA <releng+oran.required.gha@linuxfoundation.org>
+Code-Review+1: Ashish Jain <jain.ashish@samsung.com>
+Submitted-by: Rajdeep Singh <rajdeep.sin@samsung.com>
+Submitted-at: Wed, 05 Feb 2025 17:36:24 +0000
+Reviewed-on: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14105
+Comments-Total: 1
+Project: aiml-fw/aimlfw-dep
+Branch: refs/heads/k-release
