@@ -539,6 +539,27 @@ Verify Updated Artifact-Version after retraining from MME
 |               From 1.x.0 to 1.(x + 1).0
 
 
+Below state diagram captures the flow for model state for training/training.
+
+.. image:: _static/flow.png
+  :width: 600
+  :alt: State diagram to represent different states of model training
+
+.. code-block::
+        
+        @startuml
+                [*] -[#blue]-> State1 : Registrer Model to MME
+                State1 -[#blue]-> State1 : Update Model
+                State1 -[#blue]-> [*] : Delete Model Registration
+                State1 : Model onboarded
+                State1 -[#blue]-> State2 : Train Model Request
+                State2 : Trained model
+                State2 -[#blue]-> [*] : Delete Model Registration
+                State2 -[#blue]-> State3 : Re-train Model Request
+                State3 : Retrained model
+                State3 -[#blue]-> [*] : Delete Model Registration
+        @enduml
+
 ..  _reference4:
 
 Model-Deployment
