@@ -73,9 +73,16 @@ Software Installation and Deployment
         git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
         cd aimlfw-dep
 
-Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
+Update the recipe :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` to include your VM IP. Ensure image versions are correct.
 
-**Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
+.. code:: yaml
+
+        traininghost:
+                ip_address: <Fill IP of host>
+
+        
+
+Run the following script to install the `traininghost` (It may take 40-50 mins for the installation to complete):
 
 .. code:: bash
 
@@ -83,73 +90,112 @@ Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` whic
 
 
 
-Check running state of all pods and services using below command
+Check running state of all pods and services using below command :
 
 .. code:: bash
 
-        kubectl get pods --all-namespaces
-        kubectl get svc --all-namespaces
+        ~$ kubectl get pods --all-namespaces 
+        
+        kubeflow       cache-deployer-deployment-cf9646b9c-jxlqc          1/1     Running   0             53m
+        kubeflow       cache-server-56d4959c9-sz948                       1/1     Running   0             53m
+        kubeflow       leofs-bfc4794f5-7xfdn                              1/1     Running   0             56m
+        kubeflow       metadata-envoy-deployment-9c7db86d8-7rlkf          1/1     Running   0             53m
+        kubeflow       metadata-grpc-deployment-d94cc8676-mhw4l           1/1     Running   5 (47m ago)   53m
+        kubeflow       metadata-writer-cd5dd8f7-6qsx6                     1/1     Running   1 (46m ago)   53m
+        kubeflow       minio-5dc6ff5b96-4f9xd                             1/1     Running   0             53m
+        kubeflow       ml-pipeline-85b6bf5f67-5x9lq                       1/1     Running   2             53m
+        kubeflow       ml-pipeline-persistenceagent-fc7c944d4-bjz5n       1/1     Running   1 (46m ago)   53m
+        kubeflow       ml-pipeline-scheduledworkflow-676478b778-h42kx     1/1     Running   0             53m
+        kubeflow       ml-pipeline-ui-76bc4d6c99-8rw9x                    1/1     Running   0             53m
+        kubeflow       ml-pipeline-viewer-crd-8574556b89-g5xw7            1/1     Running   0             53m
+        kubeflow       ml-pipeline-visualizationserver-5d7c54f495-mhdtj   1/1     Running   0             53m
+        kubeflow       mysql-5b446b5744-mcqlw                             1/1     Running   0             53m
+        kubeflow       workflow-controller-679dcfdd4f-c64bj               1/1     Running   0             53m
+        traininghost   aiml-dashboard-667c546669-rslbz                    1/1     Running   0             38m
+        traininghost   aiml-notebook-5689459959-hd8r4                     1/1     Running   0             38m
+        traininghost   cassandra-0                                        1/1     Running   0             41m
+        traininghost   data-extraction-bd7dc6747-98ddq                    1/1     Running   0             39m
+        traininghost   kfadapter-75c88574d5-ww7qb                         1/1     Running   0             38m
+        traininghost   modelmgmtservice-56874bfc67-ct6lk                  1/1     Running   0             38m
+        traininghost   tm-757bf57cb-rlx7v                                 1/1     Running   0             39m
+        traininghost   tm-db-postgresql-0                                 1/1     Running   0             53m
 
 
-Check the AIMLFW dashboard by using the following url
 
-.. code:: bash
-
-        http://localhost:32005/
-
-In case of any change required in the RECIPE_EXAMPLE/example_recipe_latest_stable.yaml file after installation, 
-the following steps can be followed to reinstall with new changes.
-
-.. code:: bash
-
-        bin/uninstall.sh
-        bin/install.sh -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
+**Note: In K Release, dashboard is not supported. We recomment to use cURL to interact with AIMLFW components. 
+Details are provided in further section for each operation required for model training.**
 
 
-Software Uninstallation
------------------------
+Software Uninstallation & Upgrade
+---------------------------------
+
+Run the following script to uninstall the `traininghost`:
 
 .. code:: bash
 
         bin/uninstall_traininghost.sh
+
+To update the AIMLFW component, you need to follow a series of steps to ensure that the new changes are properly installed and integrated. 
+
+.. code:: bash
+
+        # Step 1: Uninstall the existing AIMLFW component
+        bin/uninstall.sh
+
+        # Step 2: Update the RECIPE_EXAMPLE/example_recipe_latest_stable.yaml file
+        # Make necessary changes to the recipe file here
+
+        # Step 3: Reinstall the AIMLFW component with the updated recipe
+        bin/install.sh -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
+
 
 .. _install-influx-db-as-datalake:
 
 ..  _reference2:
 
 
-Install Influx DB as datalake (Optional)
-----------------------------------------
+DataLake Installation
+----------------------
 
-Standalone Influx DB installation can be used if DME is not used as a data source.
+In the context of AIMLFW, a datalake can be used to store and manage large amounts of data generated by various sources. 
+
+This section provides a detailed guide on how to install and configure a datalake for AIMLFW. Currently we support following methods to injest data for model-training: Standalone InfluxDB Installation and Prepare Non-RT RIC DME as a Data Source for AIMLFW.
+
+
+1. Install Influx DB as datalake (Optional)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Standalone Influx DB can be installed using the following commands:
 
 .. code:: bash
 
         helm repo add bitnami https://charts.bitnami.com/bitnami
         helm install my-release bitnami/influxdb --version 5.13.5
-        kubectl exec -it <pod name> bash
+        
 
-From below command  we can get username, org name, org id and access token
+        ~$ kubectl get pods
+
+        NAME                                               READY   STATUS    RESTARTS        AGE
+        my-release-influxdb-85888dfd97-77dwg               1/1     Running   0               15m
+
+Use the following command to get `access token` which is required while creating feature-group.
 
 .. code:: bash
 
-        cat bitnami/influxdb/influxd.bolt | tr -cd "[:print:]"
+        kubectl get secret my-release-influxdb -o jsonpath="{.data.admin-user-token}" | base64 --decode
 
-eg:   {"id":"0a576f4ba82db000","token":"xJVlOom1GRUxDNkldo1v","status":"active","description":"admin's Token","orgID":"783d5882c44b34f0","userID":"0a576f4b91edb000","permissions" ...
 
-Use the tokens further in the below configurations and in the recipe file.
-
-Following are the steps to add qoe data to Influx DB.
-
+**This section provides a detailed guide to onboard test-data to execute model-training.** 
 
 Execute below from inside Influx DB container to create a bucket:
 
 .. code:: bash
 
-        influx bucket create -n UEData -o primary -t <token>
+        # Token is referred to the acess-token collected in previous step:
+        kubectl exec -it <influxdb-pod-name> -- influx bucket create -n UEData -o primary -t <token>
 
 
-Install the following dependencies
+Install the following dependencies which is required for parsing and onboarding data from `.csv` file:
 
 .. code:: bash
 
@@ -165,7 +211,7 @@ Use the :file:`insert.py` in ``ric-app/qp repository`` to upload the qoe data in
         git clone -b f-release https://gerrit.o-ran-sc.org/r/ric-app/qp
         cd qp/qp
 
-Update :file:`insert.py` file with the following content:
+Overwrite :file:`insert.py` file with the following content:
 
 .. code-block:: python
 
@@ -222,15 +268,15 @@ Update :file:`insert.py` file with the following content:
         populatedb()
 
 
-Update ``<token>`` in :file:`insert.py` file
+Update ``<token>`` in :file:`insert.py` with the acess-token collected in previous step.
 
-Follow below command to port forward to access Influx DB
+Follow below command to port forward for the script to access Influx DB (as no NodePort is exposed for InfluxDb)
 
 .. code:: bash
 
         kubectl port-forward svc/my-release-influxdb 8086:8086
 
-To insert data:
+Execute the following script to onboard test-data to local influxDb:
 
 .. code:: bash
 
@@ -240,7 +286,20 @@ To check inserted data in Influx DB , execute below command inside the Influx DB
 
 .. code:: bash
 
-        influx query  'from(bucket: "UEData") |> range(start: -1000d)' -o primary -t <token>
+        # Token is referred to the acess-token collected in previous step:
+        kubectl exec -it <influxdb-pod-name> -- influx query  'from(bucket: "UEData") |> range(start: -1000d)' -o primary -t <token>
+
+
+        Result: _result
+        Table: keys: [_start, _stop, _field, _measurement]
+                        _start:time                      _stop:time           _field:string     _measurement:string                      _time:time                  _value:int
+        ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------------  --------------------------
+        2022-05-18T12:52:18.008858111Z  2025-02-11T12:52:18.008858111Z              availPrbDl                liveCell  2025-01-23T17:01:22.563381000Z                          45
+        2022-05-18T12:52:18.008858111Z  2025-02-11T12:52:18.008858111Z              availPrbDl                liveCell  2025-01-23T17:01:22.573381000Z                          91
+        2022-05-18T12:52:18.008858111Z  2025-02-11T12:52:18.008858111Z              availPrbDl                liveCell  2025-01-23T17:01:22.583381000Z                         273
+        2022-05-18T12:52:18.008858111Z  2025-02-11T12:52:18.008858111Z              availPrbDl                liveCell  2025-01-23T17:01:22.593381000Z                          53
+
+
 
 
 
