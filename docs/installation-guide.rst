@@ -70,7 +70,7 @@ Software Installation and Deployment
 
 .. code:: bash
 
-        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
+        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is k-release
         cd aimlfw-dep
 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
