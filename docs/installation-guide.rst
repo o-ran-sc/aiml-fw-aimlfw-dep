@@ -74,6 +74,7 @@ Software Installation and Deployment
         cd aimlfw-dep
 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
+Ensure image version is correct.
 
 **Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
 
@@ -92,6 +93,8 @@ Check running state of all pods and services using below command
 
 
 Check the AIMLFW dashboard by using the following url
+Note: In K Release, dashboard is not supported. We recomment to use cURL to interact with AIMLFW components. 
+Details are provided in further section for each operation required for model training.
 
 .. code:: bash
 
