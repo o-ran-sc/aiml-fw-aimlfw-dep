@@ -445,9 +445,28 @@ Training and retraining pipelines in AIMLFW (AI/ML Framework for O-RAN SC) are s
 1. Onboard Pre-Existing Pipeline
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+AIMLFW does not come preloaded with the `qoe-pipeline` (responsible for model training) and `qoe-pipeline-retrain-2` (responsible for model retraining). These pipelines need to be manually onboarded before they can be used in AIMLFW workflows.
 
-2. Onboard Custom Pipeline
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Steps to Onboard Pre-existing Pipelines:**
+
+1. Access the Jupyter Dashboard
+Open a web browser and navigate to: `http://<VM-Ip of AIMLFW>:32088/tree?`
+
+2. Load the Required Notebook
+Locate the notebook corresponding to each pipeline:
+qoe-pipeline for training
+qoe-pipeline-retrain-2 for retraining
+
+3. Execute the Notebook Cells
+Open the respective notebook.
+Run all the cells in the notebook sequentially.
+
+This process registers the pipeline in Kubeflow so it can be used by AIMLFW.
+Once these steps are completed, the pipelines will be available for use within AIMLFW training operations.
+
+
+2. Onboard Custom Pipeline (Optional)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | To use a training/retraining pipeline in AIMLFW, it needs to be onboarded into the system. This involves the following steps:
 | **a. Pipeline Definition**: A pipeline must be defined in code (e.g., Python) using Kubeflow Pipelines SDK. It includes all necessary ML steps, such as data ingestion, preprocessing, training, and model deployment.
@@ -486,9 +505,9 @@ One can refer `kubeflow documentation <https://www.kubeflow.org/docs/components/
 Training job creation with DME or Standalone InfluxDB as data source
 --------------------------------------------------------------------
 
-NOTE: The QoE training function does not come pre uploaded, we need to go to training function, create training function and run the qoe-pipeline notebook.
+Creating a training job in AIMLFW involves defining the training pipeline, specifying the necessary configurations, and submitting the job for execution. The user needs to provide essential parameters. Once submitted, the pipeline runs within Kubeflow, leveraging AIMLFW’s orchestration capabilities to manage the training workflow. The status and progress of the training job can be monitored through logs.
 
-The TrainingJob 
+You can create a TrainingJob using the following cURL command:
 
 .. code:: bash
 
@@ -496,7 +515,7 @@ The TrainingJob
               --header 'Content-Type: application/json' \
               --data '{
                         "modelId":{
-                            "modelname": "modeltest15",
+                            "modelname": "modeltest1",
                             "modelversion": "1"
                         },
                         "model_location": "",
@@ -508,10 +527,10 @@ The TrainingJob
                                 "arguments": "{'epochs': 1}"
                             },
                             "trainingPipeline": {
-                                    "training_pipeline_name": "qoe_Pipeline_testing_1", 
-                                    "training_pipeline_version": "qoe_Pipeline_testing_1", 
+                                    "training_pipeline_name": "qoe_Pipeline", 
+                                    "training_pipeline_version": "qoe_Pipeline", 
                                     "retraining_pipeline_name":"qoe_Pipeline_retrain",
-                                    "retraining_pipeline_version":"2"
+                                    "retraining_pipeline_version":"qoe_Pipeline_retrain"
                             }
                         },
                         "training_dataset": "",
@@ -521,6 +540,13 @@ The TrainingJob
                         "producer_rapp_id": ""
                     }'
 
+| Note:
+| 1. The modelName and modelVersion must be registered on MME before initiating the training request.
+| 2. For the initial training request, the trainingPipeline and trainingPipelineVersion will be used to train the model.
+| 3. Any subsequent training requests will be considered retraining, in which case retraining_pipeline_name and retraining_pipeline_version will be used to train the model.
+| 4. The training_pipeline_name/retraining_pipeline_name is a name which is used while onboarding the pipeline in the jupyter notbook.
+
+Following is the example used for Standalone-InfluxDb as a Data-Source:
 
 .. code:: bash
 
@@ -528,22 +554,22 @@ The TrainingJob
               --header 'Content-Type: application/json' \
               --data '{
                         "modelId":{
-                            "modelname": "modeltest15",
+                            "modelname": "modeltest1",
                             "modelversion": "1"
                         },
                         "model_location": "",
                         "training_config": {
                             "description": "trainingjob for testing",
                             "dataPipeline": {
-                                "feature_group_name": "testing_influxdb_01",
+                                "feature_group_name": <Name of FeatureGroup created >,
                                 "query_filter": "",
                                 "arguments": "{'epochs': 1}"
                             },
                             "trainingPipeline": {
-                                    "training_pipeline_name": "qoe_Pipeline_testing_1", 
-                                    "training_pipeline_version": "qoe_Pipeline_testing_1", 
+                                    "training_pipeline_name": "qoe_Pipeline", 
+                                    "training_pipeline_version": "qoe_Pipeline", 
                                     "retraining_pipeline_name":"qoe_Pipeline_retrain",
-                                    "retraining_pipeline_version":"2"
+                                    "retraining_pipeline_version":"qoe_Pipeline_retrain"
                             }
                         },
                         "training_dataset": "",
@@ -553,12 +579,14 @@ The TrainingJob
                         "producer_rapp_id": ""
                     }'
 
+
+
 ..  _reference7:
 
 Obtain the Status of Training Job
 ---------------------------------
 
-The Status of Trainingjob can be featched using the following API endpoint. Replace <TrainingjobId> with the ID of the training job.
+The Status of Trainingjob can be fetched using the following API endpoint. Replace <TrainingjobId> with the ID of the training job which is collected from response of the previous request.
 
 .. code:: bash
 
@@ -585,11 +613,14 @@ OR you can download the model using Model_name, Model_version, Model_artifact_ve
 
 Model-Retraining
 ----------------------------------------
+
+Retraining is the process of updating an existing model by incorporating new data or refining its parameters to improve performance. In AIMLFW, retraining jobs follow a structured pipeline similar to training but leverage previously trained models as a starting point. Users need to specify the retraining pipeline
+
 A previously trained model can be retrained with different configurations/data as follows:
 
 .. code:: bash
 
-        curl --location 'localhost:32002/ai-ml-model-training/v1/training-jobs' \
+        curl --location '<AIMLFW-Ip>:32002/ai-ml-model-training/v1/training-jobs' \
         --header 'Content-Type: application/json' \
         --data '{
                 "modelId": {
@@ -620,7 +651,7 @@ Verify Updated Artifact-Version after retraining from MME
 
 .. code:: bash
 
-        curl --location 'localhost:32006/ai-ml-model-discovery/v1/models/?model-name=<MODEL_NAME>&model-version=<MODEL_VERSION>'
+        curl --location '<AIMLFW-Ip>:32006/ai-ml-model-discovery/v1/models/?model-name=<MODEL_NAME>&model-version=<MODEL_VERSION>'
 
 
 | Note: 
@@ -654,6 +685,9 @@ Below state diagram captures the flow for model state for training/training.
 
 Model-Deployment
 ----------------------------------------
+
+1. Using Kserve
+^^^^^^^^^^^^^^^^^
 
 1. Installing Kserve
 
@@ -766,8 +800,8 @@ In order to test our deployed-model, we will query the InferenceService from a c
 For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/website/0.8/get_started/first_isvc/#1-create-a-namespace>`__ 
 
 
-Install both Kserve and Kserve adapter for deploying models
------------------------------------------------------------
+2. Install both Kserve and Kserve adapter for deploying models (Optional/Not validated in k-release)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To install Kserve run the below commands
 Please note to update the DMS IP in example_recipe_latest_stable.yaml before installation 
@@ -777,8 +811,7 @@ Please note to update the DMS IP in example_recipe_latest_stable.yaml before ins
         ./bin/install_kserve_inference.sh
 
 
-Uninstall both Kserve and Kserve adapter for deploying models
--------------------------------------------------------------
+**Uninstall both Kserve and Kserve adapter for deploying models**
 
 To uninstall Kserve run the below commands
 
@@ -790,8 +823,7 @@ To uninstall Kserve run the below commands
 
 ..  _reference6:
 
-Steps to deploy model using Kserve adapter
-------------------------------------------
+**Steps to deploy model using Kserve adapter**
 
 Prerequisites
 

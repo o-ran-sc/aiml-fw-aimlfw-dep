@@ -198,7 +198,7 @@ Pushing PM Reports
 
 .. code-block:: bash
 
-        curl --location --request PUT 'http://localhost:31823/data-consumer/v1/info-jobs/job1' \
+        curl --location --request PUT 'http://<RANPM-Ip>:31823/data-consumer/v1/info-jobs/job1' \
         --header 'Content-Type: application/json' \
         --data '{
                 "info_type_id": "PmData",
@@ -236,7 +236,7 @@ Confirm ICS Job-creation
 
 .. code-block:: bash
 
-        curl --location 'http://localhost:31823/data-consumer/v1/info-jobs/job1' | jq .
+        curl --location 'http://<RANPM-Ip>:31823/data-consumer/v1/info-jobs/job1' | jq .
 
 2. Clone and run script to Push data
 
@@ -282,7 +282,7 @@ Example for executing above script
 
 .. code:: bash
 
-        curl --location --request DELETE 'http://localhost:31823/data-consumer/v1/info-jobs/job1'
+        curl --location --request DELETE 'http://<RANPM-Ip>:31823/data-consumer/v1/info-jobs/job1'
 
 Uninstalling RANPM
 ------------------
@@ -350,7 +350,7 @@ Using Non-RT RIC DME as data source for AIMLFW
         .. code-block:: bash
                 
                 # Confirm ICS job creation
-                curl --location 'http://localhost:31823/data-consumer/v1/info-jobs/<FEATURE_GROUP_NAME>' | jq .
+                curl --location 'http://<RANPM-Ip>:31823/data-consumer/v1/info-jobs/<FEATURE_GROUP_NAME>' | jq .
 
 
 3. Simulate RAN-Traffic to RANPM by Pushing PM-reports
