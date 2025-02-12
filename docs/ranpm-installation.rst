@@ -254,7 +254,8 @@ Execute below script to push qoe data into ranpm setup
 
 
 The Following script downloads `cells.csv <https://raw.githubusercontent.com/o-ran-sc/ric-app-qp/g-release/src/cells.csv>`__ , filters the data based on ``Cell Identity``,
-For each PM report, the script convert the PM-report to XML documents, uploads it to one of 'pm-https-server', and sends a File-Ready event on Kafka-topic signifying that the PM report is ready to be processed by RANPM
+For each PM report, the script convert the PM-report to XML documents, uploads it to one of 'pm-https-server', and sends a File-Ready event on Kafka-topic signifying that the PM report is ready to be processed by RANPM.
+Once the file is processed, the PM reports is stored under bucket_name `pm-logg-bucket` and measurement `test,ManagedElement=nodedntest,GNBDUFunction=1004,NRCellDU=<Cell Identity>` which will be reffered while creating featureGroup in further-steps.
 
 Example for executing above script
 
