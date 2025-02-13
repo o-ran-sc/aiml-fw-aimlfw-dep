@@ -524,7 +524,7 @@ You can create a TrainingJob using the following cURL command:
                             "dataPipeline": {
                                 "feature_group_name": <Name of FeatureGroup created >,
                                 "query_filter": "<This query-filter will be used to filter/transform your features>",
-                                "arguments": "{'epochs': 1}"
+                                "arguments": {"epochs": 1}
                             },
                             "trainingPipeline": {
                                     "training_pipeline_name": "qoe_Pipeline", 
@@ -563,7 +563,7 @@ Following is the example used for Standalone-InfluxDb as a Data-Source:
                             "dataPipeline": {
                                 "feature_group_name": <Name of FeatureGroup created >,
                                 "query_filter": "",
-                                "arguments": "{'epochs': 1}"
+                                "arguments": {"epochs": 1}
                             },
                             "trainingPipeline": {
                                     "training_pipeline_name": "qoe_Pipeline", 
