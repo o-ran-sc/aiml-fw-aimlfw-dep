@@ -48,6 +48,30 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2627c2_8ebf8966",
+        "filename": "samples/qoe/qoe_pipeline_k_release.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-02-19T08:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03e90b60_136a6ad1",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 10
+      },
+      "revId": "f8d730296e6ab06a4c1134d222527b38721ca7fc",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a6abe71_57f7b093",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "added.",
       "parentUuid": "1a6abe71_57f7b093",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 10
+      },
+      "revId": "f8d730296e6ab06a4c1134d222527b38721ca7fc",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4233aea4_8c7a43ee",
+        "filename": "samples/qoe/qoe_pipeline_retraining_k_release.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-02-19T08:07:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f500e0_c577bb5f",
       "range": {
         "startLine": 1,
         "startChar": 0,
