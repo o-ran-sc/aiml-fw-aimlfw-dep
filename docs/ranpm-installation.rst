@@ -26,7 +26,19 @@ Setting Up Kubernetes Environment
 ------------------------------------
 .. <DESCRIBE THE INTIAL KUBERNETES ENVIRONMENT FOR THE INSTALLATION OF RANPM>
 
-1. Deploy kubernetes cluster v1.24
+1. Install Kind 
+
+.. code-block:: bash
+    # For AMD64 / x86_64
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-amd64
+    # For ARM64
+    [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-arm64
+    chmod +x ./kind
+    sudo mv ./kind /usr/local/bin/kind
+
+2. Install Docker 
+
+3. Deploy kubernetes cluster v1.24
 
 .. code-block:: bash
         
@@ -52,7 +64,7 @@ Setting Up Kubernetes Environment
         sudo cp -r  /root/.kube $HOME/
         sudo chown -R $USER $HOME/.kube
 
-2. Deploy Istio v1.23.2
+4. Deploy Istio v1.23.2
 
 .. code-block:: bash
         
@@ -61,7 +73,7 @@ Setting Up Kubernetes Environment
         export PATH=$PWD/bin:$PATH
         istioctl install
 
-3. Build & Load Local Images
+5. Build & Load Local Images
 
 .. code-block:: bash
 
@@ -188,8 +200,12 @@ Update 'quorumListenOnAllIPs: true' at Zookeeper config & then Reinstall
         topicOperator: {}
         userOperator: {}
 
+2. If the pm-https-server and pm-rapp gives error like 'Failed to pull image "/pm-https-server:latest"'
 
+    a. change the image name from the statefulset for pm-https-server to "pm-https-server:latest" and then delete the pod. 
+    b. change the image name from the pod for pm-rapp to "pm-rapp:latest".
 
+    
 Pushing PM Reports
 ------------------
 .. <DESCRIBE THE SCRIPT TO PUSH PM REPORTS TO RANPM>
