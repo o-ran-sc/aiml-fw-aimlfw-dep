@@ -16,6 +16,23 @@
       "message": "soft-link looks good",
       "revId": "6835aaffde11036b5638b4131b2efe61d4cbaab7",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c6d48a_43ddbbfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002600
+      },
+      "writtenOn": "2025-06-25T14:52:39Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "6835aaffde11036b5638b4131b2efe61d4cbaab7",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
