@@ -36,16 +36,42 @@ Version history
 | 2025-01-09         | 1.3.0              | Subhash Kumar Singh| K release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
+| 2025-07-03         | 4.0.0              | Swaraj Kumar       | L release             |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
 
 
 Summary
 =======
 
-The I release of AIMLFW provides required installation scripts for deployment of I release version of AIMLFW
+The L release of AIMLFW provides required generic and composable pipeline framework, breaking down the QoE pipeline use case.
 
 
 Release Data
 ============
+
+L Release
+---------
+
+
++--------------------------------------+--------------------------------------------+
+| **Project**                          | AIMLFW Installation and Deployment         |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                         |
+|                                      | /b6835aaffde11036b5638b4131b2efe61d4cbaab7 |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Release designation**              | L release                                  |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Release date**                     | 2025-07-03                                 |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Purpose of the delivery**          | generic and composable pipeline framework  |
+|                                      | breaking down the QoE pipeline use case    |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
 
 K Release
 ---------
