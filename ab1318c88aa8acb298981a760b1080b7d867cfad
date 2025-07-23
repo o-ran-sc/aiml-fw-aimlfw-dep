@@ -18,6 +18,41 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a5f46e_63f44250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002767
+      },
+      "writtenOn": "2025-07-23T07:35:24Z",
+      "side": 1,
+      "message": "Hi Subhash,\nI agree with your approach. I have updated the code according to your suggestion. Should I proceed with uploading this revised version to Gerrit?",
+      "parentUuid": "bf4e6217_fb4c10d6",
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ab461c_aa926dde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002767
+      },
+      "writtenOn": "2025-07-23T07:35:24Z",
+      "side": 1,
+      "message": "Hi Subhash,\nI agree with your approach. I have updated the code according to your suggestion. Should I proceed with uploading this revised version to Gerrit?",
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf7f2743_c723c659",
@@ -31,6 +66,30 @@
       "writtenOn": "2025-07-23T06:34:03Z",
       "side": 1,
       "message": "first line should be the license header",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35719509_30d52d78",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002767
+      },
+      "writtenOn": "2025-07-23T07:35:24Z",
+      "side": 1,
+      "message": "Okay, thank you for your guidance.",
+      "parentUuid": "cf7f2743_c723c659",
       "range": {
         "startLine": 1,
         "startChar": 0,
