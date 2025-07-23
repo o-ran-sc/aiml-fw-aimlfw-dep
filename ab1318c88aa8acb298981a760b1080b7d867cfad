@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4e6217_fb4c10d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-07-23T06:34:03Z",
+      "side": 1,
+      "message": "In My opinion, we should reference `setup_k8s.sh` \n\n```\ncurl https://raw.githubusercontent.com/o-ran-sc/it-dep/refs/heads/master/tools/setup_k8s/setup_k8s.sh -o setup_k8s.sh \n```\n\nI see the benefit that we need not to maintain the code, and we would be able to maintain a common version of k8s similar to other projects.\n\nLet me know your thoughts.",
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7f2743_c723c659",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-07-23T06:34:03Z",
+      "side": 1,
+      "message": "first line should be the license header",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
