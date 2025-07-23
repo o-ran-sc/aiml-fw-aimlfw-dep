@@ -1,110 +1,299 @@
-# ==================================================================================
-#
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#          http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-#
-# ==================================================================================
-echo "Step 1: Disabling swap memory..."
-sudo swapoff -a
-sudo sed -i '/swap/s/^/#/' /etc/fstab
+#!/bin/bash
 
-echo "Step 2: Enabling IPv4 packet forwarding and loading kernel modules..."
-echo -e "overlay\nbr_netfilter" | sudo tee /etc/modules-load.d/k8s.conf > /dev/null
-sudo modprobe overlay
-sudo modprobe br_netfilter
+# Capture start time
+start_time=$(date +%s)
 
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf > /dev/null
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
-EOF
+workspace=$(pwd)
 
-sudo sysctl --system
+# Define default values - Updated to Kubernetes 1.33.2
+DEFAULT_KUBEVERSION="1.33.2-1.1"
+DEFAULT_HELMVERSION="3.14.2"
+DEFAULT_POD_CIDR="10.244.0.0/16"
 
-echo "Step 3: Installing Containerd..."
-sudo apt update
-sudo apt install -y containerd
-sudo mkdir -p /etc/containerd
-containerd config default | sudo tee /etc/containerd/config.toml > /dev/null
-sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
-sudo systemctl restart containerd
+# Parse command-line arguments
+IP_ADDR=""
+KUBEVERSION="$DEFAULT_KUBEVERSION"
+HELMVERSION="$DEFAULT_HELMVERSION"
+POD_CIDR="$DEFAULT_POD_CIDR"
 
-echo "Step 4: Installing Kubernetes packages..."
-sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb /' | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
-sudo apt update && sudo apt install -y kubeadm=1.28.0-1.1 kubelet=1.28.0-1.1 kubectl=1.28.0-1.1
-sudo apt-mark hold kubelet kubeadm kubectl
-
-echo "Step 5: Initializing Kubernetes..."
-sudo kubeadm init
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-echo "Removing taints from control-plane nodes..."
-for node in $(kubectl get nodes --no-headers | awk '{print $1}')
-do
-  echo "Removing taint from $node..."
-  kubectl taint nodes $node node-role.kubernetes.io/control-plane- --ignore-not-found=true
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+      --ip-address)
+          IP_ADDR="$2"
+          shift 2
+          ;;
+      --kube-version)
+          KUBEVERSION="$2"
+          shift 2
+          ;;
+      --helm-version)
+          HELMVERSION="$2"
+          shift 2
+          ;;
+      --pod-cidr)
+          POD_CIDR="$2"
+          shift 2
+          ;;    
+      *)
+          echo "Unknown parameter: $1"
+          exit 1
+          ;;
+    esac
 done
 
-echo "Downloading and applying Calico..."
-curl -fsSL https://projectcalico.docs.tigera.io/manifests/calico.yaml -o calico.yaml
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
 
-echo "Modifying Calico configuration..."
-sudo sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
+# Function to check internet connectivity
+check_internet() {
+  echo "Checking internet connection..."
+  if ping -q -c 1 -W 1 google.com >/dev/null 2>&1; then
+    echo "Internet connection is active."
+  else
+    echo "Error: No internet connection. Please ensure your system has access to the internet."
+    exit 1
+  fi
+}
 
-echo "Applying modified Calico configuration..."
-kubectl apply -f calico.yaml
+# Function to check if curl is installed and install if not
+check_and_install_curl() {
+  echo "Checking if curl is installed..."
+  if ! command_exists curl; then
+    echo "curl is not installed. Installing now..."
+    apt update
+    apt install -y curl
+    if command_exists curl; then
+      echo "curl has been successfully installed."
+    else
+      echo "Error: Failed to install curl. Please check your internet connection and try again."
+      exit 1
+    fi
+  else
+    echo "curl is already installed."
+  fi
+}
 
-echo "Installation completed for kubernetes!"
+# Function to check for existing Kubernetes cluster and prompt for removal
+check_existing_cluster() {
+  read -p "This will attempt to remove any existing cluster. Do you want to proceed? (y/N): " remove_cluster
+  if [[ "$remove_cluster" != "y" && "$remove_cluster" != "Y" ]]; then
+    echo "Kubernetes cluster removal skipped by user. Exiting script."
+    exit 0
+  fi
 
-# install nerdctl
-NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
+  echo "Attempting to remove existing Kubernetes components..."
 
-archType="amd64"
-if test "$(uname -m)" = "aarch64"
-then
-            archType="arm64"
-fi
+  # Attempt kubeadm reset if kubeadm is found
+  if command_exists kubeadm; then
+    echo "Running 'kubeadm reset'..."
+    if ! kubeadm reset -f; then
+      echo "Warning: 'kubeadm reset' failed or encountered issues. Proceeding with other cleanup steps."
+    fi
+  else
+    echo "Info: 'kubeadm' command not found. Skipping 'kubeadm reset'."
+  fi
 
-wget -q "https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${archType}.tar.gz" -O /tmp/nerdctl.tar.gz
-sudo tar Cxzvvf /usr/bin /tmp/nerdctl.tar.gz
+  # Attempt to purge Kubernetes packages
+  echo "Purging Kubernetes packages..."
+  if ! apt-get -y purge kubeadm kubectl kubelet kubernetes-cni kube* containerd; then
+    echo "Warning: Failed to purge all Kubernetes packages. This might be due to them not being fully installed or other issues."
+  fi
 
-echo "Installation completed for nerdctl!"
+  # Attempt autoremove for leftover dependencies
+  echo "Running 'apt-get autoremove'..."
+  if ! apt-get -y autoremove; then
+    echo "Warning: 'apt-get autoremove' failed or encountered issues."
+  fi
 
-# install buildkit
-BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
+  # Remove kubeconfig and other user-specific Kubernetes files
+  if [ -d "$HOME/.kube" ]; then
+    echo "Removing user's .kube directory..."
+    if ! rm -rf "$HOME/.kube"; then
+      echo "Warning: Failed to remove '$HOME/.kube' directory."
+    fi
+  else
+    echo "Info: '$HOME/.kube' directory not found. Skipping removal."
+  fi
 
-archType="amd64"
-if test "$(uname -m)" = "aarch64"
-then
-            archType="arm64"
-fi
-echo "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz"
-wget -q "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz" -O /tmp/buildkit.tar.gz
-tar Cxzvvf /tmp /tmp/buildkit.tar.gz
-sudo mv /tmp/bin/buildctl /usr/bin/
+  echo "Existing cluster cleanup attempt completed."
+}
 
-# run buildkit instance
-sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
+# Function to disable swap
+disable_swap() {
+  echo "Disabling swap..."
+  swapon --show > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    swapoff -a
+    rm /swapfile
+    sed -i 's/\/swap.img/#\/swap.img/' /etc/fstab
+  else
+    echo "No swap is currently enabled."
+  fi
+}
 
-# install kustomize
-KUSTOMIZE_VERSION=5.4.2
-curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
-tar -xvzf "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
-sudo mv kustomize /usr/local/bin/ 
-rm "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
-echo "Kustomize installed successfully." 
+# Function to check Ubuntu version
+check_ubuntu_version() {
+  os_version=$(lsb_release -rs)
+  if [ "$os_version" != "22.04" ] && [ "$os_version" != "24.04" ]; then
+    echo "Error: Unsupported Ubuntu version. This script supports 22.04 and 24.04 only."
+    exit 1
+  fi
+}
+
+# Function to handle errors
+handle_error() {
+  echo "Error occurred at step $1. Exiting..."
+  exit 1
+}
+
+# Function to check if namespace exists
+check_namespace_not_exists() {
+    local namespace="$1"
+    if kubectl get namespace "$namespace" &> /dev/null; then
+        echo "Namespace '$namespace' exists. Skipping steps..."
+        return 0  # Namespace exists
+    else
+        echo "Namespace '$namespace' does not exist."
+        return 1  # Namespace does not exist
+    fi
+}
+
+
+# Check Ubuntu version
+echo "Checking Ubuntu version..."
+check_ubuntu_version
+
+# Check internet connection
+check_internet
+
+# Check and install curl if not present
+check_and_install_curl
+
+# Check for existing Kubernetes cluster and prompt for removal
+check_existing_cluster
+
+# Disable swap
+disable_swap
+
+# Script for Installing Docker,Kubernetes and Helm
+
+wait_for_pods_running () {
+  NS="$2"
+  CMD="kubectl get pods --all-namespaces "
+  if [ "$NS" != "all-namespaces" ]; then
+    CMD="kubectl get pods -n $2 "
+  fi
+  KEYWORD="Running"
+  if [ "$#" == "3" ]; then
+    KEYWORD="${3}.*Running"
+  fi
+
+  CMD2="$CMD | grep \"$KEYWORD\" | wc -l"
+  NUMPODS=$(eval "$CMD2")
+  echo "waiting for $NUMPODS/$1 pods running in namespace [$NS] with keyword [$KEYWORD]"
+  while [  $NUMPODS -lt $1 ]; do
+    sleep 5
+    NUMPODS=$(eval "$CMD2")
+    echo "> waiting for $NUMPODS/$1 pods running in namespace [$NS] with keyword [$KEYWORD]"
+  done
+}
+
+# Step x: Edit /etc/sysctl.conf to add fs.inotify.max_user_watches and fs.inotify.max_user_instances. This shoudl be done before containerd installation
+echo "==========================================================="
+echo " Preping the ENV:  Editing /etc/sysctl.conf..."
+echo "==========================================================="
+
+bash -c 'echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf'
+bash -c 'echo "fs.inotify.max_user_instances=512" >> /etc/sysctl.conf'
+bash -c 'echo "fs.inotify.max_queued_events=16384" >> /etc/sysctl.conf'
+bash -c 'echo "vm.max_map_count=262144" >> /etc/sysctl.conf'
+
+# Apply sysctl params without reboot
+sysctl --system
+
+# Installing containerd
+modprobe overlay
+modprobe br_netfilter
+
+cat <<EOF | tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
+# sysctl params required by setup, params persist across reboots
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward = 1
+EOF
+
+# Apply sysctl params without reboot
+sysctl --system
+
+#V erify that net.ipv4.ip_forward is set to 1 with:
+sysctl net.ipv4.ip_forward
+
+echo "****************************************************************************************************************"
+echo "						Installing Containerd							"
+echo "****************************************************************************************************************"
+
+sysctl --system
+apt-get update 
+apt-get install -y containerd
+mkdir -p /etc/containerd
+containerd config default | tee /etc/containerd/config.toml
+sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+systemctl restart containerd
+
+# Helm Installation
+echo "****************************************************************************************************************"
+echo "						Installing Helm							"
+echo "****************************************************************************************************************"
+wget https://get.helm.sh/helm-v${HELMVERSION}-linux-amd64.tar.gz
+tar -xvf helm-v${HELMVERSION}-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+helm version
+rm  helm-v${HELMVERSION}-linux-amd64.tar.gz
+
+
+# Installing Kubernetes Packages - Updated for 1.33.2
+echo "***************************************************************************************************************"
+echo "						Installing Kubernetes						"
+echo "***************************************************************************************************************"
+
+rm -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+mkdir -p /etc/apt/keyrings
+
+# Updated: Install gpg package for Kubernetes 1.33.2 compatibility
+apt-get update && apt-get install -y apt-transport-https ca-certificates curl gpg
+
+# Updated: Use v1.33 repository for Kubernetes 1.33.2
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+apt update
+
+apt-cache policy kubelet | grep 'Installed: (none)' -A 1000 | grep 'Candidate:' | awk '{print $2}'
+
+# Installing Kubectl, Kubeadm and kubelet with version 1.33.2
+apt install -y kubeadm=${KUBEVERSION} kubelet=${KUBEVERSION} kubectl=${KUBEVERSION}
+apt-mark hold kubelet kubeadm kubectl
+
+kubeadm init --apiserver-advertise-address=${IP_ADDR} --pod-network-cidr=${POD_CIDR} --v=5
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+kubectl taint nodes --all node.kubernetes.io/not-ready-
+
+kubectl get pods -A
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.1/manifests/calico.yaml
+
+wait_for_pods_running 7 kube-system
+
+echo "***************************************************************************************************************"
+
+kubectl get pods -A
+
+echo "***************************************************************************************************************"
