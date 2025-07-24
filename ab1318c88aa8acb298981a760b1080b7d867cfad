@@ -71,6 +71,23 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f994af_4cbb2af6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-07-24T00:55:30Z",
+      "side": 1,
+      "message": "It would be better to go step by step because aimlfw\u0027s dep differs to it\u0027s dep, such as nardctl, buildkit and others.",
+      "revId": "ab1318c88aa8acb298981a760b1080b7d867cfad",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf7f2743_c723c659",
