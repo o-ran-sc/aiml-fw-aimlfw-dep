@@ -17,7 +17,7 @@
 # ==================================================================================
 
 protobuf==3.20.1
-tensorflow==2.5.0
+tensorflow==2.8.0 #Upadated TensorFlow Version CVE-2021-41208, WeaknessCWE-476,CWE-824, Vulnerability
 cassandra-driver==3.25.0
 pandas==1.4.4
 scikit-learn
