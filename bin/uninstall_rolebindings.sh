@@ -19,5 +19,5 @@
 # For removing secrets in Kubeflow-Pipeline and SDK
 
 kubectl delete rolebinding traininghost_default_secret_rb -n kubeflow
-kubectl delete  rolebinding secret_pipline_runner_rb -n traininghost
+kubectl delete rolebinding secret_pipeline_runner_rb -n traininghost
 kubectl delete clusterrole secret_reader
