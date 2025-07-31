@@ -26,11 +26,11 @@ git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aihp/ips/kserve-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/modelmgmtservice"
 
 sudo buildctl --addr=nerdctl-container://buildkitd build \
-	--frontend dockerfile.v0 \
-	--opt filename=Dockerfile \
-	--local dockerfile=tm \
-	--local context=tm \
-	--output type=oci,name=tm:latest | sudo nerdctl load --namespace k8s.io
+    --frontend dockerfile.v0 \
+    --opt filename=Dockerfile \
+    --local dockerfile=tm \
+    --local context=tm \
+    --output type=oci,name=tm:latest | sudo nerdctl load --namespace k8s.io
 
 sudo buildctl --addr=nerdctl-container://buildkitd build \
     --frontend dockerfile.v0 \
