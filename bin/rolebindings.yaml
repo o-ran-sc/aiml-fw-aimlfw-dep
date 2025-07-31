@@ -18,6 +18,39 @@
 
 # For reading secrets in Kubeflow-Pipeline and SDK
 
-kubectl create clusterrole secret_reader --verb get,list --resource secret
-kubectl create  rolebinding secret_pipline_runner_rb -n traininghost --serviceaccount kubeflow:pipeline-runner --clusterrole  secret_reader
-kubectl create rolebinding traininghost_default_secret_rb -n kubeflow --serviceaccount traininghost:default --clusterrole secret_reader
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: secret_reader
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret_pipeline_runner_rb
+  namespace: traininghost
+subjects:
+- kind: ServiceAccount
+  name: pipeline-runner
+  namespace: kubeflow
+roleRef:
+  kind: ClusterRole
+  name: secret_reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: traininghost_default_secret_rb
+  namespace: kubeflow
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: traininghost
+roleRef:
+  kind: ClusterRole
+  name: secret_reader
+  apiGroup: rbac.authorization.k8s.io
