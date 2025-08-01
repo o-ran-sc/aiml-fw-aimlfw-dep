@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad671ef2_b096b274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002764
+      },
+      "writtenOn": "2025-08-01T08:14:54Z",
+      "side": 1,
+      "message": "Thank you for your suggestion!\n\nAre you suggesting to convert install_rolebindings.sh and uninstall_rolebindings.sh into rolebindings.yaml and then fix install_traininghost.sh line33(bin/install_rolebindings.sh) into kubectl apply rolebinding.yaml? (kubectl delete rolebindings.yaml for uninstall_traininghost.sh)\n\nLet me know if I\u0027m understanding correctly",
+      "revId": "f3210f6bb0589b96e41dcfaa013a3f7793ad1b72",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ac0436a_12928046",
         "filename": "bin/install_rolebindings.sh",
         "patchSetId": 1
