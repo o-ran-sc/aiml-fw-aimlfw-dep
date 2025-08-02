@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ec720b_27db4cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-02T14:06:27Z",
+      "side": 1,
+      "message": "Thanks for the contribution. However, it looks like this CL duplicates the functionality introduced in CL, https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14778.",
+      "revId": "c89754625ee3690f77bf283903c9d214cc5a0da3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
