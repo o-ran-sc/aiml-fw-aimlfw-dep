@@ -28,6 +28,23 @@ else
         echo "Found servecm in the helm plugin list. Skip servecm installation."
 fi
 
+#!/bin/bash
+#set -e
+
+
+# add some Check architecture
+ARCH=$(uname -m)
+if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+    echo "[ERROR] Detected architecture: $ARCH"
+    echo "[ERROR] This script is configured to download x86 (linux-386) chartmuseum binaries."
+    echo "[ERROR] Please modify the script to download the appropriate ARM binary, such as:"
+    echo "        https://get.helm.sh/chartmuseum-v0.15.0-linux-arm64.tar.gz"
+    echo "        Then extract and copy the binary from linux-arm64/chartmuseum"
+    exit 1
+fi
+
+
+
 #The hardcoded location does not work anymore, Reference: change similar to RIC-966 updating chartmuseum and docker refs
 curl -LO https://get.helm.sh/chartmuseum-v0.15.0-linux-386.tar.gz
 tar xzvf chartmuseum-v0.15.0-linux-386.tar.gz
