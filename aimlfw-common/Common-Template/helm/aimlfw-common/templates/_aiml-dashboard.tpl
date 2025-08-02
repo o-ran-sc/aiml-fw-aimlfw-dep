@@ -82,3 +82,4 @@ Create the name of the service account to use
 {{- define "common.serviceport.aiml-dashboard.http" -}}32005{{- end -}}
 {{- define "common.serviceport.aiml-dashboard.react-app-tm-port" -}}32002{{- end -}}
 {{- define "common.serviceport.aiml-dashboard.react-app-notebook-port" -}}32088{{- end -}}
+{{- define "common.serviceport.aiml-dashboard.react-app-modelmgmtservice-port" -}}32006{{- end -}}
