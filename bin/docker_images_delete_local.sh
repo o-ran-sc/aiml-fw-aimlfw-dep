@@ -15,10 +15,20 @@
 #   limitations under the License.
 #
 # ==================================================================================
-sudo nerdctl --namespace k8s.io rmi tm:latest
-sudo nerdctl --namespace k8s.io rmi data-extraction:latest
-sudo nerdctl --namespace k8s.io rmi kfadapter:latest
-sudo nerdctl --namespace k8s.io rmi aiml-dashboard:latest
-sudo nerdctl --namespace k8s.io rmi aiml-notebook:latest
-sudo nerdctl --namespace k8s.io rmi kserve-adapter:1.0.1
-sudo nerdctl --namespace k8s.io rmi modelmgmtservice:latest 
+images=(
+    "tm:latest"
+    "data-extraction:latest"
+    "kfadapter:latest"
+    "aiml-dashboard:latest"
+    "aiml-notebook:latest"
+    "kserve-adapter:1.0.1"
+    "modelmgmtservice:latest"
+)
+
+for image in "${images[@]}"; do
+    if sudo nerdctl --namespace k8s.io rmi "$image"; then
+        echo "[INFO] Successfully removed image: $image"
+    else
+        echo "[ERROR] Failed to remove image: $image" >&2
+    fi
+done
