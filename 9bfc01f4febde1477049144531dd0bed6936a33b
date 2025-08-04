@@ -45,6 +45,30 @@
       },
       "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91cd7d4d_5ed90b05",
+        "filename": "bin/rolebindings.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002764
+      },
+      "writtenOn": "2025-08-04T08:38:00Z",
+      "side": 1,
+      "message": "I changed it to 2025 Kyunghee University, Mobile Communication Lab. Thank you!",
+      "parentUuid": "3e5b8983_be21f3e4",
+      "range": {
+        "startLine": 3,
+        "startChar": 27,
+        "endLine": 3,
+        "endChar": 77
+      },
+      "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
