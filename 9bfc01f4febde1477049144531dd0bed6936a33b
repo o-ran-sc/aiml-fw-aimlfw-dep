@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e5b8983_be21f3e4",
+        "filename": "bin/rolebindings.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-04T08:23:25Z",
+      "side": 1,
+      "message": "I think you you remove this as you are not associated with Samsung. May be you could add your associated entity name.",
+      "range": {
+        "startLine": 3,
+        "startChar": 27,
+        "endLine": 3,
+        "endChar": 77
+      },
+      "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b73fb7_b9821baf",
+        "filename": "bin/rolebindings.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-04T08:23:25Z",
+      "side": 1,
+      "message": "could you please make it 2025",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
