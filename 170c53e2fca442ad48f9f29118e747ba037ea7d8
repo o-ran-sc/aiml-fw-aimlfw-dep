@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94da14a_3f5e23d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-04T00:39:40Z",
+      "side": 1,
+      "message": "Please take a look at my comment and exclude the `calico.yaml` file since it\u0027s not related to this issue.",
+      "revId": "170c53e2fca442ad48f9f29118e747ba037ea7d8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a56a35f7_2816f4ae",
+        "filename": "bin/install_common_templates_to_helm.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-04T00:39:40Z",
+      "side": 1,
+      "message": "It looks good to check the architecture so that aimlfw is not installed on the unsupported architectures.\nWhat about moving this to the top of the `bin/install_traininghost.sh`?\nI think the error message can be simplified to just:\n`[ERROR] AIMLFW does not support the $ARCH architecture.`",
+      "revId": "170c53e2fca442ad48f9f29118e747ba037ea7d8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
