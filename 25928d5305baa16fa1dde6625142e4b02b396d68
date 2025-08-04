@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "558f4bb6_5f519618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-04T02:53:29Z",
+      "side": 1,
+      "message": "Thank you for the contribution.\nPlease exclude the `bin/docker_image_build_local.sh` file which is not related to this issue and keep script files executable.",
+      "revId": "25928d5305baa16fa1dde6625142e4b02b396d68",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
