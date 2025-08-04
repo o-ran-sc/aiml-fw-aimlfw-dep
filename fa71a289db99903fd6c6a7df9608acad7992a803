@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4059b3_11159f0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-04T00:44:52Z",
+      "side": 1,
+      "message": "Thank you for your contribution. This is necessary to add MME to the dashboard!",
+      "revId": "fa71a289db99903fd6c6a7df9608acad7992a803",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
