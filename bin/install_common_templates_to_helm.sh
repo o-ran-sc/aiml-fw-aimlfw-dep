@@ -22,17 +22,6 @@
 #!/bin/bash
 #set -e
 
-# Check architecture
-ARCH=$(uname -m)
-if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
-    echo "[ERROR] Detected architecture: $ARCH"
-    echo "[ERROR] This script is configured to download x86 (linux-386) chartmuseum binaries."
-    echo "[ERROR] Please modify the script to download the appropriate ARM binary, such as:"
-    echo "        https://get.helm.sh/chartmuseum-v0.15.0-linux-arm64.tar.gz"
-    echo "        Then extract and copy the binary from linux-arm64/chartmuseum"
-    exit 1
-fi
-
 if [ -z $(helm plugin list | grep servecm | awk '{print $1}') ];
 then
         echo "Installing servecm (Chart Manager) and common templates to helm3"
