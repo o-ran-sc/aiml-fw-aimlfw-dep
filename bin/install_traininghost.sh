@@ -16,6 +16,12 @@
 #
 # ==================================================================================
 
+# Architecture check (log only, do not exit)
+ARCH=$(uname -m)
+if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+    echo "[ERROR] AIMLFW does not support the $ARCH architecture."
+fi
+
 tools/kubernetes/install_k8s.sh
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 tools/nfs/configure_nfs_server.sh localhost
