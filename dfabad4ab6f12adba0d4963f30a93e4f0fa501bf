@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3459d51_01795a97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-05T05:08:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dfabad4ab6f12adba0d4963f30a93e4f0fa501bf",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c34aee_1f194d30",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-05T05:08:19Z",
+      "side": 1,
+      "message": "Please place this code under the license header.",
+      "revId": "dfabad4ab6f12adba0d4963f30a93e4f0fa501bf",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
