@@ -30,6 +30,6 @@ kubectl create namespace traininghost
 #copy of secrets to traininghost namespace to enable modelmanagement service to access leofs
 kubectl get secret leofs-secret --namespace=kubeflow -o yaml | sed -e 's/kubeflow/traininghost/g' | kubectl apply -f -
 
-bin/install_rolebindings.sh
+kubectl apply -f bin/rolebindings.yaml
 bin/install_databases.sh
 bin/install.sh -f RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
