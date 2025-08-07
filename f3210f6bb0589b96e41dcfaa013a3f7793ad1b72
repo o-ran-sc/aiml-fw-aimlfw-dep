@@ -89,6 +89,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afeca42_9e155cfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-07T12:51:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a421c11b_2d73f354",
+      "revId": "f3210f6bb0589b96e41dcfaa013a3f7793ad1b72",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ac0436a_12928046",
@@ -102,6 +120,30 @@
       "writtenOn": "2025-08-01T06:42:31Z",
       "side": 1,
       "message": "I think if we could convert these scripts into yaml, that will improve the readability as well.\n\nLet me know your opinion.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 139
+      },
+      "revId": "f3210f6bb0589b96e41dcfaa013a3f7793ad1b72",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e2169d_35441b6b",
+        "filename": "bin/install_rolebindings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-07T12:51:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ac0436a_12928046",
       "range": {
         "startLine": 22,
         "startChar": 0,

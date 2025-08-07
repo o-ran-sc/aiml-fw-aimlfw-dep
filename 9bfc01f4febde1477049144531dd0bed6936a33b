@@ -69,6 +69,54 @@
       },
       "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff21f60_51990577",
+        "filename": "bin/rolebindings.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-07T12:51:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "54b73fb7_b9821baf",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ded633_b8a64902",
+        "filename": "bin/rolebindings.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-07T12:51:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "91cd7d4d_5ed90b05",
+      "range": {
+        "startLine": 3,
+        "startChar": 27,
+        "endLine": 3,
+        "endChar": 77
+      },
+      "revId": "9bfc01f4febde1477049144531dd0bed6936a33b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
