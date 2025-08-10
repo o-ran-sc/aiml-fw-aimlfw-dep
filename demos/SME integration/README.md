@@ -18,7 +18,7 @@ Service Manager preload completed for config-nonrtric-2.yaml
 
 
 
-## Step 2: Registering a invoker:
+## Step 2: Registering an invoker:
 
 Can create invoker via postman or alternatively use curl command
 
