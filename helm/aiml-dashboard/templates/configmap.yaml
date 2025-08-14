@@ -24,6 +24,8 @@ data:
   # Configuration values can be set as key-value properties
   REACT_APP_TM_HOST: {{ .Values.aimldashboard.host.tm_host }}
   REACT_APP_TM_PORT: "{{ include "common.serviceport.aiml-dashboard.react-app-tm-port" .  }}"
+  REACT_APP_MME_HOST: {{ .Values.aimldashboard.host.mme_host }}
+  REACT_APP_MME_PORT: "{{ include "common.serviceport.aiml-dashboard.react-app-modelmgmtservice-port" . }}"
   REACT_APP_NOTEBOOK_HOST: {{ .Values.aimldashboard.host.notebook_host }}
   REACT_APP_NOTEBOOK_PORT:  "{{ include "common.serviceport.aiml-dashboard.react-app-notebook-port" .  }}"
   AIMLDASHBOARD_PORT: "{{ include "common.serviceport.aiml-dashboard.http" .  }}"  

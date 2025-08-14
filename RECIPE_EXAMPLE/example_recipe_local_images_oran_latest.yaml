@@ -67,6 +67,7 @@ aimldashboard:
     tag: "latest"
   host:
     tm_host: "localhost"
+    mme_host: "localhost"
     notebook_host: "localhost"
     debug: "\"false\""
 
