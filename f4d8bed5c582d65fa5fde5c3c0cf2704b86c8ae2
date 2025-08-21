@@ -54,6 +54,23 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6aa6cb6_b3dfefe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-08-21T09:01:25Z",
+      "side": 1,
+      "message": "Hi, @Juhee Shin. I have discussed with key committers in our team. Please take a look at my feedback on your last opinion. 🙏",
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4275de9_8d63c92f",
@@ -139,6 +156,30 @@
       "side": 1,
       "message": "I haven’t run the actual training pipeline after the version upgrade yet. As you mentioned, there might be compatibility issues with the kf-adapter. Do you think it would be better to remove this code for now?",
       "parentUuid": "078676ad_b80c572c",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c444e3c_d457b37e",
+        "filename": "tools/kubeflow/bin/install_kubeflow.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-08-21T09:01:25Z",
+      "side": 1,
+      "message": "Can you simply share any logs in running the training pipeline with this changeset in your local environment? We will take a look at it and guide you the next step.",
+      "parentUuid": "2ee0cb68_c927ec5c",
       "range": {
         "startLine": 26,
         "startChar": 13,
