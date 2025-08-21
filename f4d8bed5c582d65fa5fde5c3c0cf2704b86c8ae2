@@ -36,6 +36,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab58df11_3a526e83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-21T04:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88bbc405_46c30993",
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4275de9_8d63c92f",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "The upgrade of the Kubeflow Pipelines version to align with Kubernetes v1.32.3 has been validated in the actual environment, and the upgrade was made to improve compatibility with Kubernetes v1.32.3.",
       "parentUuid": "a4275de9_8d63c92f",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078676ad_b80c572c",
+        "filename": "tools/kubeflow/bin/install_kubeflow.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-08-21T04:51:41Z",
+      "side": 1,
+      "message": "Did you try to initiate the training, as KFP version change might be incompatible with `kf-adapter`.\n\nCould you please confirm.",
+      "parentUuid": "c96f1b13_09ef1310",
       "range": {
         "startLine": 26,
         "startChar": 13,
