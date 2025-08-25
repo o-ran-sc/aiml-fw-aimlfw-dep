@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92466105_9b902f08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-08-25T22:04:19Z",
+      "side": 1,
+      "message": "It looks great to extend our dev environment to WSL 👍\n@subh.singh@samsung.com Could you take a closer look at this CL?",
+      "revId": "d366b68d0fca9653b287bcdb06c1bf7b20255701",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
