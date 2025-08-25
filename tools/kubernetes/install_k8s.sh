@@ -15,6 +15,17 @@
 #   limitations under the License.
 #
 # ==================================================================================
+is_wsl() {
+  grep -qi microsoft /proc/version 2>/dev/null || [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]
+}
+
+echo "Step 0: Checking if running on WSL..."
+if is_wsl; then
+  echo "Running on WSL"
+else
+  echo "Not WSL"
+fi
+
 echo "Step 1: Disabling swap memory..."
 sudo swapoff -a
 sudo sed -i '/swap/s/^/#/' /etc/fstab
@@ -48,7 +59,11 @@ sudo apt update && sudo apt install -y kubeadm=1.28.0-1.1 kubelet=1.28.0-1.1 kub
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Step 5: Initializing Kubernetes..."
-sudo kubeadm init
+if is_wsl; then
+  sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+else
+  sudo kubeadm init
+fi
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -60,15 +75,19 @@ do
   kubectl taint nodes $node node-role.kubernetes.io/control-plane- --ignore-not-found=true
 done
 
-echo "Downloading and applying Calico..."
-curl -fsSL https://projectcalico.docs.tigera.io/manifests/calico.yaml -o calico.yaml
-
-echo "Modifying Calico configuration..."
-sudo sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
-
-echo "Applying modified Calico configuration..."
-kubectl apply -f calico.yaml
-
+echo "Step 6: Applying CNI plugin..."
+if is_wsl; then
+  echo "WSL environment — Flannel CNI"
+  curl -fSL "https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml" -o kube-flannel.yml
+  kubectl apply -f kube-flannel.yml
+else
+  echo "Non-WSL environment — Calico CNI"
+  curl -fSL https://projectcalico.docs.tigera.io/manifests/calico.yaml -o calico.yaml
+  if grep -q 'apiVersion: policy/v1beta1' calico.yaml; then
+    sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
+  fi
+  kubectl apply -f calico.yaml
+fi
 echo "Installation completed for kubernetes!"
 
 # install nerdctl
@@ -99,8 +118,11 @@ tar Cxzvvf /tmp /tmp/buildkit.tar.gz
 sudo mv /tmp/bin/buildctl /usr/bin/
 
 # run buildkit instance
-sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
-
+if is_wsl; then
+  sudo nerdctl run -d --name buildkitd --privileged --network host moby/buildkit:latest
+else
+  sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
+fi
 # install kustomize
 KUSTOMIZE_VERSION=5.4.2
 curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
