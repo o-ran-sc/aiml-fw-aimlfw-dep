@@ -188,6 +188,30 @@
       },
       "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52add9e4_aeaa38e1",
+        "filename": "tools/kubeflow/bin/install_kubeflow.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-01T09:24:32Z",
+      "side": 1,
+      "message": "@Juhee Shin please let me know if you need help to validate it by running training, I will be able to help.",
+      "parentUuid": "1c444e3c_d457b37e",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
