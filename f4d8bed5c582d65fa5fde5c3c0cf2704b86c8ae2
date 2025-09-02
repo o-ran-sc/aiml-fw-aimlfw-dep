@@ -212,6 +212,30 @@
       },
       "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d425e43e_e5ccd643",
+        "filename": "tools/kubeflow/bin/install_kubeflow.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002767
+      },
+      "writtenOn": "2025-09-02T02:13:34Z",
+      "side": 1,
+      "message": "I have run the process up to the model retraining step. Could you please check if there are any issues?\n\n\u003cTraining Job\u003e\nubuntu@aimlfw-k8s-upgrade:~/pipelines$ curl --location \u0027http://10.242.225.193:32002/ai-ml-model-training/v1/training-jobs\u0027 \\\n  --header \u0027Content-Type: application/json\u0027 \\\n  --data \u0027{\n            \"modelId\": {\n                \"modelname\": \"modeltest1\",\n                \"modelversion\": \"1\"\n            },\n            \"training_config\": {\n                \"description\": \"QoE training job after model upload\",\n                \"dataPipeline\": {\n                    \"feature_group_name\": \"testfg\",\n                    \"query_filter\": \"\",\n                    \"arguments\": {\"epochs\": 1}\n                },\n                \"trainingPipeline\": {\n                        \"training_pipeline_name\": \"qoe_pipeline_final.yaml\",\n                        \"training_pipeline_version\": \"qoe_pipeline_final.yaml\",\n                        \"retraining_pipeline_name\": \"qoe_pipeline_retrain.yaml\",\n                        \"retraining_pipeline_version\": \"qoe_pipeline_retrain.yaml\"\n                }\n            }\n        }\u0027\n\n{\n  \"consumer_rapp_id\": \"\",\n  \"id\": 1,\n  \"modelId\": {\n    \"artifactversion\": \"0.0.0\",\n    \"id\": 1,\n    \"modelname\": \"modeltest1\",\n    \"modelversion\": \"1\"\n  },\n  \"model_location\": \"s3://aimlfw-models/modeltest1/v1/model.zip\",\n  \"model_url\": \"\",\n  \"notification_url\": \"\",\n  \"producer_rapp_id\": \"\",\n  \"training_config\": {\n    \"dataPipeline\": {\n      \"arguments\": {\n        \"epochs\": 1\n      },\n      \"feature_group_name\": \"testfg\",\n      \"query_filter\": \"\"\n    },\n    \"description\": \"QoE training job after model upload\",\n    \"trainingPipeline\": {\n      \"training_pipeline_name\": \"qoe_pipeline_final.yaml\",\n      \"training_pipeline_version\": \"qoe_pipeline_final.yaml\",\n      \"retraining_pipeline_name\": \"qoe_pipeline_retrain.yaml\",\n      \"retraining_pipeline_version\": \"qoe_pipeline_retrain.yaml\"\n    }\n  },\n  \"training_dataset\": \"\",\n  \"validation_dataset\": \"\"\n}\n\n\n\n\u003cCheck Cassandra Feature Group\u003e\nubuntu@aimlfw-k8s-upgrade:~/pipelines$ kubectl exec -it -n traininghost cassandra-0 -- \\\n  cqlsh -u cassandra -p 90jQX4gvaZ -e \"USE featurestore; SELECT * FROM feature_group WHERE featuregroup_name \u003d \u0027testfg\u0027;\"\n\n featuregroup_name | auth_token | bucket         | created_at | datalake_source | host        | measurement | port | source_name\n-------------------+------------+----------------+------------+-----------------+-------------+-------------+------+------------\n testfg            | \u003ctoken\u003e    | aimlfw-models  | 2025-09-01 | influxdb        | 10.0.0.123  | qos_metrics | 8086 | collector1\n \n \n \n\u003cCheck Training Job Status\u003e\nubuntu@aimlfw-k8s-upgrade:~/pipelines$ curl --location \u0027http://10.242.225.193:32002/ai-ml-model-training/v1/training-jobs/1/status\u0027\n\n{\n  \"DATA_EXTRACTION\": \"FINISHED\",\n  \"DATA_EXTRACTION_AND_TRAINING\": \"RUNNING\",\n  \"TRAINED_MODEL\": \"NOT_STARTED\",\n  \"TRAINING\": \"RUNNING\",\n  \"TRAINING_AND_TRAINED_MODEL\": \"NOT_STARTED\"\n}\n\n{\n  \"DATA_EXTRACTION\": \"FINISHED\",\n  \"DATA_EXTRACTION_AND_TRAINING\": \"FINISHED\",\n  \"TRAINED_MODEL\": \"FINISHED\",\n  \"TRAINING\": \"FINISHED\",\n  \"TRAINING_AND_TRAINED_MODEL\": \"FINISHED\"\n}\n\n\n\n\n\u003cCheck Kubeflow Workflow Status\u003e\nubuntu@aimlfw-k8s-upgrade:~/pipelines$ kubectl get pods -n kubeflow | grep workflow\nml-pipeline-scheduledworkflow-58b5f859c-pvmfv      1/1     Running   3 (23d ago)    38d\nworkflow-controller-6bc9b6d744-8fpww               1/1     Running   63 (21d ago)   38d",
+      "parentUuid": "52add9e4_aeaa38e1",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "f4d8bed5c582d65fa5fde5c3c0cf2704b86c8ae2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
