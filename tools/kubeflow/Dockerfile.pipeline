@@ -22,10 +22,12 @@ RUN apt-get update && \
 COPY requirements_pipeline.txt .
 RUN pip3 install -r requirements_pipeline.txt
 
-RUN git clone -b g-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/feature-store" /SDK/featurestoresdk_main
-RUN git clone -b g-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/model-storage" /SDK/modelmetricssdk_main
+#TODO: Should be removed after the sdk is merged into main branch and points to pip pkg
+RUN git clone -b master "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/feature-store" /SDK/featurestoresdk_main
+RUN git clone -b master "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/model-storage" /SDK/modelmetricssdk_main
 
 RUN pip3 install /SDK/featurestoresdk_main/.
 RUN pip3 install /SDK/modelmetricssdk_main/.
+
 RUN mkdir -p /app_run
 WORKDIR /app_run

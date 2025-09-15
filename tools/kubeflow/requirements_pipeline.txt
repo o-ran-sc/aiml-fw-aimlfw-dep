@@ -18,9 +18,5 @@
 
 protobuf==3.20.1
 tensorflow==2.5.0
-cassandra-driver==3.25.0
-pandas==1.4.4
 scikit-learn
 kubernetes
-boto3
-botocore
