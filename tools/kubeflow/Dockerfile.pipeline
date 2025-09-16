@@ -16,16 +16,14 @@
 #
 # ==================================================================================
 
-FROM python:3.9-slim
+FROM python:3.10-slim
+
 RUN apt-get update && \
     apt-get install -y git
 COPY requirements_pipeline.txt .
+
 RUN pip3 install -r requirements_pipeline.txt
+RUN pip3 install featurestoresdk==0.3.1 modelmetricsdk==0.3.1
 
-RUN git clone -b l-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/feature-store" /SDK/featurestoresdk_main
-RUN git clone -b l-release "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/sdk/model-storage" /SDK/modelmetricssdk_main
-
-RUN pip3 install /SDK/featurestoresdk_main/.
-RUN pip3 install /SDK/modelmetricssdk_main/.
 RUN mkdir -p /app_run
 WORKDIR /app_run
