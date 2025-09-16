@@ -33,6 +33,23 @@
       "message": "Validation is done. LGTM",
       "revId": "9160ec198b1f905ba1e1f0ee4ab863b684c28437",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9012e5_af01582d",
+        "filename": "tools/kubeflow/requirements_pipeline.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-16T23:08:33Z",
+      "side": 1,
+      "message": "@jain.ashish@samsung.com , @subh.singh@samsung.com Don\u0027t kubernetes, scikit-learn, and protobuf need to be assigned as specific versions such as tensorflow?",
+      "revId": "9160ec198b1f905ba1e1f0ee4ab863b684c28437",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ],
   "submitRequirementResults": [
