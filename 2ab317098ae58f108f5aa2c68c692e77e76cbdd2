@@ -80,6 +80,30 @@
       },
       "revId": "2ab317098ae58f108f5aa2c68c692e77e76cbdd2",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29892d6f_5e2f018a",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-09-16T19:31:46Z",
+      "side": 1,
+      "message": "Surely I will revise the patch , following is one example to detect ubuntu.\n```\nif [ -f /etc/os-release ]; then\n    . /etc/os-release\n    if [ \"$ID\" \u003d \"ubuntu\" ]; then\n        echo \"Detected Ubuntu, installing Helm...\"\n```",
+      "parentUuid": "536a8358_1fbe266f",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 72
+      },
+      "revId": "2ab317098ae58f108f5aa2c68c692e77e76cbdd2",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
