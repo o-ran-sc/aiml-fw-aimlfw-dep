@@ -87,6 +87,24 @@
       "parentUuid": "d732674f_d3b702d9",
       "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b71c3d11_e9ff91e7",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-17T13:03:19Z",
+      "side": 1,
+      "message": "Will it install the appropriate version of helm if we use pkg manager, https://helm.sh/docs/intro/install/#from-apt-debianubuntu?",
+      "parentUuid": "aaf5cdcf_848f913b",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
