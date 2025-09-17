@@ -69,6 +69,24 @@
       "parentUuid": "dd4d29fb_ab73d1b9",
       "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf5cdcf_848f913b",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-17T10:50:13Z",
+      "side": 1,
+      "message": "I agree with the suggestion, a quick look to script gives the idea that it supports the multiple OS (x86, windows, ubuntu). So I think it is best to use the script avoiding any code related to OS detection.\n\nBut I suggest to install v3.16.x helm as it officially supports kubenetes 1.28.x-1.31.x : https://helm.sh/docs/topics/version_skew/\n\nPlease let me know any concerns.\n\n\nAlso there is page[1] in community for versions, which reflects helm and kubernetes incompatibility, and I have commented it.\n\n[1] https://lf-o-ran-sc.atlassian.net/wiki/spaces/RSAC/pages/419725360/Release+M+Software+Versions",
+      "parentUuid": "d732674f_d3b702d9",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
