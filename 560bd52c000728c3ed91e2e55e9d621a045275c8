@@ -51,6 +51,24 @@
       "parentUuid": "c59d0cb0_a5f0cb5e",
       "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d732674f_d3b702d9",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-17T09:46:28Z",
+      "side": 1,
+      "message": "It\u0027s one of the ways on the official website to install helm.\nhttps://helm.sh/docs/intro/install/#from-script\n\nIt seems better to install it by the installation script than \"cannot detect OS. Skipping.\" in WSL.",
+      "parentUuid": "dd4d29fb_ab73d1b9",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
