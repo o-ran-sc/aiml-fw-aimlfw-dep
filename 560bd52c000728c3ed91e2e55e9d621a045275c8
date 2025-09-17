@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406d086c_0d6a7228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-17T09:07:25Z",
+      "side": 1,
+      "message": "Thank you for the quick update. Please take a look at my review comment.",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59d0cb0_a5f0cb5e",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-17T09:07:25Z",
+      "side": 1,
+      "message": "What about installing it with the script as you thought before?\n`curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash`",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
