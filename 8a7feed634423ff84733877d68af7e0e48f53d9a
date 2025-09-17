@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f605ae24_ffbf27d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-17T08:32:42Z",
+      "side": 1,
+      "message": "@subh.singh@samsung.com If there is no problem, why don\u0027t we merge the code at this level?\n@moksh.baweja@samsung.com It would be nice if you update what needs to be modified with the next CL.",
+      "revId": "8a7feed634423ff84733877d68af7e0e48f53d9a",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
