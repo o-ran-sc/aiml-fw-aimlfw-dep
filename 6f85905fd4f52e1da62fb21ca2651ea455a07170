@@ -16,6 +16,24 @@
       "message": "I think you forgot to add the version, `3.18.6`.",
       "revId": "6f85905fd4f52e1da62fb21ca2651ea455a07170",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06a2af4_61f11541",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-18T16:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b568da76_9cb73d5f",
+      "revId": "6f85905fd4f52e1da62fb21ca2651ea455a07170",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }

@@ -141,6 +141,24 @@
       "parentUuid": "850daf3b_1fe125b7",
       "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c94feba_d79cf1c8",
+        "filename": "tools/helm/install_helm.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-18T16:17:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9df86a96_2954e877",
+      "revId": "560bd52c000728c3ed91e2e55e9d621a045275c8",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
