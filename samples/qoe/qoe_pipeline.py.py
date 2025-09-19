@@ -16,7 +16,6 @@
 #
 # ==================================================================================
 
-
 import kfp
 import kfp.dsl as dsl
 from kfp.dsl import InputPath, OutputPath
@@ -95,15 +94,24 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     
     xx = y
     yy = yhat
-    model_save_filepath = "./"
-    model.export(model_save_filepath)
+    
+    print("Saving models ...")
+    save_directory = './keras_model'
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory, exist_ok=True)
+        print(f"Created directory: {save_directory}")
+    else:
+        print(f"Directory already exists: {save_directory}")
+        
+    model.save('./keras_model/model.keras')
+    model.export('./saved_model')
     
     import json
     data = {}
     data['metrics'] = []
     data['metrics'].append({'Accuracy': str(np.mean(np.absolute(np.asarray(xx)-np.asarray(yy))<5))})
     
-    #as new artifact after training will always be 1.0.0
+#     as new artifact after training will always be 1.0.0
     artifactversion="1.0.0"
     url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{artifactversion}"
     updated_model_info= requests.post(url).json()
@@ -113,14 +121,17 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     trainingjob_id = featurepath.split('_')[-1]
     mm_sdk.upload_metrics(data, trainingjob_id)
     print("Model-metric : ", mm_sdk.get_metrics(trainingjob_id))
-    mm_sdk.upload_model(model_save_filepath, modelname, modelversion, artifactversion)
-    
-
+    print("uploading keras model to MME")
+    mm_sdk.upload_model("./keras_model", modelname + "_keras", modelversion, artifactversion)
+    print("Saved keras format")
+    mm_sdk.upload_model("./saved_model", modelname, modelversion, artifactversion)
+    print("Saved savedmodel format")
 
 @dsl.pipeline(
     name="qoe Pipeline",
     description="qoe",
 )
+
 def super_model_pipeline( 
     featurepath: str, epochs: str, modelname: str, modelversion:str):
     
@@ -128,15 +139,16 @@ def super_model_pipeline(
     trainop.set_caching_options(False)
     kubernetes.set_image_pull_policy(trainop, "IfNotPresent")
 
-
 pipeline_func = super_model_pipeline
 file_name = "qoe_model_pipeline"
 
 kfp.compiler.Compiler().compile(pipeline_func,  
   '{}.yaml'.format(file_name))
 
-
 import requests
 pipeline_name="qoe_Pipeline"
 pipeline_file = file_name+'.yaml'
 requests.post("http://tm.traininghost:32002/pipelines/{}/upload".format(pipeline_name), files={'file':open(pipeline_file,'rb')})
+
+
+

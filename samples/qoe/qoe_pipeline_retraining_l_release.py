@@ -89,7 +89,8 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     if modelinfo["modelLocation"] != "":
         model_url= modelinfo["modelLocation"]
     else :
-        model_url = f"http://tm.traininghost:32002/model/{modelname}/{modelversion}/{artifactversion}/Model.zip"
+        keras_model= modelname + "_keras"
+        model_url = f"http://tm.traininghost:32002/model/{keras_model}/{modelversion}/{artifactversion}/Model.zip"
     # Download the model zip file
 
     print(f"Downloading model from :{model_url}")
@@ -126,7 +127,7 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
         print(f'Zip file not found: {zip_file_path}')
 
     # Path to the directory containing the saved model
-    model_path = f"./Model/{modelversion}"
+    model_path = f"./Model/{modelversion}/model.keras"
 
     # Load the model in SavedModel format     
     model = tf.keras.models.load_model(model_path)
@@ -165,13 +166,16 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     xx = y
     yy = yhat
     
-    retrained_model_path = "./retrain"
-    if not os.path.exists(retrained_model_path):
-        os.makedirs(retrained_model_path)
-
-    # Save the retrained model
-    model.save(retrained_model_path)
-    print(f"Retrained model saved at {retrained_model_path}")
+    print("Saving models ...")
+    save_directory = './retrain/keras_model'
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory, exist_ok=True)
+        print(f"Created directory: {save_directory}")
+    else:
+        print(f"Directory already exists: {save_directory}")
+        
+    model.save('./retrain/keras_model/model.keras')
+    model.export('./retrain/saved_model')
 
     import json
     data = {}
@@ -192,8 +196,11 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     updated_model_info= requests.post(url).json()
     print(updated_model_info)
     
-    mm_sdk.upload_metrics(data, modelname, modelversion,new_artifactversion)
-    mm_sdk.upload_model("./retrain/", modelname, modelversion, new_artifactversion)
+    print("uploading keras model to MME")
+    mm_sdk.upload_model("./retrain/keras_model", modelname + "_keras", modelversion, new_artifactversion)
+    print("Saved keras format")
+    mm_sdk.upload_model("./retrain/saved_model", modelname, modelversion, new_artifactversion)
+    print("Saved savedmodel format")
 
 @dsl.pipeline(
     name="qoe Pipeline",
@@ -216,3 +223,5 @@ import requests
 pipeline_name="qoe_Pipeline_retrain"
 pipeline_file = file_name+'.yaml'
 requests.post("http://tm.traininghost:32002/pipelines/{}/upload".format(pipeline_name), files={'file':open(pipeline_file,'rb')})
+
+

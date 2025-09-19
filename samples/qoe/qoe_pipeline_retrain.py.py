@@ -16,10 +16,6 @@
 #
 # ==================================================================================
 
-#!/usr/bin/env python
-# coding: utf-8
-
-
 import kfp
 import kfp.dsl as dsl
 from kfp.dsl import InputPath, OutputPath
@@ -28,17 +24,19 @@ from kfp import kubernetes
 
 BASE_IMAGE = "traininghost/pipelineimage:latest"
 
-@component(base_image=BASE_IMAGE)
+@component(base_image=BASE_IMAGE,packages_to_install=['requests'])
 def train_export_model(featurepath: str, epochs: str, modelname: str, modelversion:str):
     
+    import re
     import tensorflow as tf
     from numpy import array
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense
+	from tensorflow.keras.layers import Dense
     from tensorflow.keras.layers import Flatten, Dropout, Activation
     from tensorflow.keras.layers import LSTM
     import numpy as np
     import requests
+    import zipfile
     print("numpy version")
     print(np.__version__)
     import pandas as pd
@@ -79,63 +77,135 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     y = y.reshape((y.shape[0], y.shape[2]))
     print(X.shape)
     print(y.shape)
+ 
+    print("Loading the saved model")
+    print(os.listdir(os.getcwd()))
     
-    model = Sequential()
-    model.add(LSTM(units = 150, activation="tanh" ,return_sequences = True, input_shape = (X.shape[1], X.shape[2])))
 
-    model.add(LSTM(units = 150, return_sequences = True,activation="tanh"))
+    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-discovery/v1/models/?model-name={modelname}&model-version={modelversion}"
+    modelinfo =  requests.get(url).json()[0]
+    artifactversion = modelinfo["modelId"]["artifactVersion"]
+    model_url = ""
+    if modelinfo["modelLocation"] != "":
+        model_url= modelinfo["modelLocation"]
+    else :
+        keras_model= modelname + "_keras"
+        model_url = f"http://tm.traininghost:32002/model/{keras_model}/{modelversion}/{artifactversion}/Model.zip"
+    # Download the model zip file
 
-    model.add(LSTM(units = 150,return_sequences = False,activation="tanh" ))
+    print(f"Downloading model from :{model_url}")
+    response = requests.get(model_url)
 
-    model.add((Dense(units = X.shape[2])))
+    print("Response generated: " + str(response))
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        local_file_path = 'Model.zip'
+        with open(local_file_path, 'wb') as file:
+            file.write(response.content)
+        print(f'Downloaded file saved to {local_file_path}')
+    else:
+        print('Failed to download the file')
+
+    print(os.listdir(os.getcwd()))
+
+    # Extract the zip file
+    zip_file_path = "./Model.zip"
+    extract_to_dir = "./Model"
+
+    if not os.path.exists(extract_to_dir):
+        os.makedirs(extract_to_dir)
+
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_to_dir)
+
+    # Delete the zip file after extraction
+    if os.path.exists(zip_file_path):
+        os.remove(zip_file_path)
+        print(f'Deleted zip file: {zip_file_path}')
+    else:
+        print(f'Zip file not found: {zip_file_path}')
+
+    # Path to the directory containing the saved model
+    model_path = f"./Model/{modelversion}/model.keras"
+
+    # Load the model in SavedModel format     
+    model = tf.keras.models.load_model(model_path)
     
-    model.compile(loss='mse', optimizer='adam',metrics=['mse'])
+    model.compile(loss='mse', optimizer='adam', metrics=['mse'])
     model.summary()
-    
-    model.fit(X, y, batch_size=10,epochs=int(epochs), validation_split=0.2)
-    yhat = model.predict(X, verbose = 0)
 
+    # Define a directory to save checkpoints
+    checkpoint_dir = "./checkpoints"
+    if not os.path.exists(checkpoint_dir):
+        os.makedirs(checkpoint_dir)
+
+    # Define a ModelCheckpoint callback
+    checkpoint_path = os.path.join(checkpoint_dir, "model_epoch_{epoch:02d}_val_loss_{val_loss:.2f}.h5")
+    checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath=checkpoint_path,   # Save checkpoint file path, this file is not saved finaly
+        monitor='val_loss',         # Monitor validation loss, can be train loss also 
+        save_best_only=True,        # Save only the best model based on validation loss
+        save_weights_only=False,    # Save the entire model, not just weights
+        mode='min',                 # Minimizing the validation loss
+        verbose=0                   # set to 1 if want to print info when a new checkpoint is saved
+    )
+
+    # Train the model with checkpointing
+    print("Retraining the model with checkpoints...")
+    history = model.fit(
+        X, 
+        y, 
+        batch_size=10, 
+        epochs=int(epochs), 
+        validation_split=0.2, 
+        callbacks=[checkpoint_callback]  # Add the callback here
+    )
     
+    yhat = model.predict(X, verbose = 0)
     xx = y
     yy = yhat
     
     print("Saving models ...")
-    save_directory = './keras_model'
+    save_directory = './retrain/keras_model'
     if not os.path.exists(save_directory):
         os.makedirs(save_directory, exist_ok=True)
         print(f"Created directory: {save_directory}")
     else:
         print(f"Directory already exists: {save_directory}")
         
-    model.save('./keras_model/model.keras')
-    model.export('./saved_model')
-    
+    model.save('./retrain/keras_model/model.keras')
+    model.export('./retrain/saved_model')
+
     import json
     data = {}
     data['metrics'] = []
     data['metrics'].append({'Accuracy': str(np.mean(np.absolute(np.asarray(xx)-np.asarray(yy))<5))})
+
+# update artifact version
+    new_artifactversion =""
+    if modelinfo["modelLocation"] != "":
+        new_artifactversion = "1.1.0"
+    else:
+        major, minor , patch= map(int, artifactversion.split('.'))
+        minor+=1
+        new_artifactversion = f"{major}.{minor}.{patch}"
     
-#     as new artifact after training will always be 1.0.0
-    artifactversion="1.0.0"
-    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{artifactversion}"
+    # update the new artifact version in mme
+    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{new_artifactversion}"
     updated_model_info= requests.post(url).json()
     print(updated_model_info)
     
-    #featurepath is a combination of <feature_group>_<trainingjob_Id>
-    trainingjob_id = featurepath.split('_')[-1]
-    mm_sdk.upload_metrics(data, trainingjob_id)
-    print("Model-metric : ", mm_sdk.get_metrics(trainingjob_id))
     print("uploading keras model to MME")
-    mm_sdk.upload_model("./keras_model", modelname + "_keras", modelversion, artifactversion)
+    mm_sdk.upload_model("./retrain/keras_model", modelname + "_keras", modelversion, new_artifactversion)
     print("Saved keras format")
-    mm_sdk.upload_model("./saved_model", modelname, modelversion, artifactversion)
+    mm_sdk.upload_model("./retrain/saved_model", modelname, modelversion, new_artifactversion)
     print("Saved savedmodel format")
 
 @dsl.pipeline(
     name="qoe Pipeline",
     description="qoe",
 )
-
 def super_model_pipeline( 
     featurepath: str, epochs: str, modelname: str, modelversion:str):
     
@@ -144,15 +214,14 @@ def super_model_pipeline(
     kubernetes.set_image_pull_policy(trainop, "IfNotPresent")
 
 pipeline_func = super_model_pipeline
-file_name = "qoe_model_pipeline"
+file_name = "qoe_model_pipeline_retrain"
 
 kfp.compiler.Compiler().compile(pipeline_func,  
   '{}.yaml'.format(file_name))
 
 import requests
-pipeline_name="qoe_Pipeline"
+pipeline_name="qoe_Pipeline_retrain"
 pipeline_file = file_name+'.yaml'
 requests.post("http://tm.traininghost:32002/pipelines/{}/upload".format(pipeline_name), files={'file':open(pipeline_file,'rb')})
-
 
 
