@@ -30,7 +30,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # Install PostgreSQL for Training Manager
 log_message "INFO" "Helm" "Installing PostgreSQL (tm-db) in 'traininghost' namespace..."
-helm install tm-db bitnami/postgresql --namespace traininghost
+helm install tm-db bitnami/postgresql  --set image.repository="bitnamilegacy/postgresql" --set image.tag="17.6.0" --set global.security.allowInsecureImages=true --namespace traininghost
 
 # Wait for tm-db to be ready
 log_message "INFO" "Kubernetes" "Waiting for tm-db-postgresql pod to be ready..."
