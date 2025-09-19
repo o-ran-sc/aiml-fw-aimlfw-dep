@@ -18,6 +18,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88000931_bb95bd03",
+        "filename": "samples/qoe/qoe_pipeline.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-19T06:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ce557d4_7c1b7003",
+      "revId": "e1eefa46703d045131594bcc203580d476c9dc6b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "933d2b20_e4984329",
@@ -41,6 +59,30 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb1dfca9_f2b71cb0",
+        "filename": "samples/qoe/qoe_pipeline.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-19T06:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "933d2b20_e4984329",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 9
+      },
+      "revId": "e1eefa46703d045131594bcc203580d476c9dc6b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24b8886e_94edfa39",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-09-17T14:43:45Z",
       "side": 1,
       "message": "remove these blank lines",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 0
+      },
+      "revId": "e1eefa46703d045131594bcc203580d476c9dc6b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fade3a33_a19fef7e",
+        "filename": "samples/qoe/qoe_pipeline.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-19T06:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24b8886e_94edfa39",
       "range": {
         "startLine": 148,
         "startChar": 0,
