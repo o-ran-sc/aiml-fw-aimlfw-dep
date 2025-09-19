@@ -1,35 +1,10 @@
-# ==================================================================================
-#
-#       Copyright (c) 2025 Samsung Electronics Co., Ltd. All Rights Reserved.
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#          http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-#
-# ==================================================================================
-
-#!/usr/bin/env python
-# coding: utf-8
-
-
 import kfp
 import kfp.dsl as dsl
 from kfp.dsl import InputPath, OutputPath
 from kfp.dsl import component as component
 from kfp import kubernetes
 
-
-
 BASE_IMAGE = "traininghost/pipelineimage:latest"
-
 
 @component(base_image=BASE_IMAGE)
 def train_export_model(featurepath: str, epochs: str, modelname: str, modelversion:str):
@@ -101,7 +76,18 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     
     xx = y
     yy = yhat
-    model.save("./")
+    
+    print("Saving models ...")
+    save_directory = './keras_model'
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory, exist_ok=True)
+        print(f"Created directory: {save_directory}")
+    else:
+        print(f"Directory already exists: {save_directory}")
+        
+    model.save('./keras_model/model.keras')
+    model.export('./saved_model')
+    
     import json
     data = {}
     data['metrics'] = []
@@ -117,15 +103,17 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     trainingjob_id = featurepath.split('_')[-1]
     mm_sdk.upload_metrics(data, trainingjob_id)
     print("Model-metric : ", mm_sdk.get_metrics(trainingjob_id))
-    mm_sdk.upload_model("./", modelname, modelversion, artifactversion)
-    
-
-
+    print("uploading keras model to MME")
+    mm_sdk.upload_model("./keras_model", modelname + "_keras", modelversion, artifactversion)
+    print("Saved keras format")
+    mm_sdk.upload_model("./saved_model", modelname, modelversion, artifactversion)
+    print("Saved savedmodel format")
 
 @dsl.pipeline(
     name="qoe Pipeline",
     description="qoe",
 )
+
 def super_model_pipeline( 
     featurepath: str, epochs: str, modelname: str, modelversion:str):
     
@@ -133,17 +121,16 @@ def super_model_pipeline(
     trainop.set_caching_options(False)
     kubernetes.set_image_pull_policy(trainop, "IfNotPresent")
 
-
-
 pipeline_func = super_model_pipeline
 file_name = "qoe_model_pipeline"
 
 kfp.compiler.Compiler().compile(pipeline_func,  
   '{}.yaml'.format(file_name))
 
-
-
 import requests
 pipeline_name="qoe_Pipeline"
 pipeline_file = file_name+'.yaml'
 requests.post("http://tm.traininghost:32002/pipelines/{}/upload".format(pipeline_name), files={'file':open(pipeline_file,'rb')})
+
+
+
