@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3a698b_3d4b3f10",
+        "filename": "bin/install_databases.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-19T05:43:16Z",
+      "side": 1,
+      "message": "could you please also check, as it will impact influxdb as well https://github.com/o-ran-sc/aiml-fw-aimlfw-dep/blob/master/docs/installation-guide.rst#install-influx-db-as-datalake-optional (may be it is addressed as separate patch).",
+      "range": {
+        "startLine": 33,
+        "startChar": 63,
+        "endLine": 33,
+        "endChar": 88
+      },
+      "revId": "8576f806af659faf55226c527cd8fc545e6db67b",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
