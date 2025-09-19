@@ -19,6 +19,12 @@ is_wsl() {
   grep -qi microsoft /proc/version 2>/dev/null || [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]
 }
 
+K8S_VERSION=1.32
+K8S_MINOR_VERSION=8
+KUSTOMIZE_VERSION=5.5.0
+NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
+BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
+
 echo "Step 0: Checking if running on WSL..."
 if is_wsl; then
   echo "Running on WSL"
@@ -53,9 +59,9 @@ sudo systemctl restart containerd
 
 echo "Step 4: Installing Kubernetes packages..."
 sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb /' | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
-sudo apt update && sudo apt install -y kubeadm=1.28.0-1.1 kubelet=1.28.0-1.1 kubectl=1.28.0-1.1
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v$K8S_VERSION/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v$K8S_VERSION/deb /" | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
+sudo apt update && sudo apt install -y kubeadm=$K8S_VERSION.$K8S_MINOR_VERSION-1.1 kubelet=$K8S_VERSION.$K8S_MINOR_VERSION-1.1 kubectl=$K8S_VERSION.$K8S_MINOR_VERSION-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Step 5: Initializing Kubernetes..."
@@ -72,7 +78,7 @@ echo "Removing taints from control-plane nodes..."
 for node in $(kubectl get nodes --no-headers | awk '{print $1}')
 do
   echo "Removing taint from $node..."
-  kubectl taint nodes $node node-role.kubernetes.io/control-plane- --ignore-not-found=true
+  kubectl taint nodes $node node-role.kubernetes.io/control-plane-
 done
 
 echo "Step 6: Applying CNI plugin..."
@@ -91,7 +97,7 @@ fi
 echo "Installation completed for kubernetes!"
 
 # install nerdctl
-NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
+
 
 archType="amd64"
 if test "$(uname -m)" = "aarch64"
@@ -105,8 +111,6 @@ sudo tar Cxzvvf /usr/bin /tmp/nerdctl.tar.gz
 echo "Installation completed for nerdctl!"
 
 # install buildkit
-BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
-
 archType="amd64"
 if test "$(uname -m)" = "aarch64"
 then
@@ -124,7 +128,6 @@ else
   sudo nerdctl run -d --name buildkitd --privileged moby/buildkit:latest
 fi
 # install kustomize
-KUSTOMIZE_VERSION=5.4.2
 curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
 tar -xvzf "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
 sudo mv kustomize /usr/local/bin/ 
