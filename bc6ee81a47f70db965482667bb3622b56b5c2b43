@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef56533a_d647b306",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-19T13:58:32Z",
+      "side": 1,
+      "message": "Adding `_l_release` to pipeline is not right, you could refer patch[1] from Ashish and fix `qoe_pipeline.py` and add `qoe_pipeline_retrain.py`.\n\n[1] https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14925",
+      "revId": "bc6ee81a47f70db965482667bb3622b56b5c2b43",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
