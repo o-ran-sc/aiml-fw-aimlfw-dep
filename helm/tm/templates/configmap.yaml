@@ -15,8 +15,8 @@
 #   limitations under the License.
 #
 # ==================================================================================
-kind: ConfigMap 
-apiVersion: v1 
+kind: ConfigMap
+apiVersion: v1
 metadata:
   name: tm-configmap
   namespace: {{ include "common.namespace.platform" . }}
@@ -36,3 +36,5 @@ data:
   PYTHONUNBUFFERED: "0"
   ACCESS_CONTROL_ALLOW_ORIGIN: "*"
   PIPELINE: {{.Values.tm.pipelines | toJson | quote }}
+  LLM_AGENT_MODEL_FOR_TM: "{{ .Values.tm.agent.llm_model }}"
+  LLM_AGENT_MODEL_TOKEN_FOR_TM: "{{ .Values.tm.agent.llm_model_token }}"
