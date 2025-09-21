@@ -18,25 +18,9 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: tm-configmap
+  name: aiml-tm-configmap
   namespace: {{ include "common.namespace.platform" . }}
 data:
   # Configuration values can be set as key-value properties
-  KF_ADAPTER_PORT: "{{ include "common.serviceport.kfadapter.http" .  }}"
-  KF_ADAPTER_IP: "{{ include "common.servicehost.kfadapter.http" .  }}"
-  DATA_EXTRACTION_API_IP: "{{ include "common.servicehost.data-extraction.http" .  }}"
-  DATA_EXTRACTION_API_PORT: "{{ include "common.serviceport.data-extraction.http" .  }}"
-  TRAINING_MANAGER_PORT: "{{ include "common.serviceport.tm.http" .  }}"
-  TRAINING_MANAGER_IP: {{ .Values.traininghost.ip_address }}
-  MODEL_MANAGEMENT_SERVICE_IP: "{{ include "common.servicehost.modelmgmtservice.http" . }}"
-  MODEL_MANAGEMENT_SERVICE_PORT: "{{ include "common.serviceport.modelmgmtservice.http" . }}"
-  PS_USER: postgres
-  PS_IP: tm-db-postgresql.traininghost
-  PS_PORT: "5432"
-  PYTHONUNBUFFERED: "0"
-  ACCESS_CONTROL_ALLOW_ORIGIN: "*"
-  PIPELINE: {{.Values.tm.pipelines | toJson | quote }}
-  {{- if .Values.tm.agent.enabled }}
   LLM_AGENT_MODEL_FOR_TM: "{{ .Values.tm.agent.llm_model }}"
   LLM_AGENT_MODEL_TOKEN_FOR_TM: "{{ .Values.tm.agent.llm_model_token }}"
-  {{- end }}

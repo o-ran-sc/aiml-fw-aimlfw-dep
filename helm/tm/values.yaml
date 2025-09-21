@@ -22,3 +22,11 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
+
+pipelines: {"timeseries": "qoe_pipeline_h_release"}
+
+agent:
+  enabled: false  
+  # The feature is disabled
+  llm_model: ""
+  llm_model_token: ""
