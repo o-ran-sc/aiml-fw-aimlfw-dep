@@ -29,6 +29,9 @@ tm:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
   pipelines: {"timeseries": "qoe_pipeline_h_release"}
+  agent:
+    llm_model: <Fill name of model>
+    llm_model_token: <Fill API token info to access model>
 
 leofs:
   image:
