@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e6579d_3f2c6b30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002600
+      },
+      "writtenOn": "2025-09-22T06:26:41Z",
+      "side": 1,
+      "message": "I have updated the sample pipleine files as per the reference patch https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14925",
+      "revId": "fdfa71d2b5ed379e4815c94158d4378606219116",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
