@@ -63,6 +63,30 @@
       },
       "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ba88b47_effb38fa",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-22T18:01:44Z",
+      "side": 1,
+      "message": "Thank you for your review :) As you commenting, I\u0027d like to modify tm/templates/configmap.yaml (default\u003dfalse)",
+      "parentUuid": "69102e75_fa8775f4",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
