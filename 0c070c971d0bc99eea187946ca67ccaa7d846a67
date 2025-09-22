@@ -16,6 +16,75 @@
       "message": "I think this is unnecessary.",
       "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ef01e4_f2e626e5",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-22T09:11:05Z",
+      "side": 1,
+      "message": "give your entity.",
+      "range": {
+        "startLine": 3,
+        "startChar": 27,
+        "endLine": 3,
+        "endChar": 49
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf4af8f_2cc90fbb",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-22T09:11:05Z",
+      "side": 1,
+      "message": "2022 -\u003e 2025",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798e8037_b2882b8a",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-22T09:11:05Z",
+      "side": 1,
+      "message": "It should be inside the templates folder otherwise include in `tm-configmap` (https://github.com/o-ran-sc/aiml-fw-aimlfw-dep/blob/master/helm/tm/templates/configmap.yaml)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
