@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4a0d35_ffab2203",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-22T09:02:01Z",
+      "side": 1,
+      "message": "would you like to add this variable with condition:\n\nDefine a boolean flag in your values.yaml, for example:\n\n```\nagent:\n  enabled: false\n  # add feature-specific config values here\nUse conditional blocks in your Helm templates to create, modify, or ignore resources based on this flag:\n\ntext\n{{- if .Values.agent.enabled }}\nllm_model: \u003cFill name of model\u003e\nllm_model_token: \u003cFill API token info to access model\u003e\n{{- end }}\n```\nI am okay with this as well.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
