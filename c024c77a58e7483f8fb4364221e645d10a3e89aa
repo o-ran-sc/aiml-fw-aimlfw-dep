@@ -16,6 +16,24 @@
       "message": "@subh.singh@samsung.com What do you think about the changes in this file?",
       "revId": "c024c77a58e7483f8fb4364221e645d10a3e89aa",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54c8147_e1608389",
+        "filename": "helm/tm/values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-23T11:56:16Z",
+      "side": 1,
+      "message": "the approach for resolving pipeline has been changed. Now it is decided based on logic available in TM:\n\nhttps://github.com/o-ran-sc/aiml-fw-awmf-tm/blob/master/trainingmgr/trainingmgr_main.py#L188-L196\n\nPlease let me know any specific thought you have while including this line.",
+      "parentUuid": "903129ca_c7d0481a",
+      "revId": "c024c77a58e7483f8fb4364221e645d10a3e89aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
