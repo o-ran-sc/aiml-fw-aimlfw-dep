@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903129ca_c7d0481a",
+        "filename": "helm/tm/values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-23T08:53:25Z",
+      "side": 1,
+      "message": "@subh.singh@samsung.com What do you think about the changes in this file?",
+      "revId": "c024c77a58e7483f8fb4364221e645d10a3e89aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
