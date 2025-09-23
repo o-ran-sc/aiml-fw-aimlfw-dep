@@ -16,6 +16,24 @@
       "message": "Please use [RECIPE_EXAMPLE / example_recipe_local_images_oran_latest.yaml](https://gerrit.o-ran-sc.org/r/gitweb?p\u003daiml-fw/aimlfw-dep.git;a\u003dblob;f\u003dRECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml;h\u003d719c2443fff4824d01bab8e74d27471582ac55b9;hb\u003dHEAD) instead of this.",
       "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db0d1fb4_cada3213",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-23T15:53:06Z",
+      "side": 1,
+      "message": "I agree this is not needed.",
+      "parentUuid": "3b479e0c_627f1268",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
