@@ -33,6 +33,24 @@
       "message": "This is sample archival, actual pipeline used from `o-ran-sc/portal-aiml-dashboard` project:\nhttps://github.com/o-ran-sc/portal-aiml-dashboard/tree/master/kf-pipelines",
       "revId": "fdfa71d2b5ed379e4815c94158d4378606219116",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c881533_311854e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-23T15:59:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "92e6579d_3f2c6b30",
+      "revId": "fdfa71d2b5ed379e4815c94158d4378606219116",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ],
   "submitRequirementResults": [
