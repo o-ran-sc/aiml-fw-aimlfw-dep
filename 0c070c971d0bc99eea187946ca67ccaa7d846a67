@@ -109,6 +109,30 @@
       },
       "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057ae0a7_740bd98b",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-23T11:57:19Z",
+      "side": 1,
+      "message": "Could you delete this file.",
+      "parentUuid": "f57c6386_945ed181",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
