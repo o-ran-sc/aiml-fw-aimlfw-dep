@@ -87,6 +87,30 @@
       },
       "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ab9c991_dda817c3",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-23T02:55:24Z",
+      "side": 1,
+      "message": "Please add `enabled` here as well.",
+      "parentUuid": "6ba88b47_effb38fa",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
