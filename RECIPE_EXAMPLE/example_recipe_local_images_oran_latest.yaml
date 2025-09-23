@@ -82,16 +82,6 @@ aimlnotebook:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
 
-kserveadapter:
-  image:
-    repository: kserve-adapter
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.1"
-  ric_dms:
-    ip: <Fill IP of ric dms>
-    port: 8000
-
 modelmgmtservice:
   image:
     repository: modelmgmtservice
