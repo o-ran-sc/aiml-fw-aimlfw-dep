@@ -34,6 +34,40 @@
       "parentUuid": "3b479e0c_627f1268",
       "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08443664_4156511d",
+        "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-23T23:18:01Z",
+      "side": 1,
+      "message": "Is every image except leofs currently being deployed with the `4.0.0` tag on staging, and will it that way?",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd5c54b_741e0fc7",
+        "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-23T23:18:01Z",
+      "side": 1,
+      "message": "Please refer to the [file](https://gerrit.o-ran-sc.org/r/gitweb?p\u003daiml-fw/aimlfw-dep.git;a\u003dblob;f\u003dRECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml;h\u003d719c2443fff4824d01bab8e74d27471582ac55b9;hb\u003dHEAD) and add the required fields.",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
