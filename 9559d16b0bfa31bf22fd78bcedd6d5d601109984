@@ -104,6 +104,24 @@
       "message": "Please refer to the [file](https://gerrit.o-ran-sc.org/r/gitweb?p\u003daiml-fw/aimlfw-dep.git;a\u003dblob;f\u003dRECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml;h\u003d719c2443fff4824d01bab8e74d27471582ac55b9;hb\u003dHEAD) and add the required fields.",
       "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d77e4e_c3331eae",
+        "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-24T10:19:19Z",
+      "side": 1,
+      "message": "Yes, mme_host is missing, compare both the file.",
+      "parentUuid": "5dd5c54b_741e0fc7",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
