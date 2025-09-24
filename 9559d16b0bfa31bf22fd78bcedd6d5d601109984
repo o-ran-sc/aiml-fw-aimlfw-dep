@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "267076ca_c100cc2f",
+        "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-24T09:22:26Z",
+      "side": 1,
+      "message": "Staging images are temporary images hosted on Nexus, built based on the latest available master branch, and they are updated with each patch merge to the master branch.\n\nPreviously, we updated this tag during the release process. However, we could enhance this step by updating the tag at the beginning of the development cycle. This approach would result in an updated staging image that can be tested throughout the cycle. By the time of the release, this staging image would serve as the release candidate.",
+      "parentUuid": "08443664_4156511d",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dd5c54b_741e0fc7",
         "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
         "patchSetId": 2
