@@ -16,6 +16,23 @@
       "message": "The updated image is successfully installing. The training will give error as the pipeline (qoe_Pipeline) is the old one (with TF version 2.5)",
       "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98333b24_4c97da1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-24T06:15:45Z",
+      "side": 1,
+      "message": "Please remove kserve adapter from the [local recipe file for latest code](https://gerrit.o-ran-sc.org/r/gitweb?p\u003daiml-fw/aimlfw-dep.git;a\u003dblob;f\u003dRECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml;h\u003d719c2443fff4824d01bab8e74d27471582ac55b9;hb\u003dHEAD#l81).\n\n@subh.singh@samsung.com I don\u0027t think it\u0027s correct to remove it from l release recipe file. What do you think?",
+      "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
