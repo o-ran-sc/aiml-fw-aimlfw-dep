@@ -71,6 +71,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2198f18_3a304481",
+        "filename": "RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-24T09:39:27Z",
+      "side": 1,
+      "message": "Make sense. Thank you for the kind and detailed explanation!",
+      "parentUuid": "267076ca_c100cc2f",
+      "revId": "9559d16b0bfa31bf22fd78bcedd6d5d601109984",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dd5c54b_741e0fc7",
