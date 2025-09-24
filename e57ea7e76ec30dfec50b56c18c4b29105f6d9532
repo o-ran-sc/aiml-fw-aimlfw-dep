@@ -33,6 +33,24 @@
       "message": "Please remove kserve adapter from the [local recipe file for latest code](https://gerrit.o-ran-sc.org/r/gitweb?p\u003daiml-fw/aimlfw-dep.git;a\u003dblob;f\u003dRECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml;h\u003d719c2443fff4824d01bab8e74d27471582ac55b9;hb\u003dHEAD#l81).\n\n@subh.singh@samsung.com I don\u0027t think it\u0027s correct to remove it from l release recipe file. What do you think?",
       "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4162367d_81613a1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-24T09:13:27Z",
+      "side": 1,
+      "message": "I asked @swaraj to work on it so that we could stabiles the `l-release` branch.\n\nThere are 2 possible way of deployment:\n1. `aimlfw-dep` master + `example_recipe_nexus_images_staging_oran_l_release.yaml`\n\npicks latest code from aimlfw-dep-master branch and latest staging image (based on master branch). To make our installation more streamline we need to address : https://lf-o-ran-sc.atlassian.net/browse/AIMLFW-268\nhttps://lf-o-ran-sc.atlassian.net/browse/AIMLFW-260\n\n2. `aimlfw-dep` l-release + `example_recipe_latest_stable.yaml` (points l-rel image)\n\npicks l-rel code from aimlfw-dep-l-rel and release image from `l-release`.\nIt will fail due to feature-store dependency in l-release code : https://github.com/o-ran-sc/aiml-fw-aimlfw-dep/blob/l-release/tools/kubeflow/Dockerfile.pipeline#L25-L26\n\nWhich could be solved by cherry-piking to l-releae: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14914\n\n\nAlso we will take this patch to avoid `kserve` from l-release, as it is not maintained.\n\nPlease let me know your opinion.",
+      "parentUuid": "98333b24_4c97da1b",
+      "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
