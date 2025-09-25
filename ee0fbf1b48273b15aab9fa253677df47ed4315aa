@@ -18,6 +18,23 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43472c05_abbcf593",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-25T09:27:47Z",
+      "side": 1,
+      "message": "This is similar to https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14961, it would be better to abandon this.",
+      "revId": "ee0fbf1b48273b15aab9fa253677df47ed4315aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26aff9ae_ad2662b8",
