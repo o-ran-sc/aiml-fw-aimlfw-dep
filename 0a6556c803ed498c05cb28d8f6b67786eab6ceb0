@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "700ede47_2a7ba80d",
+        "filename": "tools/leofs/bin/install_leofs.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-09-26T10:44:05Z",
+      "side": 1,
+      "message": "install_leofs.sh takes recipe from install_traininghost.sh directly so if user does not specify RECIPE file during install_traininghost.sh it will take RECIPE_FILE\u003dRECIPE_EXAMPLE/example_recipe_latest_stable.yaml for install_leofs.sh as well",
+      "parentUuid": "857c6d18_e3169250",
+      "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "add75e36_976b87c0",
         "filename": "tools/leofs/bin/install_leofs.sh",
         "patchSetId": 3
