@@ -51,6 +51,24 @@
       "message": "`\"` surrounds $RECIPE_FILE, but https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/14978/3/bin/install_traininghost.sh#49 doesn\u0027t. Which one is more appropriate?",
       "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206b21dd_46cf1bb6",
+        "filename": "tools/leofs/bin/install_leofs.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-09-26T10:46:26Z",
+      "side": 1,
+      "message": "Yeah, you are correct. Updated, we don\u0027t need `\"`",
+      "parentUuid": "add75e36_976b87c0",
+      "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
