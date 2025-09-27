@@ -64,6 +64,54 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd6eef3_13664c96",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T04:22:36Z",
+      "side": 1,
+      "message": "Thanks for review:)",
+      "parentUuid": "53ef01e4_f2e626e5",
+      "range": {
+        "startLine": 3,
+        "startChar": 27,
+        "endLine": 3,
+        "endChar": 49
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0dd083b_690c5fd4",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T04:22:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cf4af8f_2cc90fbb",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "798e8037_b2882b8a",
