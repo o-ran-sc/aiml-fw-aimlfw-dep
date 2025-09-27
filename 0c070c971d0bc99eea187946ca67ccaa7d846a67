@@ -133,6 +133,30 @@
       },
       "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb9f100_979963d7",
+        "filename": "helm/tm/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T03:49:49Z",
+      "side": 1,
+      "message": "Okay:) I delete this right now!",
+      "parentUuid": "057ae0a7_740bd98b",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "0c070c971d0bc99eea187946ca67ccaa7d846a67",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
