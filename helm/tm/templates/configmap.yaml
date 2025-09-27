@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2022 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2025 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
 #   limitations under the License.
 #
 # ==================================================================================
-kind: ConfigMap 
-apiVersion: v1 
+kind: ConfigMap
+apiVersion: v1
 metadata:
   name: tm-configmap
   namespace: {{ include "common.namespace.platform" . }}
@@ -36,3 +36,7 @@ data:
   PYTHONUNBUFFERED: "0"
   ACCESS_CONTROL_ALLOW_ORIGIN: "*"
   PIPELINE: {{.Values.tm.pipelines | toJson | quote }}
+  {{- if .Values.tm.agent.enabled }}
+  LLM_AGENT_MODEL_FOR_TM: "{{ .Values.tm.agent.llm_model }}"
+  LLM_AGENT_MODEL_TOKEN_FOR_TM: "{{ .Values.tm.agent.llm_model_token }}"
+  {{- end }}
