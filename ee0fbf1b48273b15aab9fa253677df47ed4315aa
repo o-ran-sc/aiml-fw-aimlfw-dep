@@ -35,6 +35,24 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d5d5ab_f1c8da2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T02:08:47Z",
+      "side": 1,
+      "message": "Okay:) I abandon this right now!",
+      "parentUuid": "43472c05_abbcf593",
+      "revId": "ee0fbf1b48273b15aab9fa253677df47ed4315aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26aff9ae_ad2662b8",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-09-22T09:04:12Z",
       "side": 1,
       "message": "I would suggest to add a condition based template:\n```\nfeatureX:\n  enabled: false\n```",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 72
+      },
+      "revId": "ee0fbf1b48273b15aab9fa253677df47ed4315aa",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24c5fd2_d45705a8",
+        "filename": "helm/tm/templates/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T02:08:47Z",
+      "side": 1,
+      "message": "Thanks your review:)",
+      "parentUuid": "26aff9ae_ad2662b8",
       "range": {
         "startLine": 39,
         "startChar": 0,
