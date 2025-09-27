@@ -128,6 +128,54 @@
       },
       "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "605d9958_af49a7b4",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T04:20:41Z",
+      "side": 1,
+      "message": "Nap!!",
+      "parentUuid": "9ab9c991_dda817c3",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5964c1_2e549000",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002753
+      },
+      "writtenOn": "2025-09-27T04:20:41Z",
+      "side": 1,
+      "message": "Okay!:)",
+      "parentUuid": "9ab9c991_dda817c3",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "7ebb829d686e8bfef1e90e810456104198a8450f",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
