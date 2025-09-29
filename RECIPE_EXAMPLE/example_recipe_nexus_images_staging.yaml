@@ -1,6 +1,6 @@
 # ==================================================================================
 #
-#       Copyright (c) 2024 Samsung Electronics Co., Ltd. All Rights Reserved.
+#       Copyright (c) 2025 Samsung Electronics Co., Ltd. All Rights Reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -27,8 +27,12 @@ tm:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/aiml-fw-awmf-tm-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
+    tag: "5.0.0"
   pipelines: {"timeseries": "qoe_pipeline_h_release"}
+  agent:
+    enabled: false
+    llm_model: <Fill name of model>
+    llm_model_token: <Fill API token info to access model>
 
 leofs:
   image:
@@ -42,7 +46,7 @@ dataextraction:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/aiml-fw-athp-data-extraction-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
+    tag: "5.0.0"
 
 datalake:
   influxdb:
@@ -57,16 +61,17 @@ kfadapter:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/aiml-fw-athp-tps-kubeflow-adapter-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
+    tag: "5.0.0"
 
 aimldashboard:
   image:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/portal-aiml-dashboard-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
+    tag: "5.0.0"
   host:
     tm_host: "localhost"
+    mme_host: "localhost"
     notebook_host: "localhost"
     debug: "\"false\""
 
@@ -75,22 +80,12 @@ aimlnotebook:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/portal-aiml-notebook-docker 
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
-
-kserveadapter:
-  image:
-    repository: nexus3.o-ran-sc.org:10004/o-ran-sc/aiml-fw-aihp-ips-kserve-adapter-docker
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.0"
-  ric_dms:
-    ip: <Fill IP of ric dms>
-    port: 8000
+    tag: "5.0.0"
 
 modelmgmtservice:
   image:
     repository: nexus3.o-ran-sc.org:10004/o-ran-sc/aiml-fw-awmf-modelmgmtservice-docker
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "3.0.0"
+    tag: "5.0.0"
 
