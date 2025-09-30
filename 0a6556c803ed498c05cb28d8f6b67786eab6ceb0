@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95c4aefc_68bde66b",
+        "filename": "tools/leofs/bin/install_leofs.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-30T00:56:59Z",
+      "side": 1,
+      "message": "Make sense. Please remove the comment line if unnecessary.",
+      "parentUuid": "700ede47_2a7ba80d",
+      "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "add75e36_976b87c0",
         "filename": "tools/leofs/bin/install_leofs.sh",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yeah, you are correct. Updated, we don\u0027t need `\"`",
       "parentUuid": "add75e36_976b87c0",
+      "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5cc23e_e521a719",
+        "filename": "tools/leofs/bin/install_leofs.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-09-30T00:56:59Z",
+      "side": 1,
+      "message": "I am waiting for this line to be updated.",
+      "parentUuid": "206b21dd_46cf1bb6",
       "revId": "0a6556c803ed498c05cb28d8f6b67786eab6ceb0",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
