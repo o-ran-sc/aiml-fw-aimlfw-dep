@@ -194,6 +194,24 @@
       "parentUuid": "0049799b_66483586",
       "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b28f735_909acd26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-09-30T06:19:31Z",
+      "side": 1,
+      "message": "Yes, for release we will keep the recipe(as image version for release is permanent). And we will keep one for staging and one for local.",
+      "parentUuid": "daa1f0a9_88fc67d9",
+      "revId": "e57ea7e76ec30dfec50b56c18c4b29105f6d9532",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
