@@ -42,7 +42,7 @@ log_message "INFO" "Kubernetes" "tm-db (PostgreSQL) pod is ready."
 
 # Install Cassandra for Training Manager
 log_message "INFO" "Helm" "Installing Cassandra in 'traininghost' namespace..."
-helm install cassandra --set dbUser.user="cassandra" --namespace="traininghost" bitnami/cassandra --version 10.0.0
+helm install cassandra --set dbUser.user="cassandra" --set image.repository="bitnamilegacy/cassandra"  --namespace="traininghost" bitnami/cassandra --version 10.0.0
 
 # Wait for Cassandra to be ready
 log_message "INFO" "Kubernetes" "Waiting for cassandra-0 pod to be ready..."
