@@ -80,10 +80,10 @@ Ensure image version is correct.
 
 .. code:: bash
 
-        bin/install_traininghost.sh
+        bin/install_traininghost.sh -f <RECIPE_FILE>
 
 
-
+**Note**: In case no RECIPE_FILE is passed <RECIPE_EXAMPLE> RECIPE_EXAMPLE/example_recipe_latest_stable.yaml will be considered as default 
 Check running state of all pods and services using below command :
 
 .. code:: bash
@@ -163,7 +163,7 @@ Standalone Influx DB can be installed using the following commands:
 
 .. code:: bash
 
-        helm repo add bitnami https://charts.bitnami.com/bitnami
+        helm install influx --set image.repository=bitnamilegacy/influxdb bitnami/influxdb --version 5.13.5
         helm install my-release bitnami/influxdb --version 5.13.5
         
 
