@@ -22,6 +22,7 @@ is_wsl() {
 K8S_VERSION=1.32
 K8S_MINOR_VERSION=8
 KUSTOMIZE_VERSION=5.5.0
+CALICO_VERSION=3.30.1
 NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
 BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
 
@@ -88,17 +89,11 @@ if is_wsl; then
   kubectl apply -f kube-flannel.yml
 else
   echo "Non-WSL environment — Calico CNI"
-  curl -fSL https://projectcalico.docs.tigera.io/manifests/calico.yaml -o calico.yaml
-  if grep -q 'apiVersion: policy/v1beta1' calico.yaml; then
-    sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
-  fi
-  kubectl apply -f calico.yaml
+  kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/calico.yaml
 fi
 echo "Installation completed for kubernetes!"
 
 # install nerdctl
-
-
 archType="amd64"
 if test "$(uname -m)" = "aarch64"
 then
