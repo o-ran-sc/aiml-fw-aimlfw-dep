@@ -70,7 +70,7 @@ Software Installation and Deployment
 
 .. code:: bash
 
-        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is k-release
+        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
         cd aimlfw-dep
 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
@@ -80,7 +80,7 @@ Ensure image version is correct.
 
 .. code:: bash
 
-        bin/install_traininghost.sh -f <RECIPE_FILE>
+        bin/install_traininghost.sh <RECIPE_FILE>
 
 
 **Note**: In case no RECIPE_FILE is passed <RECIPE_EXAMPLE> RECIPE_EXAMPLE/example_recipe_latest_stable.yaml will be considered as default 
@@ -163,9 +163,7 @@ Standalone Influx DB can be installed using the following commands:
 
 .. code:: bash
 
-        helm install influx --set image.repository=bitnamilegacy/influxdb bitnami/influxdb --version 5.13.5
-        helm install my-release bitnami/influxdb --version 5.13.5
-        
+        helm install my-release --set image.repository=bitnamilegacy/influxdb bitnami/influxdb --version 5.13.5
 
         ~$ kubectl get pods
 
@@ -797,7 +795,7 @@ In order to test our deployed-model, we will query the InferenceService from a c
         ./bin/uninstall_kserve.sh 
 
 
-For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/website/0.8/get_started/first_isvc/#1-create-a-namespace>`__ 
+For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/website/docs/getting-started/predictive-first-isvc#1-create-a-namespace>`__ 
 
 
 2. Install both Kserve and Kserve adapter for deploying models (Optional/Not validated in k-release)
