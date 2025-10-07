@@ -113,9 +113,6 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     
 #     as new artifact after training will always be 1.0.0
     artifactversion="1.0.0"
-    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{artifactversion}"
-    updated_model_info= requests.post(url).json()
-    print(updated_model_info)
     
     #featurepath is a combination of <feature_group>_<trainingjob_Id>
     trainingjob_id = featurepath.split('_')[-1]
@@ -126,6 +123,10 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
     print("Saved keras format")
     mm_sdk.upload_model("./saved_model", modelname, modelversion, artifactversion)
     print("Saved savedmodel format")
+    
+    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{artifactversion}"
+    updated_model_info= requests.post(url).json()
+    print(updated_model_info)
 
 @dsl.pipeline(
     name="qoe Pipeline",

@@ -191,16 +191,16 @@ def train_export_model(featurepath: str, epochs: str, modelname: str, modelversi
         minor+=1
         new_artifactversion = f"{major}.{minor}.{patch}"
     
-    # update the new artifact version in mme
-    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{new_artifactversion}"
-    updated_model_info= requests.post(url).json()
-    print(updated_model_info)
-    
     print("uploading keras model to MME")
     mm_sdk.upload_model("./retrain/keras_model", modelname + "_keras", modelversion, new_artifactversion)
     print("Saved keras format")
     mm_sdk.upload_model("./retrain/saved_model", modelname, modelversion, new_artifactversion)
     print("Saved savedmodel format")
+
+    # update the new artifact version in mme
+    url = f"http://modelmgmtservice.traininghost:8082/ai-ml-model-registration/v1/model-registrations/updateArtifact/{modelname}/{modelversion}/{new_artifactversion}"
+    updated_model_info= requests.post(url).json()
+    print(updated_model_info)
 
 @dsl.pipeline(
     name="qoe Pipeline",
