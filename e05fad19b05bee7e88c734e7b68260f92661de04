@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bac6b8_c1766e84",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-10-08T17:29:12Z",
+      "side": 1,
+      "message": "I would suggest to provide two command :\n\n1. if user willing to try l-release\n2. if user willing to deploy master branch",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "e05fad19b05bee7e88c734e7b68260f92661de04",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
