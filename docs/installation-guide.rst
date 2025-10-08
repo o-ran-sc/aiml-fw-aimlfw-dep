@@ -70,7 +70,7 @@ Software Installation and Deployment
 
 .. code:: bash
 
-        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
+        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # stable release branch is l-release
         cd aimlfw-dep
 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
@@ -80,10 +80,11 @@ Ensure image version is correct.
 
 .. code:: bash
 
-        bin/install_traininghost.sh <RECIPE_FILE>
+        bin/install_traininghost.sh <RECIPE_FILE>  
 
 
-**Note**: In case no RECIPE_FILE is passed <RECIPE_EXAMPLE> RECIPE_EXAMPLE/example_recipe_latest_stable.yaml will be considered as default 
+**Note**: For l-release use default RECIPE_FILE , that is RECIPE_EXAMPLE/example_recipe_latest_stable.yaml.
+In case you want to use master branch(not stable) for checking new updates use RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml as RECIPE_FILE.
 Check running state of all pods and services using below command :
 
 .. code:: bash
