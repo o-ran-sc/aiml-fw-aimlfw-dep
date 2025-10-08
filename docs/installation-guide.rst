@@ -66,29 +66,39 @@ Below are the minimum requirements for installing the AIMLFW
 
 Software Installation and Deployment
 ------------------------------------
-.. <DESCRIBE THE FULL PROCEDURES FOR THE INSTALLATION OF THE O-RAN COMPONENT INSTALLATION AND DEPLOYMENT>
+
+For a stable L-release, users can run the following commands:
 
 .. code:: bash
 
-        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
+        git clone -b l-release "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # stable release branch is l-release
         cd aimlfw-dep
 
-Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
+Update recipe file `RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
 Ensure image version is correct.
+.. code:: bash
+        bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_latest_stable.yaml 
 
-**Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
+**Note**: If the InfluxDB datalake is not available, this step can be skipped and configured later after the datalake is installed.
+If users prefer to check the latest updates, they can clone the master branch (note that the master branch can be unstable):
+
+.. code:: bash
+        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # master branch
+        cd aimlfw-dep
+
+Update the recipe file `RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml`, which includes updates for the VM IP and datalake details.
 
 .. code:: bash
 
-        bin/install_traininghost.sh <RECIPE_FILE>
+        bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml 
 
+**Note**: For the L-release, use the default `RECIPE_FILE`, which is `RECIPE_EXAMPLE/example_recipe_latest_stable.yaml`. If you want to use the master branch (which may be unstable) to check for new updates, use `RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml` as the ``RECIPE_FILE``.
 
-**Note**: In case no RECIPE_FILE is passed <RECIPE_EXAMPLE> RECIPE_EXAMPLE/example_recipe_latest_stable.yaml will be considered as default 
-Check running state of all pods and services using below command :
+Check the running state of all pods and services using the command below:
 
 .. code:: bash
 
-        ~$ kubectl get pods --all-namespaces 
+        kubectl get pods --all-namespaces 
         
         kubeflow       cache-deployer-deployment-cf9646b9c-jxlqc          1/1     Running   0             53m
         kubeflow       cache-server-56d4959c9-sz948                       1/1     Running   0             53m
@@ -165,7 +175,7 @@ Standalone Influx DB can be installed using the following commands:
 
         helm install my-release --set image.repository=bitnamilegacy/influxdb bitnami/influxdb --version 5.13.5
 
-        ~$ kubectl get pods
+        kubectl get pods
 
         NAME                                               READY   STATUS    RESTARTS        AGE
         my-release-influxdb-85888dfd97-77dwg               1/1     Running   0               15m
@@ -381,7 +391,7 @@ Below are two examples covering supported scenarios for Data Injestion.
                         "db_org": "primary"
                     }'
 
-Register Model 
+Register Model
 ---------------
 
 A model MUST be registered to the Model-Management-Service (MME) before submitting any training request. 
