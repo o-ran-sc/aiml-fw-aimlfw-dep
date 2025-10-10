@@ -513,11 +513,11 @@ You can create a TrainingJob using the following cURL command:
               --header 'Content-Type: application/json' \
               --data '{
                         "modelId":{
-                            "modelname": "modeltest1",
-                            "modelversion": "1"
+                            "modelName": "modeltest1",
+                            "modelVersion": "1"
                         },
-                        "model_location": "",
-                        "training_config": {
+                        "modelLocation": "",
+                        "trainingConfig": {
                             "description": "trainingjob for testing",
                             "dataPipeline": {
                                 "feature_group_name": <Name of FeatureGroup created >,
@@ -531,11 +531,11 @@ You can create a TrainingJob using the following cURL command:
                                     "retraining_pipeline_version":"qoe_Pipeline_retrain"
                             }
                         },
-                        "training_dataset": "",
-                        "validation_dataset": "",
-                        "notification_url": "",
-                        "consumer_rapp_id": "",
-                        "producer_rapp_id": ""
+                        "trainingDataset": "",
+                        "validationDataset": "",
+                        "notificationDestination": "",
+                        "consumerRAppId": "",
+                        "producerRAppId": ""
                     }'
 
 | Note:
@@ -552,11 +552,11 @@ Following is the example used for Standalone-InfluxDb as a Data-Source:
               --header 'Content-Type: application/json' \
               --data '{
                         "modelId":{
-                            "modelname": "modeltest1",
-                            "modelversion": "1"
+                            "modelName": "modeltest1",
+                            "modelVersion": "1"
                         },
-                        "model_location": "",
-                        "training_config": {
+                        "modelLocation": "",
+                        "trainingConfig": {
                             "description": "trainingjob for testing",
                             "dataPipeline": {
                                 "feature_group_name": <Name of FeatureGroup created >,
@@ -570,11 +570,11 @@ Following is the example used for Standalone-InfluxDb as a Data-Source:
                                     "retraining_pipeline_version":"qoe_Pipeline_retrain"
                             }
                         },
-                        "training_dataset": "",
-                        "validation_dataset": "",
-                        "notification_url": "",
-                        "consumer_rapp_id": "",
-                        "producer_rapp_id": ""
+                        "trainingDataset": "",
+                        "validationDataset": "",
+                        "notificationDestination": "",
+                        "consumerRAppId": "",
+                        "producerRAppId": ""
                     }'
 
 
@@ -622,10 +622,10 @@ A previously trained model can be retrained with different configurations/data a
         --header 'Content-Type: application/json' \
         --data '{
                 "modelId": {
-                "modelname":"<MODEL_TO_RETRAIN>",
-                "modelversion":"<MODEL_VERSION_TO_RETRAIN>"
+                "modelName":"<MODEL_TO_RETRAIN>",
+                "modelVersion":"<MODEL_VERSION_TO_RETRAIN>"
         },
-        "training_config": {
+        "trainingConfig": {
                 "description": "Retraining-Example",
                 "dataPipeline": {
                 "feature_group_name": "<FEATUREGROUP_NAME>",
@@ -639,7 +639,7 @@ A previously trained model can be retrained with different configurations/data a
                         "retraining_pipeline_version": "qoe_Pipeline_retrain"
                 }
         },
-        "model_location": ""
+        "modelLocation": ""
         }'
 
 | The user can specify different configurations as well as retraining-pipeline by modifying the training-config.
