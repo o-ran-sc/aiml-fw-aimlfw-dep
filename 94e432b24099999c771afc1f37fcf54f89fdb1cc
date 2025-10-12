@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad0f6d80_8da2b8f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-10-12T11:06:40Z",
+      "side": 1,
+      "message": "Can you add the issue id?",
+      "revId": "94e432b24099999c771afc1f37fcf54f89fdb1cc",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0f445a_3fbd3996",
+        "filename": "bin/docker_image_build_local.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-10-12T11:06:40Z",
+      "side": 1,
+      "message": "Please remove the code that builds the `kserve-adapter` image as well.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 86
+      },
+      "revId": "94e432b24099999c771afc1f37fcf54f89fdb1cc",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
