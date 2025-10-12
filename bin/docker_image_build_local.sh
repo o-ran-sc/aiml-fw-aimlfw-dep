@@ -22,7 +22,6 @@ git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/tm"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/data-extraction"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/tps/kubeflow-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/portal/aiml-dashboard"
-git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aihp/ips/kserve-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/modelmgmtservice"
 
 sudo buildctl --addr=nerdctl-container://buildkitd build \
@@ -60,13 +59,6 @@ sudo buildctl --addr=nerdctl-container://buildkitd build \
     --local dockerfile=aiml-dashboard/kf-pipelines \
     --local context=aiml-dashboard/kf-pipelines \
     --output type=oci,name=aiml-notebook:latest | sudo nerdctl load --namespace k8s.io
-
-sudo buildctl --addr=nerdctl-container://buildkitd build \
-    --frontend dockerfile.v0 \
-    --opt filename=Dockerfile \
-    --local dockerfile=kserve-adapter \
-    --local context=kserve-adapter \
-    --output type=oci,name=kserve-adapter:1.0.1 | sudo nerdctl load --namespace k8s.io
 
 sudo buildctl --addr=nerdctl-container://buildkitd build \
     --frontend dockerfile.v0 \
