@@ -22,7 +22,6 @@ git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/tm"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/data-extraction"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/athp/tps/kubeflow-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/portal/aiml-dashboard"
-git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aihp/ips/kserve-adapter"
 git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/awmf/modelmgmtservice"
 
 sudo buildctl --addr=nerdctl-container://buildkitd build \
