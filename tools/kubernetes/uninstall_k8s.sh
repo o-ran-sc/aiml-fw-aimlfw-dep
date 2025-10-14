@@ -15,8 +15,27 @@
 #   limitations under the License.
 #
 # ==================================================================================
+# --- Verify current working directory ---
+if [ ! -f "tools/logging/log.sh" ]; then
+    echo -e "Please run this script from the aimlfw-dep directory."
+    echo -e "For example:"
+    echo -e "cd aimlfw-dep"
+    echo -e "./tools/kubernetes/uninstall_k8s.sh"
+    exit 1
+fi
+
+source tools/logging/log.sh
+log_divider
+echo -e "\n${BOLD}${CYAN}: Starting Kubernetes Uninstallation...${NC}\n"
+START_TIME=$(date +%s)
 
 sudo kubeadm reset
 sudo apt-get -y purge kubeadm kubectl kubelet kubernetes-cni kube*
 sudo apt-get -y autoremove
 sudo rm -rf ~/.kube
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+echo -e "\n${BOLD}${GREEN} Kubernetes Uninstallation Completed Successfully!${NC}"
+echo -e "${YELLOW}Total Time: ${DURATION}s${NC}\n"
+log_divider

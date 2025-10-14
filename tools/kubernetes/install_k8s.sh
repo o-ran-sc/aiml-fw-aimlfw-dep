@@ -15,10 +15,27 @@
 #   limitations under the License.
 #
 # ==================================================================================
+
+# --- Verify current working directory ---
+if [ ! -f "tools/logging/log.sh" ]; then
+    echo -e "Please run this script from the aimlfw-dep directory."
+    echo -e "For example:"
+    echo -e "cd aimlfw-dep"
+    echo -e "./tools/kubernetes/install_k8s.sh"
+    exit 1
+fi
+
+source tools/logging/log.sh
+log_divider
+echo -e "\n${BOLD}${CYAN}: Starting Kubernetes Installation...${NC}\n"
+START_TIME=$(date +%s)
+
 is_wsl() {
   grep -qi microsoft /proc/version 2>/dev/null || [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]
 }
 
+<<<<<<< PATCH SET (6a908b Beautify Kubernetes Installation and Uninstallation logs)
+=======
 if [ -z "$AIMLFW_LIBS_HOME" ]; then
   echo "Please set AIMLFW_LIBS_HOME by running install_libs.sh first."
   exit 1
@@ -30,6 +47,7 @@ log_section_break
 echo -e "\n${BOLD}${CYAN}: Starting Kubernetes Installation...${NC}\n"
 START_TIME=$(date +%s)
 
+>>>>>>> BASE      (8d669e Add libs folder and install_libs.sh)
 log_step "Step 0: Checking if running on WSL..."
 if is_wsl; then
   log_info "Running on WSL"
@@ -37,11 +55,11 @@ else
   log_info "Not WSL"
 fi
 
-echo "Step 1: Disabling swap memory..."
+log_step "Step 1: Disabling swap memory..."
 sudo swapoff -a
 sudo sed -i '/swap/s/^/#/' /etc/fstab
 
-echo "Step 2: Enabling IPv4 packet forwarding and loading kernel modules..."
+log_step "Step 2: Enabling IPv4 packet forwarding and loading kernel modules..."
 echo -e "overlay\nbr_netfilter" | sudo tee /etc/modules-load.d/k8s.conf > /dev/null
 sudo modprobe overlay
 sudo modprobe br_netfilter
@@ -54,7 +72,7 @@ EOF
 
 sudo sysctl --system
 
-echo "Step 3: Installing Containerd..."
+log_step "Step 3: Installing Containerd..."
 sudo apt update
 sudo apt install -y containerd
 sudo mkdir -p /etc/containerd
@@ -62,14 +80,14 @@ containerd config default | sudo tee /etc/containerd/config.toml > /dev/null
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 sudo systemctl restart containerd
 
-echo "Step 4: Installing Kubernetes packages..."
+log_step "Step 4: Installing Kubernetes packages..."
 sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb /' | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
 sudo apt update && sudo apt install -y kubeadm=1.28.0-1.1 kubelet=1.28.0-1.1 kubectl=1.28.0-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
-echo "Step 5: Initializing Kubernetes..."
+log_step "Step 5: Initializing Kubernetes..."
 if is_wsl; then
   sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 else
@@ -79,20 +97,20 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-echo "Removing taints from control-plane nodes..."
+log_info "Removing taints from control-plane nodes..."
 for node in $(kubectl get nodes --no-headers | awk '{print $1}')
 do
-  echo "Removing taint from $node..."
+  log_info "Removing taint from $node..."
   kubectl taint nodes $node node-role.kubernetes.io/control-plane- --ignore-not-found=true
 done
 
-echo "Step 6: Applying CNI plugin..."
+log_step "Step 6: Applying CNI plugin..."
 if is_wsl; then
-  echo "WSL environment — Flannel CNI"
+  log_info "WSL environment — Flannel CNI"
   curl -fSL "https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml" -o kube-flannel.yml
   kubectl apply -f kube-flannel.yml
 else
-  echo "Non-WSL environment — Calico CNI"
+  log_info "Non-WSL environment — Calico CNI"
   curl -fSL https://projectcalico.docs.tigera.io/manifests/calico.yaml -o calico.yaml
   if grep -q 'apiVersion: policy/v1beta1' calico.yaml; then
     sed -i 's/apiVersion: policy\/v1beta1/apiVersion: policy\/v1/g' calico.yaml
@@ -100,6 +118,17 @@ else
   kubectl apply -f calico.yaml
 fi
 echo "Installation completed for kubernetes!"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+echo -e "\n${BOLD}${GREEN} Kubernetes Installation Completed Successfully!${NC}"
+echo -e "${YELLOW}Total Time: ${DURATION}s${NC}\n"
+log_divider
+
+
+echo -e "\n${BOLD}${CYAN}: Starting Nerdctl, Buildkit and Kustomize Installation...${NC}\n"
+START_TIME=$(date +%s)
+
 
 # install nerdctl
 NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
@@ -113,7 +142,7 @@ fi
 wget -q "https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${archType}.tar.gz" -O /tmp/nerdctl.tar.gz
 sudo tar Cxzvvf /usr/bin /tmp/nerdctl.tar.gz
 
-echo "Installation completed for nerdctl!"
+log_success "Installation completed for nerdctl!"
 
 # install buildkit
 BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
@@ -123,7 +152,8 @@ if test "$(uname -m)" = "aarch64"
 then
             archType="arm64"
 fi
-echo "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz"
+
+
 wget -q "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${archType}.tar.gz" -O /tmp/buildkit.tar.gz
 tar Cxzvvf /tmp /tmp/buildkit.tar.gz
 sudo mv /tmp/bin/buildctl /usr/bin/
@@ -140,4 +170,10 @@ curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomi
 tar -xvzf "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" 
 sudo mv kustomize /usr/local/bin/ 
 rm "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
-echo "Kustomize installed successfully." 
+log_success "Kustomize installed successfully." 
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+echo -e "\n${BOLD}${GREEN} Nerdctl, Buildkit and Kustomize Installation Completed Successfully!${NC}"
+echo -e "${YELLOW}Total Time: ${DURATION}s${NC}\n"
+log_divider
