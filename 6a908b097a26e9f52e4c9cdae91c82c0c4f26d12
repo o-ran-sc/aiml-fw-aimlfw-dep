@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "256e5072_5e128069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-10-15T12:03:22Z",
+      "side": 1,
+      "message": "let me know your suggestion on making logger reusable by placing it to some common folder.",
+      "revId": "6a908b097a26e9f52e4c9cdae91c82c0c4f26d12",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbaeb260_276c7f5a",
         "filename": "tools/logging/log.sh",
         "patchSetId": 1
