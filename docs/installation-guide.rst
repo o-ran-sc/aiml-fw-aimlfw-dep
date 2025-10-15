@@ -192,7 +192,8 @@ Note: This Bucket name `UEData` will be reffered while creating featureGroup in 
 Install the following dependencies which is required for parsing and onboarding data from `.csv` file:
 
 .. code:: bash
-
+        
+        sudo apt install python3-pip
         sudo pip3 install pandas
         sudo pip3 install influxdb_client
 
