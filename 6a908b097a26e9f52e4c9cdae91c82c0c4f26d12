@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbaeb260_276c7f5a",
+        "filename": "tools/logging/log.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-10-15T12:02:31Z",
+      "side": 1,
+      "message": "could you rename to log_section_break or any better suggestion.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 11
+      },
+      "revId": "6a908b097a26e9f52e4c9cdae91c82c0c4f26d12",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
