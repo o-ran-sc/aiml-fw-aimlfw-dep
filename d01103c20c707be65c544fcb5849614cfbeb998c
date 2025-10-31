@@ -22,6 +22,30 @@
       },
       "revId": "d01103c20c707be65c544fcb5849614cfbeb998c",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2f102b_f70433ed",
+        "filename": "docs/installation-guide.rst",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-10-31T10:40:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8630e10_7afad777",
+      "range": {
+        "startLine": 75,
+        "startChar": 85,
+        "endLine": 75,
+        "endChar": 91
+      },
+      "revId": "d01103c20c707be65c544fcb5849614cfbeb998c",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
