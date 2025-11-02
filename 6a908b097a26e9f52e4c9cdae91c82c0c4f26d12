@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91767161_a9c1f4ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-11-02T19:38:03Z",
+      "side": 1,
+      "message": "I have raised one parent commit over having one common folder(libs) and corresponding scripts to use it, \n\nYou can review it: \nhttps://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/15179",
+      "parentUuid": "256e5072_5e128069",
+      "revId": "6a908b097a26e9f52e4c9cdae91c82c0c4f26d12",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbaeb260_276c7f5a",
         "filename": "tools/logging/log.sh",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2025-10-15T12:02:31Z",
       "side": 1,
       "message": "could you rename to log_section_break or any better suggestion.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 11
+      },
+      "revId": "6a908b097a26e9f52e4c9cdae91c82c0c4f26d12",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158fba38_802e9f91",
+        "filename": "tools/logging/log.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-11-02T19:38:03Z",
+      "side": 1,
+      "message": "Modified in parent commit: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/15179\n\nThe `log.sh` will be removed completly, once approach in parent commit is approved.",
+      "parentUuid": "dbaeb260_276c7f5a",
       "range": {
         "startLine": 38,
         "startChar": 0,
