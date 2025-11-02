@@ -26,11 +26,22 @@ CALICO_VERSION=3.30.1
 NERDCTL_VERSION=1.7.6 # see https://github.com/containerd/nerdctl/releases for the latest release
 BUILDKIT_VERSION=0.13.2 # see https://github.com/moby/buildkit/releases for the latest release
 
-echo "Step 0: Checking if running on WSL..."
+if [ -z "$AIMLFW_LIBS_HOME" ]; then
+  echo "Please set AIMLFW_LIBS_HOME by running install_libs.sh first."
+  exit 1
+fi
+
+source "$AIMLFW_LIBS_HOME/loglib.sh"
+
+log_section_break
+echo -e "\n${BOLD}${CYAN}: Starting Kubernetes Installation...${NC}\n"
+START_TIME=$(date +%s)
+
+log_step "Step 0: Checking if running on WSL..."
 if is_wsl; then
-  echo "Running on WSL"
+  log_info "Running on WSL"
 else
-  echo "Not WSL"
+  log_info "Not WSL"
 fi
 
 echo "Step 1: Disabling swap memory..."
