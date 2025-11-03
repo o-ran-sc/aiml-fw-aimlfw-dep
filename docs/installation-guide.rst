@@ -68,22 +68,34 @@ Software Installation and Deployment
 ------------------------------------
 .. <DESCRIBE THE FULL PROCEDURES FOR THE INSTALLATION OF THE O-RAN COMPONENT INSTALLATION AND DEPLOYMENT>
 
+For stable l-release user can run following commands
+
 .. code:: bash
 
-        git clone [-b <branch-name>] "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
+        git clone -b l-release "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
         cd aimlfw-dep
 
+Any failure in l-release are tracked here 'https://lf-o-ran-sc.atlassian.net/browse/AIMLFW-286' 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
 Ensure image version is correct.
+.. code:: bash
 
+        bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
+         
 **Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
+In case user prefers to check latest updates they can clone master branch (master branch can be unstable)
+.. code:: bash
+
+        git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # master branch
+        cd aimlfw-dep
+
+Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml` which includes update of VM IP and datalake details.
 
 .. code:: bash
 
-        bin/install_traininghost.sh <RECIPE_FILE>
+        bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml 
 
-
-**Note**: In case no RECIPE_FILE is passed <RECIPE_EXAMPLE> RECIPE_EXAMPLE/example_recipe_latest_stable.yaml will be considered as default 
+**Note**: For l-release use default RECIPE_FILE , that is RECIPE_EXAMPLE/example_recipe_latest_stable.yaml.In case you want to use master branch(not stable) for checking new updates use RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml as RECIPE_FILE.
 Check running state of all pods and services using below command :
 
 .. code:: bash
@@ -796,7 +808,7 @@ In order to test our deployed-model, we will query the InferenceService from a c
         ./bin/uninstall_kserve.sh 
 
 
-For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/website/docs/getting-started/predictive-first-isvc#1-create-a-namespace>`__ 
+For Advanced usecases, Please refer to official kserve-documentation `here <https://kserve.github.io/archive/0.11/get_started/first_isvc/#1-create-a-namespace>`__ 
 
 
 2. Install both Kserve and Kserve adapter for deploying models (Optional/Not validated in k-release)
@@ -892,4 +904,5 @@ Prerequisites
    .. code:: bash
 
         kubectl get InferenceService -n ricips
+
 
