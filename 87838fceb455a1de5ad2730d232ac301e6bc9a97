@@ -24,6 +24,30 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26c6b0d_abc77b2f",
+        "filename": "utils/insert.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-11-04T14:12:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aec142b9_e90fd46a",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 52
+      },
+      "revId": "87838fceb455a1de5ad2730d232ac301e6bc9a97",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6b1492b_5056bf29",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-11-04T13:45:30Z",
       "side": 1,
       "message": "license header missing",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "87838fceb455a1de5ad2730d232ac301e6bc9a97",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4aea3b_a2010211",
+        "filename": "utils/install_influxdb.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-11-04T14:12:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c6b1492b_5056bf29",
       "range": {
         "startLine": 1,
         "startChar": 0,
