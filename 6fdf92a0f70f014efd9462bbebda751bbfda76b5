@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81e8b533_265c605e",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-11-05T18:14:04Z",
+      "side": 0,
+      "message": "could you please check of if this make any difference.",
+      "range": {
+        "startLine": 93,
+        "startChar": 3,
+        "endLine": 93,
+        "endChar": 79
+      },
+      "revId": "6fdf92a0f70f014efd9462bbebda751bbfda76b5",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
