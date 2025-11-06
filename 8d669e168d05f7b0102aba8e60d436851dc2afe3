@@ -22,6 +22,30 @@
       },
       "revId": "8d669e168d05f7b0102aba8e60d436851dc2afe3",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d6d695_22cbf61b",
+        "filename": "bin/install_libs.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-11-06T06:36:04Z",
+      "side": 1,
+      "message": "I have removed the statement",
+      "parentUuid": "df3e3f54_d1e8fb2f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "8d669e168d05f7b0102aba8e60d436851dc2afe3",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
