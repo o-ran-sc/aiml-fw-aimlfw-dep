@@ -46,6 +46,30 @@
       },
       "revId": "6fdf92a0f70f014efd9462bbebda751bbfda76b5",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7282ac9_452b5951",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-11-07T06:10:42Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "c22e8f15_701ee473",
+      "range": {
+        "startLine": 93,
+        "startChar": 3,
+        "endLine": 93,
+        "endChar": 79
+      },
+      "revId": "6fdf92a0f70f014efd9462bbebda751bbfda76b5",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
