@@ -22,6 +22,30 @@
       },
       "revId": "6fdf92a0f70f014efd9462bbebda751bbfda76b5",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22e8f15_701ee473",
+        "filename": "tools/kubernetes/install_k8s.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-11-07T05:14:17Z",
+      "side": 0,
+      "message": "As per my understanding, the API version `policy/v1beta1` was deprecated starting from Kubernetes v1.25 (refer: https://kubernetes.io/docs/reference/using-api/deprecation-guide/#poddisruptionbudget-v125).\n\nAlthough the latest calico.yaml no longer uses `policy/v1beta1`, older versions of Calico did. To ensure compatibility of those older Calico versions with Kubernetes v1.28, this check was added to automatically update the deprecated `apiVersion: policy/v1beta1` to `apiVersion: policy/v1`.\n\nSince the newer Calico releases already use the updated API version, these lines are no longer necessary.",
+      "parentUuid": "81e8b533_265c605e",
+      "range": {
+        "startLine": 93,
+        "startChar": 3,
+        "endLine": 93,
+        "endChar": 79
+      },
+      "revId": "6fdf92a0f70f014efd9462bbebda751bbfda76b5",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
