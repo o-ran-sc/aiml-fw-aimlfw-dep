@@ -34,6 +34,24 @@
       "parentUuid": "1cb55a08_29723f11",
       "revId": "e19614ea8292fb879b57ccde448855b61ee01e55",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4c60c2_42e4a8bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2025-11-07T07:13:23Z",
+      "side": 1,
+      "message": "Understood. Thanks for the detailed explanation.\nCan you add `uninstall_libs.sh` to remove unnecessary libs??",
+      "parentUuid": "46262588_21bd3566",
+      "revId": "e19614ea8292fb879b57ccde448855b61ee01e55",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
