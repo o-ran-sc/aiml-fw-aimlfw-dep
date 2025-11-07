@@ -57,7 +57,7 @@ Hardware Requirements
 
 Below are the minimum requirements for installing the AIMLFW
 
-#. OS: Ubuntu 22.04 server
+#. OS: Ubuntu 24.04 server
 #. 16 cpu cores
 #. 32 GB RAM
 #. 60 GB harddisk
