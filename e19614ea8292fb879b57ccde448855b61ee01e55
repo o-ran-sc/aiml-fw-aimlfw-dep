@@ -16,6 +16,24 @@
       "message": "`loglib.sh` is only used for aimlfw installation, so I don\u0027t think it needs to be installed outside aimlfw.\nWouldn\u0027t it be better to call it directly in the scripts, like [airflow does](https://github.com/apache/airflow/blob/main/scripts/docker/install_postgres.sh#L20L23)?",
       "revId": "e19614ea8292fb879b57ccde448855b61ee01e55",
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46262588_21bd3566",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001948
+      },
+      "writtenOn": "2025-11-07T06:51:12Z",
+      "side": 1,
+      "message": "We initially followed a similar approach, where the scripts were invoked directly within install_k8s.sh.\n\n### Problem\nHowever, this created an issue — since `loglibs.sh` had to be referenced using a relative path, the parent script could only be executed from within the aimlfw-dep directory, and not from any other location.\n\ni.e. we had to add the following check, which enforced that the script must be run specifically from the `aimlfw-dep` folder.\n(Refer: https://gerrit.o-ran-sc.org/r/c/aiml-fw/aimlfw-dep/+/15152/2/tools/kubernetes/install_k8s.sh#20)\n\n### Solution:\nTo remove the restriction of running the script only from the `aimlfw-dep` directory, we adopted the current approach — where the library files are first copied to a system directory, and the scripts are referenced from there instead.\n\nLet me know, if you have any comments.",
+      "parentUuid": "1cb55a08_29723f11",
+      "revId": "e19614ea8292fb879b57ccde448855b61ee01e55",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     }
   ]
 }
