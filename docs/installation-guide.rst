@@ -78,12 +78,14 @@ For stable l-release user can run following commands
 Any failure in l-release are tracked here 'https://lf-o-ran-sc.atlassian.net/browse/AIMLFW-286' 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
 Ensure image version is correct.
+
 .. code:: bash
 
         bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
          
 **Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
 In case user prefers to check latest updates they can clone master branch (master branch can be unstable)
+
 .. code:: bash
 
         git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # master branch
