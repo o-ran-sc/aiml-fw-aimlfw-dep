@@ -41,6 +41,30 @@
       "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "473f7bbd_e0492e57",
+        "filename": "utils/insert.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-11-11T07:43:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ee50d08_cf4a672c",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "6c5fc38f73a076791ab39a5b59d76aa785272ec1",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d09cd43_b73077e4",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-11-10T14:10:21Z",
       "side": 1,
       "message": "It should be 2025",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "6c5fc38f73a076791ab39a5b59d76aa785272ec1",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3250e6cc_c3deebe8",
+        "filename": "utils/install_influxdb.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002793
+      },
+      "writtenOn": "2025-11-11T07:43:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d09cd43_b73077e4",
       "range": {
         "startLine": 3,
         "startChar": 22,
