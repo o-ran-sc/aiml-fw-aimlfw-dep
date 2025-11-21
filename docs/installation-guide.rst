@@ -81,6 +81,11 @@ Ensure image version is correct.
 
 .. code:: bash
 
+        # Install common libraries
+        bin/install_libs.sh
+        source ~/.bashrc
+
+        # Install AIMLFW 
         bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_latest_stable.yaml
          
 **Note**: In case the Influx DB datalake is not available, this can be skipped at this stage and can be updated after installing datalake.
@@ -95,6 +100,11 @@ Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yam
 
 .. code:: bash
 
+        # Install common libraries
+        bin/install_libs.sh
+        source ~/.bashrc
+
+        # Install AIMLFW 
         bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml 
 
 **Note**: For l-release use default RECIPE_FILE , that is RECIPE_EXAMPLE/example_recipe_latest_stable.yaml.In case you want to use master branch(not stable) for checking new updates use RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml as RECIPE_FILE.
