@@ -68,14 +68,14 @@ Software Installation and Deployment
 ------------------------------------
 .. <DESCRIBE THE FULL PROCEDURES FOR THE INSTALLATION OF THE O-RAN COMPONENT INSTALLATION AND DEPLOYMENT>
 
-For stable l-release user can run following commands
+For stable m-release user can run following commands
 
 .. code:: bash
 
-        git clone -b l-release "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is l-release
+        git clone -b m-release "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"  # latest release branch is m-release
         cd aimlfw-dep
 
-Any failure in l-release are tracked here 'https://lf-o-ran-sc.atlassian.net/browse/AIMLFW-286' 
+Any failure in m-release are tracked here 'https://lf-o-ran-sc.atlassian.net/browse/AIMLFW-286' 
 Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_latest_stable.yaml` which includes update of VM IP and datalake details.
 Ensure image version is correct.
 
@@ -107,7 +107,7 @@ Update recipe file :file:`RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yam
         # Install AIMLFW 
         bin/install_traininghost.sh RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml 
 
-**Note**: For l-release use default RECIPE_FILE , that is RECIPE_EXAMPLE/example_recipe_latest_stable.yaml.In case you want to use master branch(not stable) for checking new updates use RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml as RECIPE_FILE.
+**Note**: For m-release use default RECIPE_FILE , that is RECIPE_EXAMPLE/example_recipe_latest_stable.yaml.In case you want to use master branch(not stable) for checking new updates use RECIPE_EXAMPLE/example_recipe_nexus_images_staging.yaml as RECIPE_FILE.
 Check running state of all pods and services using below command :
 
 .. code:: bash
@@ -142,6 +142,29 @@ Check running state of all pods and services using below command :
 
 **Note: In K Release, dashboard is not supported. We recomment to use cURL to interact with AIMLFW components. 
 Details are provided in further section for each operation required for model training.**
+
+
+Troubleshooting
+---------------------------------
+
+1. ImagePullBackOff Issue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If, after installation, some pods enter the ``ImagePullBackOff`` state (for example):
+
+.. code:: bash
+
+   kubeflow   ml-pipeline-ui-75d9df4ddb-5jvrb   0/1   ImagePullBackOff   0   22h
+
+This typically indicates that the required container images could not be pulled automatically.
+To resolve this issue, **manually pull and retag** the required images using the following commands:
+
+.. code:: bash
+
+        sudo nerdctl pull gcriomlpipeline/frontend:2.3.0 --namespace k8s.io
+        sudo nerdctl tag gcriomlpipeline/frontend:2.3.0 gcr.io/ml-pipeline/frontend:2.3.0 --namespace k8s.io
+        sudo nerdctl pull gcriomlpipeline/argoexec:v3.4.17-license-compliance --namespace k8s.io
+        sudo nerdctl tag gcriomlpipeline/argoexec:v3.4.17-license-compliance  gcr.io/ml-pipeline/argoexec:v3.4.17-license-compliance --namespace k8s.io
 
 
 Software Uninstallation & Upgrade
