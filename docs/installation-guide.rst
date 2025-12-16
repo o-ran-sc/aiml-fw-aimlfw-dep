@@ -144,6 +144,29 @@ Check running state of all pods and services using below command :
 Details are provided in further section for each operation required for model training.**
 
 
+Troubleshooting
+---------------------------------
+
+1. ImagePullBackOff Issue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If, after installation, some pods enter the ``ImagePullBackOff`` state (for example):
+
+.. code:: bash
+
+   kubeflow   ml-pipeline-ui-75d9df4ddb-5jvrb   0/1   ImagePullBackOff   0   22h
+
+This typically indicates that the required container images could not be pulled automatically.
+To resolve this issue, **manually pull and retag** the required images using the following commands:
+
+.. code:: bash
+
+        sudo nerdctl pull gcriomlpipeline/frontend:2.3.0 --namespace k8s.io
+        sudo nerdctl tag gcriomlpipeline/frontend:2.3.0 gcr.io/ml-pipeline/frontend:2.3.0 --namespace k8s.io
+        sudo nerdctl pull gcriomlpipeline/argoexec:v3.4.17-license-compliance --namespace k8s.io
+        sudo nerdctl tag gcriomlpipeline/argoexec:v3.4.17-license-compliance  gcr.io/ml-pipeline/argoexec:v3.4.17-license-compliance --namespace k8s.io
+
+
 Software Uninstallation & Upgrade
 ---------------------------------
 
