@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15bdbd97_393407c4",
+        "filename": "RECIPE_EXAMPLE/example_recipe_local_images_oran_m_release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000475
+      },
+      "writtenOn": "2025-12-17T09:24:30Z",
+      "side": 1,
+      "message": "I think this file does not need any change for m-release.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 84
+      },
+      "revId": "42da0e728e3280c721ec0274fc9a254c06dbd1d4",
+      "serverId": "84e4e190-e623-4c37-9eda-58b1937c1b53"
+    }
+  ]
+}
