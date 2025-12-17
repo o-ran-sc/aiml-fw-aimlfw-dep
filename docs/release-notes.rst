@@ -39,6 +39,9 @@ Version history
 | 2025-07-03         | 4.0.0              | Swaraj Kumar       | L release             |
 |                    |                    |                    |                       |
 +--------------------+--------------------+--------------------+-----------------------+
+| 2025-12-17         | 5.0.0              | Ashish Jain        | M release             |
+|                    |                    |                    |                       |
++--------------------+--------------------+--------------------+-----------------------+
 
 
 Summary
@@ -49,6 +52,30 @@ The L release of AIMLFW provides required generic and composable pipeline framew
 
 Release Data
 ============
+
+M Release
+---------
+
+
++--------------------------------------+--------------------------------------------+
+| **Project**                          | AIMLFW Installation and Deployment         |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Repo/commit-ID**                   | aiml-fw/aimlfw-dep                         |
+|                                      | /42da0e728e3280c721ec0274fc9a254c06dbd1d4  |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Release designation**              | M release                                  |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Release date**                     | 2025-12-17                                 |
+|                                      |                                            |
++--------------------------------------+--------------------------------------------+
+| **Purpose of the delivery**          | Major Infrastructure Upgrades Completed,   |
+|                                      | Pipeline & SDK Stability Improvements,     |
+|                                      | Compatibility Validation & AI Workflow     |
+|                                      | Enablement, GitHub Actions Enhancements    |
++--------------------------------------+--------------------------------------------+
 
 L Release
 ---------
