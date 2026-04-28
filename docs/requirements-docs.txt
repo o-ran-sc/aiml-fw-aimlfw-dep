@@ -1,6 +1,4 @@
-sphinx
-sphinx_rtd_theme>=1.0.0
-docutils<0.17
+sphinx>=7,<10
+sphinx-rtd-theme
 sphinxcontrib-httpdomain
-recommonmark
 lfdocs-conf
